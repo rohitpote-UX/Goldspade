@@ -1,0 +1,289 @@
+================================================================================
+                        GOLDSPADE DIGITAL STUDIO
+                  COMPLETE TECHNICAL ARCHITECTURE & PROJECT OVERVIEW
+================================================================================
+
+1. EXECUTIVE SUMMARY & BRAND POSITIONING
+--------------------------------------------------------------------------------
+Brand Name: Goldspade
+Tagline: "Forged for Founders."
+Core Positioning: Goldspade is a premium digital studio that designs and engineers 
+high-authority brand identities, digital products, web platforms, and automated 
+business systems for ambitious founders and enterprises.
+
+The codebase is built as a zero-compromise, performance-first Next.js 15 web 
+application featuring an editorial visual design system, custom smooth scrolling, 
+GSAP scroll animations, a dual Light/Dark theme engine, and SSG prerendering.
+
+
+2. TECHNICAL STACK & DEPENDENCY ARCHITECTURE
+--------------------------------------------------------------------------------
+Framework:            Next.js 15.1.7 (App Router, Static Site Generation SSG)
+Runtime Environment:  Node.js (v24.x)
+Language:             TypeScript 5.7.3 (Strict Mode)
+UI Core:              React 19.0.0 & React DOM 19.0.0
+Styling Engine:       Tailwind CSS 3.4.17, PostCSS 8.5.1, Autoprefixer 10.4.20
+Smooth Scrolling:     Lenis 1.3.26 (@studio-freight/lenis)
+Animation Engine:     GSAP 3.12.7 + ScrollTrigger plugin
+Icons & Assets:       Lucide React 0.475.0
+Utility Libraries:    clsx 2.1.1, tailwind-merge 3.0.1
+Email Backend:        Resend API Service Abstraction (fetch REST client)
+Linting & Quality:    ESLint 9.20.1, eslint-config-next 15.1.7
+
+
+3. DIRECTORY & FILE STRUCTURE
+--------------------------------------------------------------------------------
+c:\Users\Rohit Pote\Desktop\Personal Projects\GoldSpade\
+├── app/                              # Next.js App Router Page Directory
+│   ├── about/page.tsx                # About Studio Page
+│   ├── capabilities/page.tsx         # Services & Core Competencies Page
+│   ├── contact/page.tsx              # 10/10 UX/UI Project Inquiry Contact Form Page
+│   ├── journal/page.tsx              # Insights & Perspectives Page
+│   ├── login/page.tsx                # Client Portal Login Page
+│   ├── philosophy/page.tsx           # Execution Philosophy Page
+│   ├── signup/page.tsx               # Client Portal Registration Page
+│   ├── work/                         # Portfolio Directory
+│   │   ├── page.tsx                  # Selected Work Gallery Page
+│   │   └── [slug]/page.tsx           # SSG Case Study Page Template
+│   ├── globals.css                   # Core Design System Tokens & CSS Variables
+│   ├── layout.tsx                    # Root Layout (Theme, Lenis, Navbar, Footer)
+│   ├── page.tsx                      # Main Landing Page (Hero, Selected Work, etc.)
+│   ├── robots.txt                    # Search Engine Crawler Directives
+│   └── sitemap.xml                   # Dynamic SEO Sitemap
+├── components/                       # React Component Architecture
+│   ├── layout/                       # Layout Wrapper Components
+│   │   ├── Container.tsx             # Responsive Width Container Clamp
+│   │   ├── Footer.tsx                # Studio Footer (Big Typography, SLA, Links)
+│   │   └── Navbar.tsx                # Floating Navigation Pill & Mobile Menu
+│   ├── motion/                       # Animation Wrappers
+│   ├── providers/                    # Client Context & State Providers
+│   │   ├── SmoothScrollProvider.tsx  # Lenis + GSAP RAF Ticker & Route Reset
+│   │   └── ThemeProvider.tsx         # Light / Dark Theme State Manager
+│   ├── sections/                     # Page Section Modules
+│   │   ├── CapabilitiesSection.tsx   # Core Services Grid
+│   │   ├── FinalCTASection.tsx       # Intent Selector & Contact Teaser
+│   │   ├── HeroSection.tsx           # "FORGED FOR FOUNDERS" Hero Engine
+│   │   ├── IntroSection.tsx          # Studio Principles Section
+│   │   ├── PhilosophySection.tsx     # Strategy vs Execution Section
+│   │   ├── ProcessSection.tsx        # 4-Step Methodology Section
+│   │   ├── SelectedWorkSection.tsx   # Featured Projects Carousel/List
+│   │   └── TrustSection.tsx          # System Architecture & Tech Stack Node Grid
+│   └── ui/                           # Reusable UI Primitives
+│       ├── Button.tsx                # Editorial Action Button (Mint, Primary, Ghost)
+│       ├── GitaPathVideoCard.tsx     # 4-Stage Editorial Brand-Building Video Engine
+│       ├── ProjectCard.tsx           # Portfolio Card with Live/Coming Soon Badges
+│       └── ThemeToggle.tsx           # Sun/Moon Smooth Theme Switcher Button
+├── data/                             # Data Layer (Single Source of Truth)
+│   └── projects.ts                   # Complete Portfolio Dataset Array
+├── lib/                              # Utility & API Services
+│   ├── email/                        # Email Infrastructure
+│   │   └── service.ts                # Resend API Dispatch Abstraction
+│   ├── seo/                          # Search Engine Optimization
+│   │   ├── jsonld.ts                 # Organization Schema Generator
+│   │   └── metadata.ts               # OpenGraph & SEO Metadata Constructor
+│   └── utils/                        # Functional Helpers
+│       └── cn.ts                     # Tailwind Classname Merger (clsx + twMerge)
+├── public/                           # Static Media Assets
+│   └── media/                        # Editorial Images & Page Imagery
+│       ├── pages/                    # About & Contact Page Imagery
+│       └── projects/                 # Portfolio Hero Images & Video Sequence Frames
+├── types/                            # TypeScript Type Definitions
+│   └── project.ts                    # Project Interface Specification
+├── next.config.ts                    # Next.js Build Configuration
+├── tailwind.config.ts                # Tailwind Custom Token Configuration
+├── postcss.config.js                 # PostCSS Processor Config
+├── tsconfig.json                     # TypeScript Compiler Options
+└── package.json                      # Dependency Manifest
+
+
+4. DESIGN SYSTEM & DUAL THEME ARCHITECTURE
+--------------------------------------------------------------------------------
+The website implements a Light / Dark theme system controlled via CSS variables 
+and Tailwind's `darkMode: ["class", '[data-theme="dark"]']` strategy.
+
+A. Theme Tokens (`globals.css`):
+   - Light Theme (Baseline):
+     - Canvas Background:      #F5F5F3 (Warm off-white)
+     - Primary Text:           #171515 (Editorial off-black)
+     - Secondary Text:         #555555 (Mid gray)
+     - Editorial Border:       #DCDCD8 (Subtle outline)
+     - Mint Accent:            #73F3C5 (Signature Goldspade mint)
+     - Card Background:        #FFFFFF (Pure white surface)
+   - Dark Theme:
+     - Canvas Background:      #0B0B0B (Deep pitch black)
+     - Primary Text:           #F5F5F2 (Warm white)
+     - Secondary Text:         #A8AAA6 (Soft gray)
+     - Editorial Border:       rgba(255, 255, 255, 0.12)
+     - Card Background:        #121212 (Elevated dark card surface)
+
+B. Anti-Flicker Script (`app/layout.tsx`):
+   To prevent Flash of Unstyled Theme (FOUT) on first paint, an inline IIFE runs 
+   synchronously inside `<head>` before render:
+   ```javascript
+   (function() {
+     try {
+       var theme = localStorage.getItem('goldspade-theme');
+       if (theme === 'dark') {
+         document.documentElement.setAttribute('data-theme', 'dark');
+       } else {
+         document.documentElement.setAttribute('data-theme', 'light');
+       }
+     } catch (e) {}
+   })();
+   ```
+
+C. Theme Transitions:
+   Smooth 400ms CSS transitions (`cubic-bezier(0.16, 1, 0.3, 1)`) are configured 
+   for `background-color`, `color`, `border-color`, and `box-shadow` across all 
+   key UI surfaces (`header`, `footer`, `main`, `section`, `nav`, `button`, `input`).
+
+
+5. MOTION & SMOOTH SCROLLING ENGINE
+--------------------------------------------------------------------------------
+A. Lenis Inertia Scroll:
+   `SmoothScrollProvider.tsx` initializes Lenis with smooth wheel scrolling 
+   (`duration: 1.2`, `wheelMultiplier: 1.0`).
+
+B. GSAP Ticker Synchronization:
+   Lenis animation frame loop is connected directly into the GSAP ticker:
+   ```typescript
+   lenis.on("scroll", ScrollTrigger.update);
+   const updateRaf = (time: number) => { lenis.raf(time * 1000); };
+   gsap.ticker.add(updateRaf);
+   gsap.ticker.lagSmoothing(0);
+   ```
+
+C. SSR Safety Guards:
+   Every module importing `ScrollTrigger` wraps plugin registration in a window 
+   check to guarantee server components compile safely in Node.js:
+   ```typescript
+   if (typeof window !== "undefined") {
+     gsap.registerPlugin(ScrollTrigger);
+   }
+   ```
+
+D. Deterministic Route Navigation Reset:
+   Whenever Next.js App Router navigates between routes, `SmoothScrollProvider` 
+   executes a route change listener (`usePathname`):
+   ```typescript
+   useEffect(() => {
+     if (typeof window !== "undefined") {
+       lenisRef.current?.scrollTo(0, { immediate: true });
+       ScrollTrigger.refresh();
+     }
+   }, [pathname]);
+   ```
+
+
+6. DATA ENGINE & CREDIBILITY SPECIFICATION (`data/projects.ts`)
+--------------------------------------------------------------------------------
+The portfolio dataset is strictly typed in `types/project.ts` and managed in 
+`data/projects.ts`.
+
+Interface Contract (`types/project.ts`):
+```typescript
+export interface Project {
+  slug: string;
+  title: string;
+  category: string;
+  positioning: string;
+  year: string;
+  description: string;
+  services: string[];
+  heroImage: string;
+  heroVideo?: string;
+  featured: boolean;
+  status: "LIVE" | "COMING SOON";
+  technologies: string[];
+}
+```
+
+Credibility Rules:
+1. Unified Year: All projects display `year: "2026"`.
+2. Live Status (`status: "LIVE"`):
+   - `EZdukkan` (Retail Merchant Business & Invoicing Application)
+   - `Mamacha Mala` (Maharashtrian Resort & Culinary Destination)
+   - Rendered with a pulsing mint dot badge (`<span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />`).
+3. Unreleased Status (`status: "COMING SOON"`):
+   - `GitaPath` (Digital Philosophy Platform)
+   - `BrandBattle` (AI Product Intelligence Engine)
+   - `Mayuri Developer` (Architectural Real Estate Website)
+   - `Face Attendance System` (Computer Vision Biometric Verification)
+   - `BiteBuddy` (Tiffin Subscription & Food Platform)
+   - Rendered in subtle, restrained editorial mono typography without fake links.
+
+
+7. GITAPATH BRAND-BUILDING VIDEO ENGINE (`GitaPathVideoCard.tsx`)
+--------------------------------------------------------------------------------
+The GitaPath visual card on the Home Page hero section (`HeroSection.tsx`) features 
+a custom 4-stage cinematic montage loop engine:
+
+- Stage 01: `BRAND FOUNDATION & IDENTITY` (Logo mark & design system exploration)
+- Stage 02: `SCRIPTURE & READING INTERFACE` (Mobile app reading UX detail)
+- Stage 03: `ANCIENT WISDOM → DIGITAL ARCHITECTURE` (Temple architecture blending to laptop interface)
+- Stage 04: `CRAFTSMANSHIP & SYSTEM ENGINEERING` (Engineering & building status)
+
+Technical Highlights:
+- Viewport Optimization: Uses `IntersectionObserver` to pause frame loop intervals when scrolled out of view, saving GPU resources.
+- Interactive Hover State: 1.03x scale zoom with a smooth 700ms transition, top stage tagline reveal, and a 2px label shift.
+- Status Pill: `GITAPATH · BUILDING` with a pulsing mint dot indicator.
+
+
+8. CONTACT FORM UX/UI & API INFRASTRUCTURE (`app/contact/page.tsx`)
+--------------------------------------------------------------------------------
+The project inquiry contact form provides a 10/10 founder-focused user experience:
+
+A. Human Microcopy Validation:
+   - Single-letter name input (`"a"`): *"We promise we won't call you 'A'. What's your full name?"*
+   - Partial email input (`alex@`): *"Almost there — your email needs a little more."*
+   - Valid email input (`alex@company.com`): Displays a mint checkmark badge + *"Looks good ✓"*.
+   - Generic company name (`"website"`): *"Give it a name we'll remember."*
+
+B. Custom Budget Dropdown:
+   Replaces native browser `<select>` with a custom popup menu (`< $10k`, `$10k - $25k`, 
+   `$25k - $50k`, `$50k+`) with keyboard navigation and click-outside dismissal.
+
+C. Conversational Prompt Chips:
+   Textarea prompts (`A new brand?`, `A digital product?`, `A web platform?`, 
+   `Something difficult to explain?`) prepending structured context directly into 
+   the message field.
+
+D. Progressive Confidence Indicator:
+   Quiet progress feedback above submit button (*"Getting started..."* → *"You're giving us a good picture."* → *"That's enough for us to get started."*).
+
+E. Email Service Dispatch (`lib/email/service.ts`):
+   REST API fetch integration with Resend API (`POST https://api.resend.com/emails`). 
+   Falls back gracefully to development logging mode when API keys are not present.
+
+
+9. SEO & RICH SNIPPET INFRASTRUCTURE
+--------------------------------------------------------------------------------
+- Metadata Constructor (`lib/seo/metadata.ts`): Generates page titles, meta 
+  descriptions, OpenGraph social cards, Twitter cards, and canonical URLs.
+- JSON-LD Structured Data (`lib/seo/jsonld.ts`): Emits Google Schema.org Organization 
+  JSON-LD scripts for studio rich search snippets.
+- Prerendered SEO Files: Standard `sitemap.xml` and `robots.txt` generated automatically.
+
+
+10. BUILD VERIFICATION & PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+- Static Prerendering: 21 static pages generated during `npm run build`:
+  - `/` (Home Page)
+  - `/_not-found`
+  - `/about`
+  - `/capabilities`
+  - `/contact`
+  - `/journal`
+  - `/login`
+  - `/philosophy`
+  - `/robots.txt`
+  - `/signup`
+  - `/sitemap.xml`
+  - `/work`
+  - `/work/[slug]` (7 SSG static project paths)
+- Shared JS Bundle: ~105 kB First Load JS.
+- Compilation Health: 0 TypeScript errors, 0 ESLint warnings, 100% clean builds.
+
+================================================================================
+                       DOCUMENT GENERATED: AUGUST 2026
+================================================================================

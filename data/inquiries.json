@@ -1,0 +1,24 @@
+[
+  {
+    "id": "inq_1786583341636_uyrw4",
+    "name": "rohit Pote",
+    "email": "gitapath@gmail.com",
+    "companyProject": "Gitapath",
+    "budget": "$10k - $25k",
+    "overview": "We are looking to build a new brand:",
+    "createdAt": "2026-08-13T01:09:01.636Z",
+    "status": "new",
+    "ip": "::1"
+  },
+  {
+    "id": "inq_1786583016694_n1dhy",
+    "name": "Alex Mercer",
+    "email": "alex@founder.com",
+    "companyProject": "Venture Studio Ltd",
+    "budget": "$25k - $50k",
+    "overview": "We are building a scalable fintech platform for ambitious founders.",
+    "createdAt": "2026-08-13T01:03:36.695Z",
+    "status": "new",
+    "ip": "::1"
+  }
+]
