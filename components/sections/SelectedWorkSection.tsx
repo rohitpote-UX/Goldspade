@@ -7,16 +7,13 @@ import { PROJECTS } from "@/data/projects";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export function SelectedWorkSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
   const featuredProjects = PROJECTS.slice(0, 4);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }

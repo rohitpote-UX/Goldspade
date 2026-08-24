@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { ArrowUpRight, Check, ChevronDown } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Mail } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 const BUDGET_OPTIONS = ["< $10k", "$10k - $25k", "$25k - $50k", "$50k+"];
@@ -90,10 +90,10 @@ export default function ContactPage() {
   const getEmailFeedback = () => {
     if (!formData.email) return "";
     if (isValidEmailFormat(formData.email)) {
-      return "Looks good";
+      return "Valid email format";
     }
     if (isPartialEmail(formData.email)) {
-      return "Almost there — your email needs a little more.";
+      return "Almost there — your email needs a domain.";
     }
     return "";
   };
@@ -142,7 +142,7 @@ export default function ContactPage() {
     }
 
     if (!formData.message.trim() || formData.message.trim().length < 10) {
-      errors.message = "Give us a little more context. Two sentences is enough.";
+      errors.message = "Give us a little more context (minimum 10 characters).";
       hasError = true;
     }
 
@@ -150,40 +150,46 @@ export default function ContactPage() {
 
     if (hasError) return;
 
-    setStatus({ submitting: true, submitted: false });
+    // Honeypot Protection: Silently accept automated submissions without sending
+    if (formData._hp && formData._hp.trim().length > 0) {
+      setStatus({ submitting: false, submitted: true });
+      return;
+    }
+
+    setStatus({ submitting: true, submitted: false, error: undefined });
 
     try {
-      const response = await fetch("/api/inquiry", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          companyProject: formData.company,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim(),
           budget: formData.budget,
-          overview: formData.message,
+          message: formData.message.trim(),
           _hp: formData._hp,
         }),
       });
 
-      const res = await response.json();
+      const data = await res.json();
 
-      if (response.ok && res.success) {
+      if (res.ok && data.success) {
         setStatus({ submitting: false, submitted: true });
       } else {
         setStatus({
           submitting: false,
           submitted: false,
-          error: res.error || "Something went wrong. Please try again or email us directly.",
+          error:
+            data.error || "Something went wrong while sending your inquiry. Please try again.",
         });
       }
     } catch {
       setStatus({
         submitting: false,
         submitted: false,
-        error: "Something went wrong. Please try again or email us directly.",
+        error:
+          "Something went wrong while sending your inquiry. Your message wasn't sent. Please try again.",
       });
     }
   };
@@ -199,10 +205,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-36 pb-28 md:py-40 bg-canvas text-primary-dark min-h-screen px-6 sm:px-12 md:px-20 lg:px-24 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
+    <div
+      suppressHydrationWarning
+      className="pt-36 pb-28 md:py-40 bg-canvas text-primary-dark min-h-screen px-6 sm:px-12 md:px-20 lg:px-24 transition-colors duration-300"
+    >
+      <div className="max-w-7xl mx-auto" suppressHydrationWarning>
         {/* Section Header */}
-        <div className="mb-16 md:mb-20 max-w-3xl">
+        <div className="mb-16 md:mb-20 max-w-3xl" suppressHydrationWarning>
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3 font-bold">
             INQUIRIES · START A CONVERSATION
           </span>
@@ -214,25 +223,80 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pt-8 border-t border-editorial-border">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pt-8 border-t border-editorial-border" suppressHydrationWarning>
           {/* Left Column: Direct Studio Information */}
-          <div className="md:col-span-5 space-y-8">
-            {/* Direct Email */}
-            <div className="group">
-              <span className="text-xs font-mono font-bold uppercase text-secondary-dark block mb-2 tracking-wider">
-                Direct Email
-              </span>
+          <div className="md:col-span-5 space-y-8" suppressHydrationWarning>
+            {/* Direct Email with Awwwards-style Brush Interaction */}
+            <div className="group relative" suppressHydrationWarning>
+              <div className="flex items-center space-x-2 mb-2">
+                <span className="text-xs font-mono font-bold uppercase text-secondary-dark tracking-wider">
+                  Direct Email
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
+              </div>
+
+              {/* Brushed Clickable Anchor */}
               <a
-                href="mailto:hello@goldspade.com"
-                className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-primary-dark hover:text-secondary-dark transition-colors inline-flex items-center group-hover:translate-x-0.5 transition-transform"
+                href="mailto:hello@goldspade.in"
+                aria-label="Directly email Goldspade studio at hello@goldspade.in"
+                className="relative inline-flex items-center py-2 px-1 text-2xl sm:text-3xl font-bold uppercase tracking-tight text-primary-dark transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint rounded-lg group"
               >
-                <span>hello@goldspade.com</span>
-                <ArrowUpRight className="w-6 h-6 ml-1.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-all" />
+                {/* Organic Awwwards Paint Brush Stroke Effect */}
+                <div
+                  className="absolute inset-x-0 bottom-1.5 h-3 sm:h-3.5 -z-10 pointer-events-none overflow-visible opacity-90 transition-all duration-500 ease-out origin-left group-hover:scale-y-125"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 340 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-full text-mint drop-shadow-[0_2px_8px_rgba(115,243,197,0.4)] transition-all duration-500 ease-out"
+                    preserveAspectRatio="none"
+                  >
+                    {/* Background Soft Texture Path */}
+                    <path
+                      d="M2 11.5C38 6.5 110 4 175 8.5C240 13 298 9.5 338 12C341 12.2 336 16.5 315 16C265 15 190 17 110 15C50 13.5 12 16.5 3 14C1 13.5 1 12 2 11.5Z"
+                      fill="currentColor"
+                      className="opacity-0 group-hover:opacity-40 transition-opacity duration-300 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"
+                    />
+                    {/* Primary Dynamic Drawn Brush Stroke */}
+                    <path
+                      d="M3 10C45 4.5 125 5 180 8C235 11 295 7.5 337 11"
+                      stroke="currentColor"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="[stroke-dasharray:360] [stroke-dashoffset:360] group-hover:[stroke-dashoffset:0] group-focus-visible:[stroke-dashoffset:0] transition-all duration-500 ease-out"
+                    />
+                    {/* Second subtle fine-line bristle stroke for handmade depth */}
+                    <path
+                      d="M15 14C70 12 160 14 240 12.5C285 11.5 315 14 330 13"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      className="[stroke-dasharray:340] [stroke-dashoffset:340] group-hover:[stroke-dashoffset:0] transition-all duration-700 ease-out delay-75 opacity-70"
+                    />
+                  </svg>
+                </div>
+
+                {/* Email text with micro-translation */}
+                <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+                  hello@goldspade.in
+                </span>
+
+                {/* Arrow with kinetic hover translation */}
+                <ArrowUpRight className="relative z-10 w-6 h-6 ml-2 text-primary-dark/70 group-hover:text-primary-dark group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300" />
               </a>
+
+              {/* Sub-label explaining direct mail action */}
+              <div className="flex items-center space-x-1.5 mt-1 text-[11px] font-mono text-secondary-dark">
+                <Mail className="w-3.5 h-3.5 opacity-60" />
+                <span className="tracking-wide">Opens your default email client</span>
+              </div>
             </div>
 
             {/* Studio Location */}
-            <div>
+            <div suppressHydrationWarning>
               <span className="text-xs font-mono font-bold uppercase text-secondary-dark block mb-2 tracking-wider">
                 Studio Location
               </span>
@@ -242,7 +306,7 @@ export default function ContactPage() {
             </div>
 
             {/* Response SLA Card (Interactive) */}
-            <div className="p-6 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border shadow-xs hover:border-mint/50 hover:shadow-md transition-all duration-300 group relative overflow-hidden">
+            <div className="p-6 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border shadow-xs hover:border-mint/50 hover:shadow-md transition-all duration-300 group relative overflow-hidden" suppressHydrationWarning>
               <div className="absolute top-0 left-0 bottom-0 w-1 bg-mint opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="text-xs font-mono font-bold uppercase text-secondary-dark block mb-2 tracking-wider flex items-center justify-between">
                 <span>Response SLA</span>
@@ -254,7 +318,7 @@ export default function ContactPage() {
             </div>
 
             {/* Quiet Workspace Media Asset */}
-            <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-editorial-border shadow-xs group cursor-pointer">
+            <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-editorial-border shadow-xs group cursor-pointer" suppressHydrationWarning>
               <Image
                 src="/media/pages/contact/contact-desk-morning.png"
                 alt="Goldspade Morning Workspace"
@@ -269,22 +333,22 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Contact / Inquiry Form */}
-          <div className="md:col-span-7">
+          <div className="md:col-span-7" suppressHydrationWarning>
             {status.submitted ? (
               /* Success State */
-              <div className="p-10 sm:p-14 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border text-center space-y-6 shadow-sm animate-in fade-in duration-500">
+              <div className="p-10 sm:p-14 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border text-center space-y-6 shadow-sm animate-in fade-in duration-500" suppressHydrationWarning>
                 <div className="w-12 h-12 rounded-full bg-mint/20 border border-mint text-primary-dark flex items-center justify-center mx-auto">
                   <Check className="w-6 h-6 text-primary-dark" />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2" suppressHydrationWarning>
                   <h3 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-primary-dark">
-                    MESSAGE RECEIVED.
+                    INQUIRY RECEIVED.
                   </h3>
                   <p className="text-secondary-dark text-base sm:text-lg max-w-md mx-auto leading-relaxed">
-                    Your idea is officially on our desk. We&apos;ll review it and get back to you within 24 hours.
+                    Thank you. We&apos;ve received your inquiry and will get back to you within 24 hours.
                   </p>
                 </div>
-                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4" suppressHydrationWarning>
                   <Button
                     onClick={() => {
                       setStatus({ submitting: false, submitted: false });
@@ -309,17 +373,38 @@ export default function ContactPage() {
               </div>
             ) : (
               /* Form Component */
-              <form onSubmit={handleSubmit} className="space-y-7">
+              <form onSubmit={handleSubmit} className="space-y-7" suppressHydrationWarning>
+                {/* Honeypot field (hidden from human users) */}
+                <input
+                  type="text"
+                  name="_hp"
+                  value={formData._hp}
+                  onChange={(e) => setFormData({ ...formData, _hp: e.target.value })}
+                  style={{
+                    position: "absolute",
+                    opacity: 0,
+                    zIndex: -1,
+                    width: 0,
+                    height: 0,
+                    pointerEvents: "none",
+                  }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  suppressHydrationWarning
+                />
+
                 {status.error && (
-                  <div className="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-900 dark:text-red-200 text-xs font-mono rounded-2xl">
-                    {status.error}
+                  <div className="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-900 dark:text-red-200 text-xs font-mono rounded-2xl" suppressHydrationWarning>
+                    <p className="font-bold mb-1">Something went wrong.</p>
+                    <p>{status.error}</p>
                   </div>
                 )}
 
                 {/* Name & Email Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" suppressHydrationWarning>
                   {/* Your Name */}
-                  <div className="relative">
+                  <div className="relative" suppressHydrationWarning>
                     <label
                       htmlFor="name"
                       className={cn(
@@ -331,6 +416,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       id="name"
+                      name="name"
                       type="text"
                       required
                       value={formData.name}
@@ -346,6 +432,7 @@ export default function ContactPage() {
                         focused.name ? "border-mint ring-1 ring-mint/30" : "",
                         validationErrors.name && touched.name ? "border-red-400" : ""
                       )}
+                      suppressHydrationWarning
                     />
                     {getNameFeedback() && (
                       <p className="mt-1.5 text-[11px] font-mono text-secondary-dark">
@@ -360,7 +447,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* Email Address */}
-                  <div className="relative">
+                  <div className="relative" suppressHydrationWarning>
                     <label
                       htmlFor="email"
                       className={cn(
@@ -370,9 +457,10 @@ export default function ContactPage() {
                     >
                       Email Address *
                     </label>
-                    <div className="relative">
+                    <div className="relative" suppressHydrationWarning>
                       <input
                         id="email"
+                        name="email"
                         type="email"
                         required
                         value={formData.email}
@@ -388,6 +476,7 @@ export default function ContactPage() {
                           focused.email ? "border-mint ring-1 ring-mint/30" : "",
                           validationErrors.email && touched.email ? "border-red-400" : ""
                         )}
+                        suppressHydrationWarning
                       />
                       {isValidEmailFormat(formData.email) && (
                         <div className="absolute right-3.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-mint/20 border border-mint text-primary-dark flex items-center justify-center">
@@ -409,9 +498,9 @@ export default function ContactPage() {
                 </div>
 
                 {/* Company & Budget Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6" suppressHydrationWarning>
                   {/* Company / Project Name */}
-                  <div className="relative">
+                  <div className="relative" suppressHydrationWarning>
                     <label
                       htmlFor="company"
                       className="block text-xs font-mono font-bold uppercase text-secondary-dark mb-2"
@@ -420,6 +509,7 @@ export default function ContactPage() {
                     </label>
                     <input
                       id="company"
+                      name="company"
                       type="text"
                       value={formData.company}
                       onFocus={() => setFocused((p) => ({ ...p, company: true }))}
@@ -430,6 +520,7 @@ export default function ContactPage() {
                         "w-full bg-white dark:bg-black/60 border border-editorial-border rounded-2xl px-4 py-3.5 text-primary-dark text-sm placeholder:text-secondary-dark/50 focus:outline-none transition-all duration-200 shadow-xs",
                         focused.company ? "border-mint ring-1 ring-mint/30" : ""
                       )}
+                      suppressHydrationWarning
                     />
                     {getCompanyFeedback() && (
                       <p className="mt-1.5 text-[11px] font-mono text-secondary-dark">
@@ -439,7 +530,7 @@ export default function ContactPage() {
                   </div>
 
                   {/* Custom Budget Dropdown */}
-                  <div className="relative" ref={dropdownRef}>
+                  <div className="relative" ref={dropdownRef} suppressHydrationWarning>
                     <label
                       htmlFor="budget"
                       className="block text-xs font-mono font-bold uppercase text-secondary-dark mb-2"
@@ -454,6 +545,7 @@ export default function ContactPage() {
                         "w-full bg-white dark:bg-black/60 border border-editorial-border rounded-2xl px-4 py-3.5 text-primary-dark text-sm text-left flex items-center justify-between transition-all duration-200 shadow-xs",
                         isBudgetOpen ? "border-mint ring-1 ring-mint/30" : ""
                       )}
+                      suppressHydrationWarning
                     >
                       <span className="font-semibold">{formData.budget}</span>
                       <ChevronDown
@@ -466,7 +558,7 @@ export default function ContactPage() {
 
                     {/* Custom Dropdown Popup Menu */}
                     {isBudgetOpen && (
-                      <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-black border border-editorial-border rounded-2xl shadow-lg z-30 py-2 overflow-hidden animate-in fade-in duration-200">
+                      <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-black border border-editorial-border rounded-2xl shadow-lg z-30 py-2 overflow-hidden animate-in fade-in duration-200" suppressHydrationWarning>
                         {BUDGET_OPTIONS.map((opt) => {
                           const isSelected = formData.budget === opt;
                           return (
@@ -483,6 +575,7 @@ export default function ContactPage() {
                                   ? "bg-mint/15 text-primary-dark border-l-2 border-mint"
                                   : "text-secondary-dark hover:text-primary-dark hover:bg-black/5 dark:hover:bg-white/5"
                               )}
+                              suppressHydrationWarning
                             >
                               <span>{opt}</span>
                               {isSelected && <Check className="w-4 h-4 text-primary-dark" />}
@@ -495,7 +588,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Project Overview & Objectives Textarea */}
-                <div className="relative">
+                <div className="relative" suppressHydrationWarning>
                   <div className="flex items-center justify-between mb-2">
                     <label
                       htmlFor="message"
@@ -512,6 +605,7 @@ export default function ContactPage() {
 
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={5}
                     value={formData.message}
@@ -527,10 +621,11 @@ export default function ContactPage() {
                       focused.message ? "border-mint ring-1 ring-mint/30" : "",
                       validationErrors.message && touched.message ? "border-red-400" : ""
                     )}
+                    suppressHydrationWarning
                   />
 
                   {/* Contextual Conversational Chips */}
-                  <div className="mt-3 flex flex-wrap gap-2 items-center">
+                  <div className="mt-3 flex flex-wrap gap-2 items-center" suppressHydrationWarning>
                     <span className="text-[10px] font-mono uppercase text-secondary-dark tracking-wider mr-1">
                       PROMPTS:
                     </span>
@@ -540,6 +635,7 @@ export default function ContactPage() {
                         type="button"
                         onClick={() => handleChipClick(chip)}
                         className="text-[11px] font-mono font-medium text-secondary-dark hover:text-primary-dark bg-white dark:bg-black/40 hover:bg-mint/10 border border-editorial-border hover:border-mint/40 px-2.5 py-1 rounded-full transition-all duration-200 cursor-pointer shadow-2xs"
+                        suppressHydrationWarning
                       >
                         {chip}
                       </button>
@@ -554,7 +650,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Progressive Confidence Line & Submit Button */}
-                <div className="pt-4 space-y-4">
+                <div className="pt-4 space-y-4" suppressHydrationWarning>
                   {/* Progressive Confidence Indicator */}
                   {getProgressMessage() && (
                     <div className="flex items-center space-x-2 text-xs font-mono text-secondary-dark animate-in fade-in duration-300">
@@ -563,16 +659,17 @@ export default function ContactPage() {
                     </div>
                   )}
 
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4" suppressHydrationWarning>
                     <Button
                       type="submit"
                       disabled={status.submitting}
                       variant="mint"
                       size="lg"
-                      icon
+                      icon={!status.submitting}
                       className="w-full sm:w-auto"
+                      suppressHydrationWarning
                     >
-                      {status.submitting ? "TRANSMITTING INQUIRY..." : "SUBMIT INQUIRY"}
+                      {status.submitting ? "SENDING INQUIRY..." : "SUBMIT INQUIRY"}
                     </Button>
                     <span className="text-[11px] font-mono text-secondary-dark text-center sm:text-right">
                       Strict SLA: Response within 24 hours.

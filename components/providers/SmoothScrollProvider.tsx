@@ -6,10 +6,6 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export function SmoothScrollProvider({
   children,
 }: {
@@ -19,6 +15,8 @@ export function SmoothScrollProvider({
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
@@ -59,9 +57,13 @@ export function SmoothScrollProvider({
       } else {
         window.scrollTo(0, 0);
       }
-      ScrollTrigger.refresh();
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50);
+      return () => clearTimeout(timer);
     }
   }, [pathname]);
 
   return <>{children}</>;
 }
+

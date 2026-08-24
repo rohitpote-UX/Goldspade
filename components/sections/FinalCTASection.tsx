@@ -6,10 +6,6 @@ import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 interface IntentOption {
   id: string;
   label: string;
@@ -51,6 +47,7 @@ export function FinalCTASection() {
   const rightCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
@@ -215,10 +212,10 @@ export function FinalCTASection() {
                 <div className="mt-6 pt-6 border-t border-editorial-border/60 flex items-center justify-between text-xs font-mono text-secondary-dark">
                   <span>Prefer direct email?</span>
                   <a
-                    href="mailto:hello@goldspade.com"
-                    className="font-bold text-primary-dark hover:text-mint transition-colors underline underline-offset-4"
+                    href="mailto:hello@goldspade.in"
+                    className="text-xs uppercase tracking-widest text-primary-dark font-bold font-mono hover:text-secondary-dark transition-colors inline-flex items-center"
                   >
-                    hello@goldspade.com
+                    hello@goldspade.in
                   </a>
                 </div>
               </div>

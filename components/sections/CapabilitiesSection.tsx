@@ -6,10 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const CAPABILITIES = [
   {
     num: "01",
@@ -63,6 +59,7 @@ export function CapabilitiesSection() {
   const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }

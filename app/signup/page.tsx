@@ -8,14 +8,15 @@ import { AuthService } from "@/lib/auth/abstraction";
 export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState<{ loading: boolean; error?: string; success?: boolean }>({
     loading: false,
   });
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus({ loading: true });
-    const res = await AuthService.signup(email, name);
+    setStatus({ loading: true, error: undefined });
+    const res = await AuthService.signup(email, name, password);
     if (res.success) {
       setStatus({ loading: false, success: true });
     } else {
@@ -38,8 +39,15 @@ export default function SignupPage() {
         <div className="p-8 bg-white rounded-3xl border border-editorial-border shadow-sm">
           {status.success ? (
             <div className="text-center space-y-4 py-6">
-              <h3 className="text-xl font-bold uppercase text-primary-dark">REQUEST SUBMITTED</h3>
-              <p className="text-sm text-secondary-dark">We will verify your client credentials shortly.</p>
+              <h3 className="text-xl font-bold uppercase text-primary-dark">ACCOUNT CREATED</h3>
+              <p className="text-sm text-secondary-dark">
+                Welcome to Goldspade. Your portal credentials have been established.
+              </p>
+              <div className="pt-4">
+                <Button href="/" variant="primary" size="md">
+                  Enter Portal
+                </Button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSignup} className="space-y-6">
@@ -75,6 +83,24 @@ export default function SignupPage() {
                   placeholder="alex@company.com"
                   className="w-full bg-canvas border border-editorial-border rounded-xl px-4 py-3 text-primary-dark text-sm focus:outline-none focus:border-primary-dark transition-colors"
                 />
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono font-bold uppercase text-secondary-dark mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  minLength={8}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="At least 8 characters"
+                  className="w-full bg-canvas border border-editorial-border rounded-xl px-4 py-3 text-primary-dark text-sm focus:outline-none focus:border-primary-dark transition-colors"
+                />
+                <p className="mt-1.5 text-[10px] font-mono text-secondary-dark">
+                  Must include uppercase, lowercase, and a number or symbol.
+                </p>
               </div>
 
               <Button

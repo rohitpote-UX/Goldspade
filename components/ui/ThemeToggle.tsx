@@ -29,6 +29,7 @@ export function ThemeToggle({ className, size = "md" }: ThemeToggleProps) {
     <button
       onClick={toggleTheme}
       type="button"
+      suppressHydrationWarning
       className={cn(
         "relative inline-flex items-center justify-center rounded-full border border-editorial-border bg-white text-primary-dark hover:border-primary-dark transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 active:scale-95 flex-shrink-0 cursor-pointer shadow-xs",
         sizeClasses,

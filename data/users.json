@@ -1,0 +1,20 @@
+[
+  {
+    "id": "usr_1787440972955_wlcxw",
+    "email": "client1787440972877@testcorp.com",
+    "name": "Test Client",
+    "passwordHash": "dca74540b478aae87a64b7d7d06a68cdef7894279c08e97beba72e1e8c026747680ee420e18f22816d0cac18c88142fa11ae1281db9351ef8a261e79aba61c07",
+    "passwordSalt": "6fffcd4b73230d2701bd0ec232a0eac8",
+    "role": "client",
+    "createdAt": "2026-08-22T23:22:52.955Z"
+  },
+  {
+    "id": "usr_1787551199664_u815s",
+    "email": "admin@goldspade.in",
+    "name": "Goldspade Administrator",
+    "passwordHash": "380f91d1480927d7bf02fed0e93470148d62a50abc78f7c7dafc7a4add3014b7b2320e038459e1c68c8ea112a36a5eb806939a4b6c2d08f99a6fc67a18b2c25d",
+    "passwordSalt": "f283165a0a3a9af5cedbb0de15e06ade",
+    "role": "ADMIN",
+    "createdAt": "2026-08-24T05:59:59.664Z"
+  }
+]

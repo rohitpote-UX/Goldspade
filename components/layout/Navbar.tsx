@@ -106,6 +106,7 @@ export function Navbar() {
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            suppressHydrationWarning
             className="inline-flex items-center space-x-1.5 bg-white border border-editorial-border text-primary-dark px-3.5 py-2 rounded-full text-xs font-mono font-bold uppercase shadow-sm focus:outline-none"
             aria-label="Toggle Navigation Menu"
           >

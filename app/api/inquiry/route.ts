@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { saveInquiry } from "@/lib/db/inquiries";
+import { saveInquiry, updateInquiryEmailStatus } from "@/lib/db/inquiries";
 import { sendInquiryNotification, EmailResult } from "@/lib/email/service";
 
 // Predefined budget options matching UI contract
@@ -160,11 +160,15 @@ export async function POST(req: NextRequest) {
         submittedAt: inquiryRecord.createdAt,
       });
 
-      if (!emailResult.success) {
+      if (emailResult.success) {
+        await updateInquiryEmailStatus(inquiryRecord.id, "sent");
+      } else {
+        await updateInquiryEmailStatus(inquiryRecord.id, "failed");
         console.warn("[Inquiry API Warning - Email Delivery Failed]:", emailResult.error);
         // Note: Inquiry remains safely saved in DB
       }
     } catch (emailErr) {
+      await updateInquiryEmailStatus(inquiryRecord.id, "failed");
       console.error("[Inquiry API Error - Email Exception]:", emailErr);
     }
 

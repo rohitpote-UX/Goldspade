@@ -5,10 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Check, Code2, Cpu, Layers, Sparkles, Zap } from "lucide-react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const SYSTEM_NODES = [
   { label: "IDEA", icon: Sparkles },
   { label: "STRATEGY", icon: Layers },
@@ -24,6 +20,7 @@ export function TrustSection() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }

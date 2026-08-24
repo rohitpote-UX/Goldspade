@@ -146,16 +146,17 @@ ${submittedTimestamp}`;
 
   // 2. Check Resend API Provider
   const resendApiKey = process.env.RESEND_API_KEY;
-  if (resendApiKey) {
+  if (resendApiKey && resendApiKey.trim().length > 0 && !resendApiKey.includes("placeholder")) {
     try {
+      const fromAddress = process.env.RESEND_FROM_EMAIL || "Goldspade Inquiries <onboarding@resend.dev>";
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${resendApiKey}`,
+          Authorization: `Bearer ${resendApiKey.trim()}`,
         },
         body: JSON.stringify({
-          from: "Goldspade Inquiries <onboarding@resend.dev>",
+          from: fromAddress,
           to: [recipientEmail],
           reply_to: data.email,
           subject: subject,

@@ -6,10 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export function Footer() {
   const [currentYear, setCurrentYear] = useState(2026);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -20,6 +16,7 @@ export function Footer() {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     setCurrentYear(new Date().getFullYear());
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mediaQuery.matches);
@@ -148,58 +145,6 @@ export function Footer() {
           </svg>
         </div>
 
-        {/* Inline CSS Keyframe Animations for Mint Flowing Paths */}
-        <style jsx>{`
-          @keyframes gridFlow1 {
-            0% {
-              stroke-dashoffset: 600;
-              opacity: 0;
-            }
-            15% {
-              opacity: 0.8;
-            }
-            85% {
-              opacity: 0.8;
-            }
-            100% {
-              stroke-dashoffset: -600;
-              opacity: 0;
-            }
-          }
-          @keyframes gridFlow2 {
-            0% {
-              stroke-dashoffset: 600;
-              opacity: 0;
-            }
-            20% {
-              opacity: 0.7;
-            }
-            80% {
-              opacity: 0.7;
-            }
-            100% {
-              stroke-dashoffset: -600;
-              opacity: 0;
-            }
-          }
-          @keyframes gridFlow3 {
-            0% {
-              stroke-dashoffset: 600;
-              opacity: 0;
-            }
-            10% {
-              opacity: 0.9;
-            }
-            90% {
-              opacity: 0.9;
-            }
-            100% {
-              stroke-dashoffset: -600;
-              opacity: 0;
-            }
-          }
-        `}</style>
-
         {/* Main Content Layout Container */}
         <div ref={contentRef} className="max-w-[1920px] mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pb-20 border-b border-white/10">
@@ -225,10 +170,10 @@ export function Footer() {
                   DIRECT CONTACT
                 </span>
                 <a
-                  href="mailto:hello@goldspade.com"
+                  href="mailto:hello@goldspade.in"
                   className="font-mono text-xl sm:text-2xl font-bold tracking-tight text-white hover:text-mint transition-colors duration-300 inline-block"
                 >
-                  HELLO@GOLDSPADE.COM
+                  HELLO@GOLDSPADE.IN
                 </a>
               </div>
             </div>
@@ -326,12 +271,20 @@ export function Footer() {
               <span>© {currentYear} GOLDSPADE STUDIO. ALL RIGHTS RESERVED.</span>
             </div>
 
-            <div className="flex space-x-6 font-bold">
+            <div className="flex items-center space-x-6 font-bold">
               <Link href="/privacy" className="hover:text-white transition-colors">
                 PRIVACY
               </Link>
               <Link href="/terms" className="hover:text-white transition-colors">
                 TERMS
+              </Link>
+              <Link
+                href="/admin"
+                className="text-white/40 hover:text-mint transition-colors inline-flex items-center space-x-1"
+                aria-label="Goldspade Internal Client Desk"
+              >
+                <span>CLIENT DESK</span>
+                <span className="text-mint">→</span>
               </Link>
             </div>
           </div>

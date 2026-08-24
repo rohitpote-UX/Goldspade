@@ -54,6 +54,7 @@ export function Button({
     return (
       <Link
         href={href}
+        suppressHydrationWarning
         className={cn(baseStyles, variants[variant], sizes[size], className)}
       >
         {content}
@@ -63,6 +64,7 @@ export function Button({
 
   return (
     <button
+      suppressHydrationWarning
       className={cn(baseStyles, variants[variant], sizes[size], className)}
       {...props}
     >
