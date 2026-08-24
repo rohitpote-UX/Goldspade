@@ -43,24 +43,24 @@ export function SelectedWorkSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-28 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-6 sm:px-12 md:px-20 lg:px-24 overflow-hidden">
+    <section ref={containerRef} className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 md:mb-24">
           <div>
             <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
               02 — PORTFOLIO
             </span>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+            <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
               SELECTED WORK
             </h2>
           </div>
-          <Button href="/work" variant="secondary" size="md" icon className="mt-6 md:mt-0">
+          <Button href="/work" variant="secondary" size="md" icon className="mt-6 md:mt-0 w-full sm:w-auto">
             View All Work ({PROJECTS.length})
           </Button>
         </div>
 
         {/* Alternating Editorial Portfolio Showcase */}
-        <div className="space-y-28 md:space-y-40">
+        <div className="space-y-16 sm:space-y-24 md:space-y-40">
           {featuredProjects.map((project, index) => {
             const isEven = index % 2 === 0;
             return (
@@ -100,13 +100,13 @@ export function SelectedWorkSection() {
                       )}
                     </span>
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-primary-dark mb-4">
+                  <h3 className="text-2xl sm:text-4xl font-bold uppercase tracking-tight text-primary-dark mb-4">
                     {project.title}
                   </h3>
-                  <p className="text-base sm:text-lg text-secondary-dark mb-8 leading-relaxed font-normal">
+                  <p className="text-base sm:text-lg text-secondary-dark mb-6 sm:mb-8 leading-relaxed font-normal">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
                     {project.services.map((service) => (
                       <span
                         key={service}
@@ -117,7 +117,7 @@ export function SelectedWorkSection() {
                     ))}
                   </div>
                   <div>
-                    <Button href={`/work/${project.slug}`} variant="primary" size="md" icon>
+                    <Button href={`/work/${project.slug}`} variant="primary" size="md" icon className="w-full sm:w-auto">
                       VIEW CASE STUDY
                     </Button>
                   </div>

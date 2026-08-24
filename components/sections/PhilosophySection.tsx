@@ -3,14 +3,14 @@ import Image from "next/image";
 
 export function PhilosophySection() {
   return (
-    <section className="py-32 md:py-48 bg-canvas text-primary-dark border-t border-editorial-border relative overflow-hidden px-6 sm:px-12 md:px-20 lg:px-24">
+    <section className="py-16 sm:py-24 md:py-48 bg-canvas text-primary-dark border-t border-editorial-border relative overflow-hidden px-5 sm:px-12 md:px-20 lg:px-24">
       <div className="max-w-7xl mx-auto">
         <div className="max-w-5xl">
-          <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-8">
+          <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-6 sm:mb-8">
             05 — PHILOSOPHY
           </span>
 
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tight text-primary-dark leading-[0.88] mb-12">
+          <h2 className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tight text-primary-dark leading-[0.9] mb-8 sm:mb-12">
             IDEAS ARE <br />
             EVERYWHERE. <br />
             <span className="text-mint">EXECUTION IS RARE.</span>

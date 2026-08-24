@@ -63,18 +63,18 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="pt-36 pb-28 md:py-40 bg-canvas text-primary-dark min-h-screen px-6 sm:px-12 flex flex-col justify-center items-center">
+    <div className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas text-primary-dark min-h-screen px-5 sm:px-12 flex flex-col justify-center items-center">
       <div className="w-full max-w-md">
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center text-xs uppercase tracking-widest text-secondary-dark hover:text-primary-dark font-mono mb-8 transition-colors font-bold"
+          className="inline-flex items-center text-xs uppercase tracking-widest text-secondary-dark hover:text-primary-dark font-mono mb-6 sm:mb-8 transition-colors font-bold"
         >
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Studio
         </Link>
 
         {/* Card Container */}
-        <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-3xl p-8 sm:p-10 shadow-sm space-y-8">
+        <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-3xl p-6 sm:p-8 md:p-10 shadow-sm space-y-6 sm:space-y-8">
           {/* Header */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -117,7 +117,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@goldspade.in"
-                  className="w-full bg-white dark:bg-black/40 border border-editorial-border rounded-xl px-4 py-3 text-sm text-primary-dark placeholder:text-secondary-dark/40 focus:outline-none focus:border-mint focus:ring-1 focus:ring-mint/30 transition-all pl-10"
+                  className="w-full bg-white dark:bg-black/40 border border-editorial-border rounded-xl px-4 py-3.5 text-base sm:text-sm text-primary-dark placeholder:text-secondary-dark/40 focus:outline-none focus:border-mint focus:ring-1 focus:ring-mint/30 transition-all pl-10"
                 />
                 <Mail className="w-4 h-4 text-secondary-dark/50 absolute left-3.5 top-1/2 -translate-y-1/2" />
               </div>
@@ -138,7 +138,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-white dark:bg-black/40 border border-editorial-border rounded-xl px-4 py-3 text-sm text-primary-dark placeholder:text-secondary-dark/40 focus:outline-none focus:border-mint focus:ring-1 focus:ring-mint/30 transition-all pl-10"
+                  className="w-full bg-white dark:bg-black/40 border border-editorial-border rounded-xl px-4 py-3.5 text-base sm:text-sm text-primary-dark placeholder:text-secondary-dark/40 focus:outline-none focus:border-mint focus:ring-1 focus:ring-mint/30 transition-all pl-10"
                 />
                 <Key className="w-4 h-4 text-secondary-dark/50 absolute left-3.5 top-1/2 -translate-y-1/2" />
               </div>

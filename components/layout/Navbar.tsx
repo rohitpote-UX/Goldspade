@@ -29,7 +29,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-6 sm:pt-8 md:pt-10 px-6 sm:px-12 md:px-16 lg:px-20 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 pt-4 sm:pt-6 md:pt-10 px-4 sm:px-8 md:px-16 lg:px-20 pointer-events-none">
       <div className="max-w-[1920px] mx-auto flex items-center justify-between pointer-events-auto relative">
         {/* Independent Left Logo with Animated Mint Curved Line */}
         <Link
@@ -100,17 +100,16 @@ export function Navbar() {
           <ThemeToggle size="sm" />
           <Link
             href="/contact"
-            className="text-[11px] font-bold uppercase tracking-wider bg-mint text-[#171515] px-3.5 py-2 rounded-full"
+            className="text-[11px] font-bold uppercase tracking-wider bg-mint text-[#171515] px-3.5 py-2 rounded-full shadow-2xs hover:bg-[#5fe4b4] transition-colors"
           >
             START
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             suppressHydrationWarning
-            className="inline-flex items-center space-x-1.5 bg-white border border-editorial-border text-primary-dark px-3.5 py-2 rounded-full text-xs font-mono font-bold uppercase shadow-sm focus:outline-none"
+            className="w-9 h-9 inline-flex items-center justify-center bg-white border border-editorial-border text-primary-dark rounded-full shadow-2xs focus:outline-none transition-transform active:scale-95"
             aria-label="Toggle Navigation Menu"
           >
-            <span>MENU</span>
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
@@ -118,14 +117,14 @@ export function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[88px] bg-canvas z-40 flex flex-col justify-between p-8 border-t border-editorial-border md:hidden pointer-events-auto animate-in fade-in duration-200">
+        <div className="fixed inset-0 top-[68px] sm:top-[76px] md:top-[88px] bg-canvas z-40 flex flex-col justify-between p-6 sm:p-8 border-t border-editorial-border md:hidden pointer-events-auto animate-in fade-in duration-200">
           <nav className="flex flex-col space-y-6 mt-4">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-3xl font-bold uppercase tracking-tight text-primary-dark hover:text-secondary-dark transition-colors"
+                className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-primary-dark hover:text-secondary-dark transition-colors"
               >
                 {link.label}
               </Link>
@@ -133,13 +132,13 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-3xl font-bold uppercase tracking-tight text-primary-dark hover:text-secondary-dark transition-colors pt-4 border-t border-editorial-border"
+              className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-primary-dark hover:text-secondary-dark transition-colors pt-4 border-t border-editorial-border"
             >
               CONTACT
             </Link>
           </nav>
 
-          <div className="pt-8 border-t border-editorial-border text-xs font-mono text-secondary-dark uppercase tracking-widest flex items-center justify-between">
+          <div className="pt-6 sm:pt-8 border-t border-editorial-border text-xs font-mono text-secondary-dark uppercase tracking-widest flex items-center justify-between">
             <div>
               <p>GOLDSPADE STUDIO</p>
               <p>FORGED FOR FOUNDERS.</p>

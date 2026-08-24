@@ -2,8 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { saveInquiry, updateInquiryEmailStatus } from "@/lib/db/inquiries";
 import { sendInquiryNotification, EmailResult } from "@/lib/email/service";
 
-// Predefined budget options matching UI contract
-const VALID_BUDGETS = ["< $10k", "$10k - $25k", "$25k - $50k", "$50k+"];
+// Predefined budget options matching UI contract (INR rupee tiers + backwards compatibility)
+const VALID_BUDGETS = [
+  "< ₹10k",
+  "₹10k - ₹25k",
+  "₹25k - ₹50k",
+  "₹50k - ₹1L",
+  "₹1L - ₹2.5L",
+  "₹2.5L+",
+  "₹50k+",
+  "< $10k",
+  "$10k - $25k",
+  "$25k - $50k",
+  "$50k+",
+];
 
 // Email regex pattern
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

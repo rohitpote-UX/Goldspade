@@ -88,7 +88,7 @@ export function Footer() {
       {/* Curved Near-Black Panel Container (Sliding Door Panel) */}
       <div
         ref={panelRef}
-        className="relative bg-[#050505] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] pt-20 pb-12 px-6 sm:px-12 md:px-16 lg:px-20 border-t border-white/10 shadow-2xl transition-shadow duration-500"
+        className="relative bg-[#050505] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] pt-14 sm:pt-16 md:pt-20 pb-10 sm:pb-12 px-5 sm:px-12 md:px-16 lg:px-20 border-t border-white/10 shadow-2xl transition-shadow duration-500"
       >
         {/* Architectural Blueprint Grid Background */}
         <div className="absolute inset-0 pointer-events-none opacity-30 overflow-hidden rounded-t-[2.5rem] sm:rounded-t-[3.5rem]">
@@ -147,31 +147,31 @@ export function Footer() {
 
         {/* Main Content Layout Container */}
         <div ref={contentRef} className="max-w-[1920px] mx-auto relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pb-20 border-b border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 pb-12 sm:pb-16 md:pb-20 border-b border-white/10">
             {/* Column 1: Brand Signature & Contact */}
-            <div className="md:col-span-5 flex flex-col justify-between space-y-8">
+            <div className="md:col-span-5 flex flex-col justify-between space-y-6 sm:space-y-8">
               <div>
-                <span className="font-mono text-xs text-mint uppercase tracking-widest block mb-4">
+                <span className="font-mono text-xs text-mint uppercase tracking-widest block mb-3 sm:mb-4">
                   STUDIO SIGNATURE
                 </span>
                 <Link
                   href="/"
-                  className="font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase text-white block mb-6 hover:opacity-90 transition-opacity"
+                  className="font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase text-white block mb-4 sm:mb-6 hover:opacity-90 transition-opacity"
                 >
                   GOLDSPADE
                 </Link>
-                <p className="text-base sm:text-lg text-white/70 max-w-md leading-relaxed font-normal">
+                <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-md leading-relaxed font-normal">
                   Forged for Founders. Strategy, design, and technology built for ambitious businesses.
                 </p>
               </div>
 
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/40 font-mono block mb-2">
+                <span className="text-xs uppercase tracking-widest text-white/70 font-mono block mb-2">
                   DIRECT CONTACT
                 </span>
                 <a
                   href="mailto:hello@goldspade.in"
-                  className="font-mono text-xl sm:text-2xl font-bold tracking-tight text-white hover:text-mint transition-colors duration-300 inline-block"
+                  className="font-mono text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-white hover:text-mint transition-colors duration-300 inline-block"
                 >
                   HELLO@GOLDSPADE.IN
                 </a>
@@ -179,13 +179,13 @@ export function Footer() {
             </div>
 
             {/* Column 2 & 3: Navigation & Connect */}
-            <div className="md:col-span-4 grid grid-cols-2 gap-8">
+            <div className="md:col-span-4 grid grid-cols-2 gap-6 sm:gap-8">
               {/* Navigation */}
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/40 font-mono block mb-6">
+                <span className="text-xs uppercase tracking-widest text-white/70 font-mono block mb-4 sm:mb-6">
                   NAVIGATION
                 </span>
-                <ul className="space-y-4 text-sm font-semibold">
+                <ul className="space-y-3 sm:space-y-4 text-sm font-semibold">
                   {[
                     { label: "WORK", href: "/work" },
                     { label: "CAPABILITIES", href: "/capabilities" },
@@ -197,7 +197,7 @@ export function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="text-white/80 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
+                        className="text-white/90 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
                       >
                         {item.label}
                       </Link>
@@ -208,10 +208,10 @@ export function Footer() {
 
               {/* Connect */}
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/40 font-mono block mb-6">
+                <span className="text-xs uppercase tracking-widest text-white/70 font-mono block mb-4 sm:mb-6">
                   CONNECT
                 </span>
-                <ul className="space-y-4 text-sm font-semibold">
+                <ul className="space-y-3 sm:space-y-4 text-sm font-semibold">
                   {[
                     { label: "X / TWITTER", href: "https://twitter.com" },
                     { label: "LINKEDIN", href: "https://linkedin.com" },
@@ -222,7 +222,7 @@ export function Footer() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/80 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
+                        className="text-white/90 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
                       >
                         {item.label}
                       </a>
@@ -236,7 +236,7 @@ export function Footer() {
             <div className="md:col-span-3">
               <div
                 ref={cardRef}
-                className="group relative flex flex-col justify-between bg-white/[0.04] backdrop-blur-md p-8 sm:p-9 rounded-3xl border border-white/10 hover:border-white/20 hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-400 shadow-2xl h-full"
+                className="group relative flex flex-col justify-between bg-white/[0.04] backdrop-blur-md p-6 sm:p-8 md:p-9 rounded-3xl border border-white/10 hover:border-white/20 hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-400 shadow-2xl h-full"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -245,17 +245,17 @@ export function Footer() {
                     </span>
                     <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
                   </div>
-                  <h4 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mb-3">
+                  <h4 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-white mb-2 sm:mb-3">
                     HAVE AN IDEA?
                   </h4>
-                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed mb-8">
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed mb-6 sm:mb-8">
                     Let&apos;s discuss how we can build your brand, product, or system.
                   </p>
                 </div>
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center space-x-2 bg-mint text-primary-dark font-bold uppercase tracking-wider text-xs px-6 py-4 rounded-full hover:bg-[#5fe4b4] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-md group-hover:shadow-mint/10"
+                  className="inline-flex items-center justify-center space-x-2 bg-mint text-primary-dark font-bold uppercase tracking-wider text-xs px-6 py-3.5 sm:py-4 rounded-full hover:bg-[#5fe4b4] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-md group-hover:shadow-mint/10"
                 >
                   <span>START A PROJECT</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -265,9 +265,9 @@ export function Footer() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 font-mono">
-            <div className="flex items-center space-x-4 mb-4 sm:mb-0">
-              <span className="text-white/30 font-bold">STUDIO / 001</span>
+          <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/70 font-mono gap-4 sm:gap-0">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 text-center sm:text-left gap-1 sm:gap-0">
+              <span className="text-white/60 font-bold">STUDIO / 001</span>
               <span>© {currentYear} GOLDSPADE STUDIO. ALL RIGHTS RESERVED.</span>
             </div>
 
@@ -280,7 +280,7 @@ export function Footer() {
               </Link>
               <Link
                 href="/admin"
-                className="text-white/40 hover:text-mint transition-colors inline-flex items-center space-x-1"
+                className="text-white/70 hover:text-mint transition-colors inline-flex items-center space-x-1"
                 aria-label="Goldspade Internal Client Desk"
               >
                 <span>CLIENT DESK</span>

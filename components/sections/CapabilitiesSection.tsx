@@ -94,18 +94,18 @@ export function CapabilitiesSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-28 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-6 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
+      className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-16 md:mb-24">
+        <div className="mb-12 sm:mb-16 md:mb-24">
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
             03 — CAPABILITIES
           </span>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+          <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
             WHAT WE BUILD
           </h2>
-          <p className="mt-4 text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
             Integrated services structured to take ambitious founders from initial concept to market leadership.
           </p>
         </div>
@@ -119,13 +119,13 @@ export function CapabilitiesSection() {
                 ref={(el) => {
                   rowsRef.current[index] = el;
                 }}
-                className="group relative border-b border-editorial-border py-10 md:py-14 transition-all duration-500 hover:bg-white/40 dark:hover:bg-white/5 px-2 md:px-4 select-none"
+                className="group relative border-b border-editorial-border py-6 sm:py-8 md:py-14 transition-all duration-500 hover:bg-white/40 dark:hover:bg-white/5 px-2 md:px-4 select-none"
               >
                 {/* Horizontal Editorial Row */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between relative z-10">
                   {/* Left: Number + Sliding Image Container (Enters from Left X: -110% -> 0% on Hover Only) */}
-                  <div className="flex items-center space-x-6 sm:space-x-8 md:space-x-10">
-                    <span className="text-sm font-mono text-secondary-dark/60 font-semibold tracking-wider w-8 flex-shrink-0">
+                  <div className="flex items-center space-x-4 sm:space-x-8 md:space-x-10">
+                    <span className="text-xs sm:text-sm font-mono text-secondary-dark/60 font-semibold tracking-wider w-6 sm:w-8 flex-shrink-0">
                       {cap.num}
                     </span>
 
@@ -144,20 +144,20 @@ export function CapabilitiesSection() {
                     </div>
 
                     {/* Main Service Title */}
-                    <h3 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-primary-dark transition-transform duration-500 group-hover:translate-x-2">
+                    <h3 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-primary-dark transition-transform duration-500 group-hover:translate-x-2">
                       {cap.title}
                     </h3>
                   </div>
 
                   {/* Right: Secondary Descriptor & Directional Mint Arrow */}
-                  <div className="flex items-center justify-between md:justify-end space-x-8 mt-6 md:mt-0">
-                    <span className="text-xs sm:text-sm text-secondary-dark/80 font-mono uppercase tracking-wider hidden md:inline group-hover:text-primary-dark group-hover:translate-x-1.5 transition-all duration-500">
+                  <div className="flex items-center justify-between md:justify-end space-x-6 sm:space-x-8 mt-4 sm:mt-6 md:mt-0">
+                    <span className="text-xs sm:text-sm text-secondary-dark/80 font-mono uppercase tracking-wider md:inline group-hover:text-primary-dark group-hover:translate-x-1.5 transition-all duration-500">
                       {cap.tagline}
                     </span>
 
                     {/* Directional Mint Arrow Button */}
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center border border-editorial-border bg-white text-primary-dark transition-all duration-500 group-hover:bg-mint group-hover:border-editorial-border group-hover:rotate-45 group-hover:scale-105 shadow-sm">
-                      <ArrowUpRight className="w-5 h-5 transition-transform duration-500" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border border-editorial-border bg-white text-primary-dark transition-all duration-500 group-hover:bg-mint group-hover:border-editorial-border group-hover:rotate-45 group-hover:scale-105 shadow-xs">
+                      <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500" />
                     </div>
                   </div>
                 </div>

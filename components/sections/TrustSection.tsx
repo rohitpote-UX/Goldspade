@@ -56,19 +56,19 @@ export function TrustSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-28 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-6 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
+      className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="mb-12 sm:mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
           <div>
             <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
               06 — CREDIBILITY
             </span>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+            <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
               BUILT ON <span className="text-mint">TRUST.</span>
             </h2>
-            <p className="mt-4 text-lg sm:text-xl text-secondary-dark max-w-2xl font-normal leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg md:text-xl text-secondary-dark max-w-2xl font-normal leading-relaxed">
               Your business deserves more than a polished interface. It deserves clarity, technical discipline, and people who take ownership.
             </p>
           </div>
@@ -84,13 +84,13 @@ export function TrustSection() {
         </div>
 
         {/* Asymmetric Trust Architecture Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* Card 01: Featured Technical Discipline (lg:col-span-7) */}
           <div
             ref={(el) => {
               cardsRef.current[0] = el;
             }}
-            className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400 relative overflow-hidden"
+            className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400 relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-6">
@@ -145,7 +145,7 @@ export function TrustSection() {
             ref={(el) => {
               cardsRef.current[1] = el;
             }}
-            className="lg:col-span-5 bg-white p-8 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400"
+            className="lg:col-span-5 bg-white p-6 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400"
           >
             <div>
               <div className="flex items-center justify-between mb-6">
@@ -174,7 +174,7 @@ export function TrustSection() {
             ref={(el) => {
               cardsRef.current[2] = el;
             }}
-            className="lg:col-span-5 bg-white p-8 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400"
+            className="lg:col-span-5 bg-white p-6 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400"
           >
             <div>
               <div className="flex items-center justify-between mb-6">
@@ -205,7 +205,7 @@ export function TrustSection() {
             ref={(el) => {
               cardsRef.current[3] = el;
             }}
-            className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400"
+            className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between group hover:border-primary-dark/40 hover:-translate-y-1.5 transition-all duration-400"
           >
             <div>
               <div className="flex items-center justify-between mb-6">

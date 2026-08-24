@@ -28,7 +28,7 @@ async function test() {
       name: "Founder Alex",
       email: "alex.founder@company.com",
       companyProject: "Acme Inc.",
-      budget: "$25k - $50k",
+      budget: "₹25k - ₹50k",
       overview: "We need a complete redesign and scalable engineering system for our fintech platform.",
     }),
   });

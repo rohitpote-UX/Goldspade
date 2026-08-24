@@ -9,21 +9,21 @@ export const metadata = constructMetadata({
 
 export default function WorkPage() {
   return (
-    <div className="pt-36 pb-28 md:py-40 bg-canvas text-primary-dark min-h-screen px-6 sm:px-12 md:px-20 lg:px-24">
+    <div className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas text-primary-dark min-h-screen px-5 sm:px-12 md:px-20 lg:px-24">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 md:mb-20">
+        <div className="mb-12 sm:mb-16 md:mb-20">
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
             PORTFOLIO
           </span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+          <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
             SELECTED WORK
           </h1>
-          <p className="mt-4 text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
             A curated showcase of purpose-driven digital products, editorial platforms, and business systems.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 pt-6 sm:pt-8">
           {PROJECTS.map((project) => (
             <ProjectCard key={project.slug} project={project} aspectRatio="wide" />
           ))}

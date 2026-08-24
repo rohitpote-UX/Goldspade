@@ -217,18 +217,18 @@ export function ProcessSection() {
   return (
     <section
       ref={containerRef}
-      className="py-28 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-6 sm:px-12 md:px-20 lg:px-24 overflow-hidden relative"
+      className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 overflow-hidden relative"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="methodology-header mb-16 md:mb-20">
+        <div className="methodology-header mb-12 sm:mb-16 md:mb-20">
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
             04 — METHODOLOGY
           </span>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+          <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
             FROM IDEA TO <span className="text-mint">IMPACT.</span>
           </h2>
-          <p className="mt-4 text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
             A systematic strategy ensuring every decision builds commercial value and enterprise credibility.
           </p>
         </div>

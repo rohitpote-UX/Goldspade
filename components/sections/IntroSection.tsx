@@ -95,29 +95,29 @@ export function IntroSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-28 md:py-44 bg-canvas text-primary-dark border-t border-editorial-border px-6 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
+      className="py-16 sm:py-24 md:py-44 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column: Eyebrow, Headline, Description */}
           <div ref={leftColRef} className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-6">
+              <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-4 sm:mb-6">
                 01 — POSITIONING
               </span>
 
-              <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold uppercase tracking-tight text-primary-dark leading-[0.92] mb-8">
+              <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-bold uppercase tracking-tight text-primary-dark leading-[0.95] mb-6 sm:mb-8">
                 WE DON&apos;T JUST <br />
                 BUILD WEBSITES.
               </h2>
 
-              <p className="text-xl sm:text-2xl md:text-3xl text-secondary-dark font-normal leading-relaxed mb-12 max-w-2xl">
+              <p className="text-base sm:text-xl md:text-3xl text-secondary-dark font-normal leading-relaxed mb-8 sm:mb-12 max-w-2xl">
                 We build the digital foundations behind ambitious ideas. Positioning Goldspade at the intersection of strategic intelligence, bespoke craftsmanship, and rigorous engineering.
               </p>
             </div>
 
             {/* Four Strategic Principles with Pillar-to-Visual Hover Connection */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-editorial-border">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 pt-6 sm:pt-8 border-t border-editorial-border">
               {PRINCIPLES.map((pillar, idx) => {
                 const isActive = activePillar === idx;
                 return (

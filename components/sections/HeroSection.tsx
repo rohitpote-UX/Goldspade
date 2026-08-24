@@ -58,11 +58,11 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100svh] pt-32 sm:pt-40 pb-20 flex flex-col justify-between bg-canvas text-primary-dark overflow-hidden px-6 sm:px-12 md:px-20 lg:px-24"
+      className="relative min-h-[100svh] pt-28 sm:pt-36 md:pt-40 pb-14 sm:pb-20 flex flex-col justify-between bg-canvas text-primary-dark overflow-hidden px-5 sm:px-12 md:px-20 lg:px-24"
     >
       <div className="max-w-7xl mx-auto w-full my-auto">
         {/* Compact Eyebrow Pill */}
-        <div className="inline-flex items-center space-x-2 bg-white border border-editorial-border px-4 py-2 rounded-full mb-8 shadow-sm">
+        <div className="inline-flex items-center space-x-2 bg-white border border-editorial-border px-4 py-2 rounded-full mb-6 sm:mb-8 shadow-xs">
           <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary-dark">
             BRAND · PRODUCT · EXPERIENCE
@@ -72,9 +72,9 @@ export function HeroSection() {
         {/* Editorial Typography + Interacting Floating Images Canvas */}
         <div ref={headlineRef} className="relative z-10 font-bold uppercase tracking-tighter leading-[0.85] text-primary-dark">
           {/* Line 1: FORGED + Floating Hero Concept Showcase */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-8 mb-2">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-8 mb-2">
             <div className="clip-text-container">
-              <h1 className="clip-text text-[clamp(56px,14vw,180px)] font-bold tracking-tighter">
+              <h1 className="clip-text text-[clamp(44px,13vw,180px)] font-bold tracking-tighter">
                 FORGED
               </h1>
             </div>
@@ -86,7 +86,7 @@ export function HeroSection() {
           </div>
 
           {/* Line 2: FOR + Floating Image 2 + Floating Image 3 */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-8 mb-2">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-8 mb-2">
             {/* Floating Image 2 (Brand Identity & Craft) */}
             <div
               ref={(el) => { imagesRef.current[1] = el; }}
@@ -107,7 +107,7 @@ export function HeroSection() {
             </div>
 
             <div className="clip-text-container">
-              <span className="clip-text block text-[clamp(56px,14vw,180px)] font-bold tracking-tighter text-primary-dark">
+              <span className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter text-primary-dark">
                 FOR
               </span>
             </div>
@@ -133,9 +133,9 @@ export function HeroSection() {
           </div>
 
           {/* Line 3: FOUNDERS. + Floating Image 4 + Floating Proof Pill */}
-          <div className="flex flex-wrap items-center gap-4 sm:gap-8">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-8">
             <div className="clip-text-container">
-              <span className="clip-text block text-[clamp(56px,14vw,180px)] font-bold tracking-tighter text-mint">
+              <span className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter text-mint">
                 FOUNDERS.
               </span>
             </div>
@@ -162,7 +162,7 @@ export function HeroSection() {
             {/* Floating Factual Proof Pill */}
             <div
               ref={(el) => { imagesRef.current[4] = el; }}
-              className="inline-flex items-center space-x-2 bg-mint text-[#171515] px-5 py-3 rounded-full border border-black/10 shadow-sm"
+              className="inline-flex items-center space-x-2 bg-mint text-[#171515] px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-black/10 shadow-xs"
             >
               <span className="text-xs font-mono font-bold uppercase tracking-wider">
                 IDEA TO SCALABLE SYSTEM
@@ -172,18 +172,18 @@ export function HeroSection() {
         </div>
 
         {/* Supporting Copy & Dual Rounded CTAs */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end pt-12 md:pt-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-end pt-10 sm:pt-12 md:pt-16">
           <div className="md:col-span-6">
-            <p className="text-lg sm:text-xl md:text-2xl text-secondary-dark leading-relaxed font-normal max-w-lg">
+            <p className="text-base sm:text-xl md:text-2xl text-secondary-dark leading-relaxed font-normal max-w-lg">
               We build brands, products and digital experiences for ambitious businesses.
             </p>
           </div>
 
-          <div className="md:col-span-6 flex flex-wrap items-center justify-start md:justify-end gap-4">
-            <Button href="/work" variant="primary" size="lg" icon>
+          <div className="md:col-span-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-start md:justify-end gap-3 sm:gap-4">
+            <Button href="/work" variant="primary" size="lg" icon className="w-full sm:w-auto">
               VIEW OUR WORK
             </Button>
-            <Button href="/contact" variant="secondary" size="lg" icon>
+            <Button href="/contact" variant="secondary" size="lg" icon className="w-full sm:w-auto">
               START A PROJECT
             </Button>
           </div>

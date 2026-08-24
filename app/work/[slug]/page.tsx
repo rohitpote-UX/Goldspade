@@ -38,18 +38,18 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
   const isLive = project.status === "LIVE";
 
   return (
-    <article className="pt-36 pb-28 md:py-40 bg-canvas min-h-screen text-primary-dark px-6 sm:px-12 md:px-20 lg:px-24">
+    <article className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas min-h-screen text-primary-dark px-5 sm:px-12 md:px-20 lg:px-24">
       <div className="max-w-7xl mx-auto">
         {/* Back Link */}
         <Link
           href="/work"
-          className="inline-flex items-center text-xs uppercase tracking-widest text-secondary-dark hover:text-primary-dark font-mono mb-8 transition-colors font-bold"
+          className="inline-flex items-center text-xs uppercase tracking-widest text-secondary-dark hover:text-primary-dark font-mono mb-6 sm:mb-8 transition-colors font-bold"
         >
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Work
         </Link>
 
         {/* Case Study Header */}
-        <div className="max-w-4xl mb-12">
+        <div className="max-w-4xl mb-10 sm:mb-12">
           <div className="flex items-center space-x-3 mb-3">
             <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block">
               {project.category} — {project.year}
@@ -65,10 +65,10 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
               )}
             </span>
           </div>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark mb-6">
+          <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark mb-4 sm:mb-6">
             {project.title}
           </h1>
-          <p className="text-xl sm:text-2xl text-secondary-dark leading-relaxed font-normal">
+          <p className="text-base sm:text-xl md:text-2xl text-secondary-dark leading-relaxed font-normal">
             {project.positioning}
           </p>
         </div>

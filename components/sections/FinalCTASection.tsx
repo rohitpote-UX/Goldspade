@@ -97,18 +97,18 @@ export function FinalCTASection() {
   return (
     <section
       ref={sectionRef}
-      className="py-28 md:py-44 bg-canvas text-primary-dark border-t border-editorial-border relative overflow-hidden px-6 sm:px-12 md:px-20 lg:px-24"
+      className="py-16 sm:py-24 md:py-44 bg-canvas text-primary-dark border-t border-editorial-border relative overflow-hidden px-5 sm:px-12 md:px-20 lg:px-24"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
           {/* Left Column: Asymmetric Editorial Question & Brand Purpose */}
           <div ref={leftColRef} className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-8">
+              <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-6 sm:mb-8">
                 07 — START A CONVERSATION
               </span>
 
-              <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[8.5rem] font-bold uppercase tracking-tight text-primary-dark leading-[0.88] mb-8">
+              <h2 className="text-4xl sm:text-7xl md:text-8xl lg:text-[8.5rem] font-bold uppercase tracking-tight text-primary-dark leading-[0.9] mb-6 sm:mb-8">
                 WHAT <br />
                 ARE YOU <br />
                 <span className="group relative inline-block text-mint cursor-pointer">
@@ -129,12 +129,12 @@ export function FinalCTASection() {
                 </span>
               </h2>
 
-              <p className="text-xl sm:text-2xl text-secondary-dark max-w-xl font-normal leading-relaxed mb-8">
+              <p className="text-base sm:text-xl md:text-2xl text-secondary-dark max-w-xl font-normal leading-relaxed mb-6 sm:mb-8">
                 Tell us what you&apos;re building, where you&apos;re stuck, or where you want to go. We&apos;ll help you find the clearest path forward.
               </p>
             </div>
 
-            <div className="pt-8 border-t border-editorial-border/60">
+            <div className="pt-6 sm:pt-8 border-t border-editorial-border/60">
               <span className="font-mono text-xs uppercase tracking-widest text-secondary-dark/60 font-bold block mb-3">
                 IDEA → STRATEGY → BUILD → GROW
               </span>
@@ -148,15 +148,15 @@ export function FinalCTASection() {
           <div className="lg:col-span-5">
             <div
               ref={rightCardRef}
-              className="bg-white p-8 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between h-full relative overflow-hidden"
+              className="bg-white p-6 sm:p-10 rounded-3xl border border-editorial-border shadow-sm flex flex-col justify-between h-full relative overflow-hidden"
             >
               <div>
-                <span className="text-xs font-mono font-bold uppercase tracking-widest text-secondary-dark block mb-6">
+                <span className="text-xs font-mono font-bold uppercase tracking-widest text-secondary-dark block mb-4 sm:mb-6">
                   WHERE ARE YOU NOW?
                 </span>
 
                 {/* Intent Selectable Options */}
-                <div className="space-y-3 mb-8">
+                <div className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8">
                   {INTENT_OPTIONS.map((option) => {
                     const isSelected = selectedIntent.id === option.id;
                     return (
@@ -164,7 +164,7 @@ export function FinalCTASection() {
                         key={option.id}
                         onClick={() => setSelectedIntent(option)}
                         type="button"
-                        className={`w-full text-left px-5 py-3.5 rounded-2xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-between group ${
+                        className={`w-full text-left px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-between group ${
                           isSelected
                             ? "bg-primary-dark text-canvas border-primary-dark shadow-sm translate-x-1"
                             : "bg-canvas/50 border border-editorial-border/60 text-primary-dark hover:border-primary-dark/30 hover:bg-canvas hover:translate-x-1"
@@ -185,7 +185,7 @@ export function FinalCTASection() {
                 </div>
 
                 {/* Dynamic Strategic Insight Banner */}
-                <div className="bg-canvas/60 p-4 rounded-2xl border border-editorial-border/60 mb-8 transition-all duration-300">
+                <div className="bg-canvas/60 p-4 rounded-2xl border border-editorial-border/60 mb-6 sm:mb-8 transition-all duration-300">
                   <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-mint block mb-1">
                     STRATEGIC INSIGHT
                   </span>
@@ -199,7 +199,7 @@ export function FinalCTASection() {
               <div>
                 <Link
                   href={`/contact?intent=${selectedIntent.id}`}
-                  className="w-full group inline-flex items-center justify-center space-x-2 text-xs sm:text-sm font-bold uppercase tracking-widest bg-mint text-primary-dark px-8 py-5 rounded-full hover:bg-[#5fe4b4] transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-sm text-center"
+                  className="w-full group inline-flex items-center justify-center space-x-2 text-xs sm:text-sm font-bold uppercase tracking-widest bg-mint text-primary-dark px-6 sm:px-8 py-4 sm:py-5 min-h-[48px] rounded-full hover:bg-[#5fe4b4] transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-sm text-center"
                 >
                   <span>START A PROJECT</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />

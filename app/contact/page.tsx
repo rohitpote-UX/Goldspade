@@ -6,7 +6,14 @@ import { Button } from "@/components/ui/Button";
 import { ArrowUpRight, Check, ChevronDown, Mail } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
-const BUDGET_OPTIONS = ["< $10k", "$10k - $25k", "$25k - $50k", "$50k+"];
+const BUDGET_OPTIONS = [
+  "< ₹10k",
+  "₹10k - ₹25k",
+  "₹25k - ₹50k",
+  "₹50k - ₹1L",
+  "₹1L - ₹2.5L",
+  "₹2.5L+",
+];
 
 const PROMPT_CHIPS = [
   "A new brand?",
@@ -20,7 +27,7 @@ export default function ContactPage() {
     name: "",
     email: "",
     company: "",
-    budget: "$10k - $25k",
+    budget: "₹10k - ₹25k",
     message: "",
     _hp: "", // Honeypot field
   });
@@ -207,25 +214,25 @@ export default function ContactPage() {
   return (
     <div
       suppressHydrationWarning
-      className="pt-36 pb-28 md:py-40 bg-canvas text-primary-dark min-h-screen px-6 sm:px-12 md:px-20 lg:px-24 transition-colors duration-300"
+      className="pt-28 sm:pt-36 md:py-40 bg-canvas text-primary-dark min-h-screen px-5 sm:px-12 md:px-20 lg:px-24 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto" suppressHydrationWarning>
         {/* Section Header */}
-        <div className="mb-16 md:mb-20 max-w-3xl" suppressHydrationWarning>
+        <div className="mb-12 sm:mb-16 md:mb-20 max-w-3xl" suppressHydrationWarning>
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3 font-bold">
             INQUIRIES · START A CONVERSATION
           </span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95] mb-4">
+          <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95] mb-4">
             START A PROJECT
           </h1>
-          <p className="text-lg sm:text-xl text-secondary-dark font-normal leading-relaxed">
+          <p className="text-base sm:text-xl text-secondary-dark font-normal leading-relaxed">
             Tell us about your company, what you are building, or where you need technical and design clarity.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 pt-8 border-t border-editorial-border" suppressHydrationWarning>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 pt-6 sm:pt-8 border-t border-editorial-border" suppressHydrationWarning>
           {/* Left Column: Direct Studio Information */}
-          <div className="md:col-span-5 space-y-8" suppressHydrationWarning>
+          <div className="md:col-span-5 space-y-6 sm:space-y-8" suppressHydrationWarning>
             {/* Direct Email with Awwwards-style Brush Interaction */}
             <div className="group relative" suppressHydrationWarning>
               <div className="flex items-center space-x-2 mb-2">
@@ -300,19 +307,19 @@ export default function ContactPage() {
               <span className="text-xs font-mono font-bold uppercase text-secondary-dark block mb-2 tracking-wider">
                 Studio Location
               </span>
-              <p className="text-base text-secondary-dark font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-secondary-dark font-normal leading-relaxed">
                 Global Digital Studio. Operating across timezones for ambitious founders worldwide.
               </p>
             </div>
 
             {/* Response SLA Card (Interactive) */}
-            <div className="p-6 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border shadow-xs hover:border-mint/50 hover:shadow-md transition-all duration-300 group relative overflow-hidden" suppressHydrationWarning>
+            <div className="p-5 sm:p-6 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border shadow-xs hover:border-mint/50 hover:shadow-md transition-all duration-300 group relative overflow-hidden" suppressHydrationWarning>
               <div className="absolute top-0 left-0 bottom-0 w-1 bg-mint opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="text-xs font-mono font-bold uppercase text-secondary-dark block mb-2 tracking-wider flex items-center justify-between">
                 <span>Response SLA</span>
                 <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
               </span>
-              <p className="text-base text-primary-dark font-semibold leading-relaxed">
+              <p className="text-sm sm:text-base text-primary-dark font-semibold leading-relaxed">
                 We review every project inquiry within 24 hours.
               </p>
             </div>
@@ -336,15 +343,15 @@ export default function ContactPage() {
           <div className="md:col-span-7" suppressHydrationWarning>
             {status.submitted ? (
               /* Success State */
-              <div className="p-10 sm:p-14 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border text-center space-y-6 shadow-sm animate-in fade-in duration-500" suppressHydrationWarning>
+              <div className="p-8 sm:p-14 bg-white dark:bg-black/60 rounded-3xl border border-editorial-border text-center space-y-6 shadow-sm animate-in fade-in duration-500" suppressHydrationWarning>
                 <div className="w-12 h-12 rounded-full bg-mint/20 border border-mint text-primary-dark flex items-center justify-center mx-auto">
                   <Check className="w-6 h-6 text-primary-dark" />
                 </div>
                 <div className="space-y-2" suppressHydrationWarning>
-                  <h3 className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-primary-dark">
+                  <h3 className="text-2xl sm:text-4xl font-bold uppercase tracking-tight text-primary-dark">
                     INQUIRY RECEIVED.
                   </h3>
-                  <p className="text-secondary-dark text-base sm:text-lg max-w-md mx-auto leading-relaxed">
+                  <p className="text-secondary-dark text-sm sm:text-lg max-w-md mx-auto leading-relaxed">
                     Thank you. We&apos;ve received your inquiry and will get back to you within 24 hours.
                   </p>
                 </div>
@@ -356,24 +363,25 @@ export default function ContactPage() {
                         name: "",
                         email: "",
                         company: "",
-                        budget: "$10k - $25k",
+                        budget: "₹10k - ₹25k",
                         message: "",
                         _hp: "",
                       });
                     }}
                     variant="secondary"
                     size="md"
+                    className="w-full sm:w-auto"
                   >
                     Send Another Message
                   </Button>
-                  <Button href="/" variant="primary" size="md" icon>
+                  <Button href="/" variant="primary" size="md" icon className="w-full sm:w-auto">
                     BACK TO THE SITE
                   </Button>
                 </div>
               </div>
             ) : (
               /* Form Component */
-              <form onSubmit={handleSubmit} className="space-y-7" suppressHydrationWarning>
+              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7 p-6 sm:p-8 md:p-10 bg-white dark:bg-black/40 rounded-3xl border border-editorial-border shadow-xs" suppressHydrationWarning>
                 {/* Honeypot field (hidden from human users) */}
                 <input
                   type="text"
