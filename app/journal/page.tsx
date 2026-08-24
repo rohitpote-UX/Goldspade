@@ -1,13 +1,32 @@
 import { constructMetadata } from "@/lib/seo/metadata";
+import { generateWebPageSchema } from "@/lib/seo/jsonld";
 
 export const metadata = constructMetadata({
-  title: "Journal & Insights",
-  description: "Perspectives on strategy, design, engineering, and digital business systems by Goldspade.",
+  title: "Goldspade Journal — Strategy, Design & Digital Products",
+  exactTitle: true,
+  description:
+    "Perspectives on digital strategy, software architecture, brand positioning, and modern execution by Goldspade.",
+  canonicalUrl: "/journal",
 });
 
 export default function JournalPage() {
+  const pageSchema = generateWebPageSchema({
+    title: "Goldspade Journal — Strategy, Design & Digital Products",
+    description:
+      "Perspectives on digital strategy, software architecture, brand positioning, and modern execution by Goldspade.",
+    url: "/journal",
+    breadcrumbs: [
+      { name: "Home", url: "/" },
+      { name: "Journal", url: "/journal" },
+    ],
+  });
+
   return (
     <div className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas text-primary-dark min-h-screen px-5 sm:px-12 md:px-20 lg:px-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+      />
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 sm:mb-16 md:mb-20">
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">

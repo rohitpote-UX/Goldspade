@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { PROJECTS } from "@/data/projects";
 import { constructMetadata } from "@/lib/seo/metadata";
+import { generateCaseStudySchema } from "@/lib/seo/jsonld";
 import { ArrowLeft } from "lucide-react";
 
 interface CaseStudyProps {
@@ -22,8 +23,12 @@ export async function generateMetadata({ params }: CaseStudyProps) {
   if (!project) return {};
 
   return constructMetadata({
-    title: `${project.title} — ${project.category}`,
+    title: `Goldspade × ${project.title} — ${project.category} Case Study`,
+    exactTitle: true,
     description: project.description,
+    canonicalUrl: `/work/${project.slug}`,
+    image: project.heroImage,
+    type: "article",
   });
 }
 
@@ -36,9 +41,14 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
   }
 
   const isLive = project.status === "LIVE";
+  const caseStudySchema = generateCaseStudySchema(project, `/work/${project.slug}`);
 
   return (
     <article className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas min-h-screen text-primary-dark px-5 sm:px-12 md:px-20 lg:px-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }}
+      />
       <div className="max-w-7xl mx-auto">
         {/* Back Link */}
         <Link
@@ -77,7 +87,7 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
         <div className="relative w-full aspect-[16/9] bg-white border border-editorial-border rounded-3xl overflow-hidden mb-16 shadow-sm">
           <Image
             src={project.heroImage}
-            alt={project.title}
+            alt={`${project.title} — ${project.category} case study visual interface by Goldspade`}
             fill
             priority
             sizes="100vw"

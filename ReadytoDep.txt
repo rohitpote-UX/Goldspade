@@ -142,12 +142,12 @@ Create or update your environment variables in your hosting provider's dashboard
 
 1. `NEXT_PUBLIC_SITE_URL`
    - Description: The canonical live URL of your deployed domain.
-   - Value: `https://goldspade.com` (or `https://your-domain.vercel.app`)
+   - Value: `https://www.goldspade.in` (or `https://your-domain.vercel.app`)
    - Purpose: Used by SEO metadata engine, OpenGraph cards, sitemaps, and canonical links.
 
 2. `INQUIRY_EMAIL`
    - Description: The admin/notification email address that will receive project inquiries.
-   - Value: `crohitpote17@gmail.com` (or `hello@goldspade.com`)
+   - Value: `crohitpote17@gmail.com` (or `hello@goldspade.in`)
    - Purpose: All contact form submissions send formatted notification emails here.
 
 3. EMAIL DISPATCH CONFIGURATION (Choose Option A OR Option B):
@@ -156,8 +156,8 @@ Create or update your environment variables in your hosting provider's dashboard
    - Obtain key from: https://resend.com
    - Set Variable: `RESEND_API_KEY=re_123456789...`
    - Note: In `lib/email/service.ts`, the default 'from' email is `onboarding@resend.dev`. 
-     Once you verify your custom domain on Resend (e.g., `goldspade.com`), update the 
-     'from' address in `lib/email/service.ts` line 158 to `inquiries@goldspade.com`.
+     Once you verify your custom domain on Resend (e.g., `goldspade.in`), update the 
+     'from' address in `lib/email/service.ts` to `inquiries@goldspade.in`.
 
    OPTION B: SMTP / Gmail Integration
    - Set Variables:
@@ -178,7 +178,7 @@ Create or update your environment variables in your hosting provider's dashboard
 
 5. AUTHENTICATION PLACEHOLDERS (If activating Client Portal):
    - Set `NEXTAUTH_SECRET=your_random_long_secret_key`
-   - Set `NEXTAUTH_URL=https://goldspade.com`
+   - Set `NEXTAUTH_URL=https://www.goldspade.in`
 
 
 --------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ and edge caching out of the box.
 3. Import your `GoldSpade` repository.
 4. Framework Preset will automatically detect `Next.js`.
 5. Expand "Environment Variables" and add:
-   - `NEXT_PUBLIC_SITE_URL` = `https://goldspade.com`
+   - `NEXT_PUBLIC_SITE_URL` = `https://www.goldspade.in`
    - `INQUIRY_EMAIL` = `crohitpote17@gmail.com`
    - `RESEND_API_KEY` = `re_your_actual_key`
 6. Click "Deploy".

@@ -71,12 +71,15 @@ export function HeroSection() {
 
         {/* Editorial Typography + Interacting Floating Images Canvas */}
         <div ref={headlineRef} className="relative z-10 font-bold uppercase tracking-tighter leading-[0.85] text-primary-dark">
+          {/* Accessible Semantic H1 for Search Engines and Screen Readers */}
+          <h1 className="sr-only">Goldspade — Premium Digital Studio Forged for Founders</h1>
+
           {/* Line 1: FORGED + Floating Hero Concept Showcase */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-8 mb-2">
             <div className="clip-text-container">
-              <h1 className="clip-text text-[clamp(44px,13vw,180px)] font-bold tracking-tighter">
+              <span aria-hidden="true" className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter">
                 FORGED
-              </h1>
+              </span>
             </div>
 
             {/* Floating Hero Concept Showcase */}
@@ -92,10 +95,10 @@ export function HeroSection() {
               ref={(el) => { imagesRef.current[1] = el; }}
               className="relative w-36 sm:w-52 md:w-64 aspect-[4/3] rounded-3xl overflow-hidden border border-editorial-border shadow-md transition-transform duration-700 hover:scale-105 group cursor-pointer hidden sm:block"
             >
-              <Link href="/capabilities" className="relative block w-full h-full">
+              <Link href="/capabilities" className="relative block w-full h-full" aria-label="Explore Brand & Visual Identity Systems">
                 <Image
                   src="/media/hero/hero-brand.png"
-                  alt="Brand & Visual Identity System"
+                  alt="Brand and visual identity system engineered by Goldspade"
                   fill
                   sizes="(max-width: 768px) 208px, 256px"
                   className="object-cover transition-transform duration-700 group-hover:scale-105 filter contrast-105"
@@ -107,7 +110,7 @@ export function HeroSection() {
             </div>
 
             <div className="clip-text-container">
-              <span className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter text-primary-dark">
+              <span aria-hidden="true" className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter text-primary-dark">
                 FOR
               </span>
             </div>
@@ -117,10 +120,10 @@ export function HeroSection() {
               ref={(el) => { imagesRef.current[2] = el; }}
               className="relative w-40 sm:w-56 md:w-72 aspect-[16/9] rounded-3xl overflow-hidden border border-editorial-border shadow-md transition-transform duration-700 hover:scale-105 group cursor-pointer"
             >
-              <Link href="/capabilities" className="relative block w-full h-full">
+              <Link href="/capabilities" className="relative block w-full h-full" aria-label="Explore Digital Product Interface & UX">
                 <Image
                   src="/media/hero/hero-product.png"
-                  alt="Digital Product Interface & UX"
+                  alt="Digital product interface and user experience design by Goldspade"
                   fill
                   sizes="(max-width: 768px) 224px, 288px"
                   className="object-cover transition-transform duration-700 group-hover:scale-105 filter contrast-105"
@@ -135,7 +138,7 @@ export function HeroSection() {
           {/* Line 3: FOUNDERS. + Floating Image 4 + Floating Proof Pill */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-8">
             <div className="clip-text-container">
-              <span className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter text-mint">
+              <span aria-hidden="true" className="clip-text block text-[clamp(44px,13vw,180px)] font-bold tracking-tighter text-mint">
                 FOUNDERS.
               </span>
             </div>
@@ -145,10 +148,10 @@ export function HeroSection() {
               ref={(el) => { imagesRef.current[3] = el; }}
               className="relative w-36 sm:w-48 aspect-square rounded-3xl overflow-hidden border border-editorial-border shadow-md transition-transform duration-700 hover:scale-105 group cursor-pointer hidden lg:block"
             >
-              <Link href="/philosophy" className="relative block w-full h-full">
+              <Link href="/philosophy" className="relative block w-full h-full" aria-label="Read Goldspade philosophy on scale and foundations">
                 <Image
                   src="/media/hero/hero-growth.png"
-                  alt="Scale & Architectural Foundation"
+                  alt="Scale and architectural foundation engineered for founders"
                   fill
                   sizes="192px"
                   className="object-cover transition-transform duration-700 group-hover:scale-105 filter contrast-105"

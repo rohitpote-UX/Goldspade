@@ -54,7 +54,11 @@ const CAPABILITIES = [
   },
 ];
 
-export function CapabilitiesSection() {
+interface CapabilitiesSectionProps {
+  headingLevel?: "h1" | "h2";
+}
+
+export function CapabilitiesSection({ headingLevel = "h2" }: CapabilitiesSectionProps = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -91,8 +95,11 @@ export function CapabilitiesSection() {
     return () => ctx.revert();
   }, []);
 
+  const HeadingTag = headingLevel;
+
   return (
     <section
+      id="capabilities"
       ref={sectionRef}
       className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
     >
@@ -102,9 +109,9 @@ export function CapabilitiesSection() {
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
             03 — CAPABILITIES
           </span>
-          <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+          <HeadingTag className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
             WHAT WE BUILD
-          </h2>
+          </HeadingTag>
           <p className="mt-4 text-base sm:text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
             Integrated services structured to take ambitious founders from initial concept to market leadership.
           </p>

@@ -43,7 +43,7 @@ export function SelectedWorkSection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 overflow-hidden">
+    <section id="selected-work" ref={containerRef} className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 md:mb-24">
           <div>

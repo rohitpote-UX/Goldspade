@@ -381,7 +381,14 @@ export default function ContactPage() {
               </div>
             ) : (
               /* Form Component */
-              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7 p-6 sm:p-8 md:p-10 bg-white dark:bg-black/40 rounded-3xl border border-editorial-border shadow-xs" suppressHydrationWarning>
+              <form
+                id="project-inquiry-form"
+                data-tool-name="submitProjectInquiry"
+                data-tool-description="Submit a verified project inquiry to Goldspade digital studio."
+                onSubmit={handleSubmit}
+                className="space-y-6 sm:space-y-7 p-6 sm:p-8 md:p-10 bg-white dark:bg-black/40 rounded-3xl border border-editorial-border shadow-xs"
+                suppressHydrationWarning
+              >
                 {/* Honeypot field (hidden from human users) */}
                 <input
                   type="text"
@@ -427,6 +434,8 @@ export default function ContactPage() {
                       name="name"
                       type="text"
                       required
+                      autoComplete="name"
+                      aria-required="true"
                       value={formData.name}
                       onFocus={() => setFocused((p) => ({ ...p, name: true }))}
                       onBlur={() => {
@@ -471,6 +480,8 @@ export default function ContactPage() {
                         name="email"
                         type="email"
                         required
+                        autoComplete="email"
+                        aria-required="true"
                         value={formData.email}
                         onFocus={() => setFocused((p) => ({ ...p, email: true }))}
                         onBlur={() => {
@@ -519,6 +530,7 @@ export default function ContactPage() {
                       id="company"
                       name="company"
                       type="text"
+                      autoComplete="organization"
                       value={formData.company}
                       onFocus={() => setFocused((p) => ({ ...p, company: true }))}
                       onBlur={() => setFocused((p) => ({ ...p, company: false }))}
@@ -548,6 +560,9 @@ export default function ContactPage() {
                     <button
                       type="button"
                       id="budget"
+                      aria-label="Select estimated project budget"
+                      aria-haspopup="listbox"
+                      aria-expanded={isBudgetOpen}
                       onClick={() => setIsBudgetOpen((prev) => !prev)}
                       className={cn(
                         "w-full bg-white dark:bg-black/60 border border-editorial-border rounded-2xl px-4 py-3.5 text-primary-dark text-sm text-left flex items-center justify-between transition-all duration-200 shadow-xs",
@@ -566,13 +581,20 @@ export default function ContactPage() {
 
                     {/* Custom Dropdown Popup Menu */}
                     {isBudgetOpen && (
-                      <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-black border border-editorial-border rounded-2xl shadow-lg z-30 py-2 overflow-hidden animate-in fade-in duration-200" suppressHydrationWarning>
+                      <div
+                        role="listbox"
+                        aria-label="Estimated budget options"
+                        className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-black border border-editorial-border rounded-2xl shadow-lg z-30 py-2 overflow-hidden animate-in fade-in duration-200"
+                        suppressHydrationWarning
+                      >
                         {BUDGET_OPTIONS.map((opt) => {
                           const isSelected = formData.budget === opt;
                           return (
                             <button
                               key={opt}
                               type="button"
+                              role="option"
+                              aria-selected={isSelected}
                               onClick={() => {
                                 setFormData({ ...formData, budget: opt });
                                 setIsBudgetOpen(false);
@@ -615,6 +637,7 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     required
+                    aria-required="true"
                     rows={5}
                     value={formData.message}
                     onFocus={() => setFocused((p) => ({ ...p, message: true }))}

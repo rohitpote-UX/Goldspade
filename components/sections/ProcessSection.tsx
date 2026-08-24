@@ -216,6 +216,7 @@ export function ProcessSection() {
 
   return (
     <section
+      id="our-process"
       ref={containerRef}
       className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 overflow-hidden relative"
     >

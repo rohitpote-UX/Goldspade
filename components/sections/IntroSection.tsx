@@ -94,6 +94,7 @@ export function IntroSection() {
 
   return (
     <section
+      id="positioning"
       ref={sectionRef}
       className="py-16 sm:py-24 md:py-44 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
     >

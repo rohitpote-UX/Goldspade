@@ -199,7 +199,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: "Something went wrong. Please try again or email us directly at hello@goldspade.com.",
+        error: "Something went wrong. Please try again or email us directly at hello@goldspade.in.",
       },
       { status: 500 }
     );

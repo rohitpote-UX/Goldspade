@@ -1,27 +1,37 @@
 import React from "react";
 import Image from "next/image";
 
-export function PhilosophySection() {
+interface PhilosophySectionProps {
+  headingLevel?: "h1" | "h2";
+}
+
+export function PhilosophySection({ headingLevel = "h2" }: PhilosophySectionProps = {}) {
+  const HeadingTag = headingLevel;
+
   return (
-    <section className="py-16 sm:py-24 md:py-48 bg-canvas text-primary-dark border-t border-editorial-border relative overflow-hidden px-5 sm:px-12 md:px-20 lg:px-24">
+    <section
+      id="philosophy"
+      className="py-16 sm:py-24 md:py-48 bg-canvas text-primary-dark border-t border-editorial-border relative overflow-hidden px-5 sm:px-12 md:px-20 lg:px-24"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="max-w-5xl">
           <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-6 sm:mb-8">
             05 — PHILOSOPHY
           </span>
 
-          <h2 className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tight text-primary-dark leading-[0.9] mb-8 sm:mb-12">
+          <HeadingTag className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-bold uppercase tracking-tight text-primary-dark leading-[0.9] mb-8 sm:mb-12">
             IDEAS ARE <br />
             EVERYWHERE. <br />
             <span className="text-mint">EXECUTION IS RARE.</span>
-          </h2>
+          </HeadingTag>
 
           {/* Cinematic Philosophy Image */}
           <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden border border-editorial-border my-12 shadow-sm">
             <Image
               src="/media/pages/philosophy/philosophy-founder-horizon.png"
-              alt="Founder Ambition and Direction"
+              alt="Goldspade founder horizon vision and strategic execution philosophy"
               fill
+              sizes="(max-width: 1200px) 100vw, 1200px"
               className="object-cover filter contrast-105"
             />
           </div>
