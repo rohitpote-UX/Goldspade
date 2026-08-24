@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1C1C"/>
+      <stop offset="100%" stop-color="#121010"/>
+    </linearGradient>
+    <linearGradient id="mint-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8EECD1"/>
+      <stop offset="100%" stop-color="#73F3C5"/>
+    </linearGradient>
+    <filter id="subtle-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Background with Signature Dark Tone -->
+  <rect width="512" height="512" rx="112" fill="url(#bg-grad)"/>
+  <rect width="510" height="510" x="1" y="1" rx="111" fill="none" stroke="#2D2B2B" stroke-width="2"/>
+
+  <!-- Spade Head (Pure White with Subtle Shadow) -->
+  <path
+    d="M 256 90
+       C 285 140 376 195 376 270
+       C 376 335 312 355 256 355
+       C 200 355 136 335 136 270
+       C 136 195 227 140 256 90 Z"
+    fill="#FFFFFF"
+    filter="url(#subtle-shadow)"
+  />
+
+  <!-- Spade Stem (Signature Electric Mint Accent) -->
+  <path
+    d="M 256 320
+       C 256 355 240 395 190 415
+       L 322 415
+       C 272 395 256 355 256 320 Z"
+    fill="url(#mint-grad)"
+  />
+
+  <!-- Dynamic Curved Accent Bar (Goldspade Signature Stroke) -->
+  <path
+    d="M 180 435
+       C 220 442 292 442 332 435"
+    stroke="#73F3C5"
+    stroke-width="8"
+    stroke-linecap="round"
+    opacity="0.9"
+  />
+</svg>
