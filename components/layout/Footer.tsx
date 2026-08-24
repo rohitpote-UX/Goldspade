@@ -84,11 +84,11 @@ export function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative bg-canvas pt-12 text-white overflow-hidden">
+    <footer ref={footerRef} className="relative bg-canvas pt-12 text-pure-white overflow-hidden">
       {/* Curved Near-Black Panel Container (Sliding Door Panel) */}
       <div
         ref={panelRef}
-        className="relative bg-[#050505] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] pt-14 sm:pt-16 md:pt-20 pb-10 sm:pb-12 px-5 sm:px-12 md:px-16 lg:px-20 border-t border-white/10 shadow-2xl transition-shadow duration-500"
+        className="relative bg-[#050505] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] pt-14 sm:pt-16 md:pt-20 pb-10 sm:pb-12 px-5 sm:px-12 md:px-16 lg:px-20 border-t border-pure-white/10 shadow-2xl transition-shadow duration-500"
       >
         {/* Architectural Blueprint Grid Background */}
         <div className="absolute inset-0 pointer-events-none opacity-30 overflow-hidden rounded-t-[2.5rem] sm:rounded-t-[3.5rem]">
@@ -147,7 +147,7 @@ export function Footer() {
 
         {/* Main Content Layout Container */}
         <div ref={contentRef} className="max-w-[1920px] mx-auto relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 pb-12 sm:pb-16 md:pb-20 border-b border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 pb-12 sm:pb-16 md:pb-20 border-b border-pure-white/10">
             {/* Column 1: Brand Signature & Contact */}
             <div className="md:col-span-5 flex flex-col justify-between space-y-6 sm:space-y-8">
               <div>
@@ -156,22 +156,22 @@ export function Footer() {
                 </span>
                 <Link
                   href="/"
-                  className="font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase text-white block mb-4 sm:mb-6 hover:opacity-90 transition-opacity"
+                  className="font-bold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter uppercase text-pure-white block mb-4 sm:mb-6 hover:opacity-90 transition-opacity"
                 >
                   GOLDSPADE
                 </Link>
-                <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-md leading-relaxed font-normal">
+                <p className="text-sm sm:text-base md:text-lg text-pure-white/80 max-w-md leading-relaxed font-normal">
                   Forged for Founders. Strategy, design, and technology built for ambitious businesses.
                 </p>
               </div>
 
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/70 font-mono block mb-2">
+                <span className="text-xs uppercase tracking-widest text-pure-white/70 font-mono block mb-2">
                   DIRECT CONTACT
                 </span>
                 <a
                   href="mailto:hello@goldspade.in"
-                  className="font-mono text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-white hover:text-mint transition-colors duration-300 inline-block"
+                  className="font-mono text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-pure-white hover:text-mint transition-colors duration-300 inline-block"
                 >
                   HELLO@GOLDSPADE.IN
                 </a>
@@ -182,7 +182,7 @@ export function Footer() {
             <div className="md:col-span-4 grid grid-cols-2 gap-6 sm:gap-8">
               {/* Navigation */}
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/70 font-mono block mb-4 sm:mb-6">
+                <span className="text-xs uppercase tracking-widest text-pure-white/70 font-mono block mb-4 sm:mb-6">
                   NAVIGATION
                 </span>
                 <ul className="space-y-3 sm:space-y-4 text-sm font-semibold">
@@ -197,7 +197,7 @@ export function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.href}
-                        className="text-white/90 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
+                        className="text-pure-white/90 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
                       >
                         {item.label}
                       </Link>
@@ -208,7 +208,7 @@ export function Footer() {
 
               {/* Connect */}
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/70 font-mono block mb-4 sm:mb-6">
+                <span className="text-xs uppercase tracking-widest text-pure-white/70 font-mono block mb-4 sm:mb-6">
                   CONNECT
                 </span>
                 <ul className="space-y-3 sm:space-y-4 text-sm font-semibold">
@@ -223,7 +223,7 @@ export function Footer() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/90 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
+                        className="text-pure-white/90 hover:text-mint hover:translate-x-1.5 transition-all duration-300 inline-block"
                       >
                         {item.label}
                       </a>
@@ -237,7 +237,7 @@ export function Footer() {
             <div className="md:col-span-3">
               <div
                 ref={cardRef}
-                className="group relative flex flex-col justify-between bg-white/[0.04] backdrop-blur-md p-6 sm:p-8 md:p-9 rounded-3xl border border-white/10 hover:border-white/20 hover:bg-white/[0.06] hover:-translate-y-1 transition-all duration-400 shadow-2xl h-full"
+                className="group relative flex flex-col justify-between bg-pure-white/[0.04] backdrop-blur-md p-6 sm:p-8 md:p-9 rounded-3xl border border-pure-white/10 hover:border-pure-white/20 hover:bg-pure-white/[0.06] hover:-translate-y-1 transition-all duration-400 shadow-2xl h-full"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -246,10 +246,10 @@ export function Footer() {
                     </span>
                     <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
                   </div>
-                  <h4 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-white mb-2 sm:mb-3">
+                  <h4 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-pure-white mb-2 sm:mb-3">
                     HAVE AN IDEA?
                   </h4>
-                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed mb-6 sm:mb-8">
+                  <p className="text-xs sm:text-sm text-pure-white/80 leading-relaxed mb-6 sm:mb-8">
                     Let&apos;s discuss how we can build your brand, product, or system.
                   </p>
                 </div>
@@ -266,22 +266,22 @@ export function Footer() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/70 font-mono gap-4 sm:gap-0">
+          <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-pure-white/70 font-mono gap-4 sm:gap-0">
             <div className="flex flex-col sm:flex-row items-center sm:space-x-4 text-center sm:text-left gap-1 sm:gap-0">
-              <span className="text-white/60 font-bold">STUDIO / 001</span>
+              <span className="text-pure-white/60 font-bold">STUDIO / 001</span>
               <span>© {currentYear} GOLDSPADE STUDIO. ALL RIGHTS RESERVED.</span>
             </div>
 
             <div className="flex items-center space-x-6 font-bold">
-              <Link href="/privacy" className="hover:text-white transition-colors">
+              <Link href="/privacy" className="hover:text-pure-white transition-colors">
                 PRIVACY
               </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
+              <Link href="/terms" className="hover:text-pure-white transition-colors">
                 TERMS
               </Link>
               <Link
                 href="/admin"
-                className="text-white/70 hover:text-mint transition-colors inline-flex items-center space-x-1"
+                className="text-pure-white/70 hover:text-mint transition-colors inline-flex items-center space-x-1"
                 aria-label="Goldspade Internal Client Desk"
               >
                 <span>CLIENT DESK</span>
