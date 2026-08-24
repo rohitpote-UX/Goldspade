@@ -256,7 +256,7 @@ export function Footer() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center space-x-2 bg-mint text-primary-dark font-bold uppercase tracking-wider text-xs px-6 py-3.5 sm:py-4 rounded-full hover:bg-[#5fe4b4] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-md group-hover:shadow-mint/10"
+                  className="inline-flex items-center justify-center space-x-2 bg-mint text-[#171515] font-bold uppercase tracking-wider text-xs px-6 py-3.5 sm:py-4 rounded-full hover:bg-[#5fe4b4] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-md group-hover:shadow-mint/10"
                 >
                   <span>START A PROJECT</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
