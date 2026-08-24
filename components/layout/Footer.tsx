@@ -213,9 +213,10 @@ export function Footer() {
                 </span>
                 <ul className="space-y-3 sm:space-y-4 text-sm font-semibold">
                   {[
-                    { label: "X / TWITTER", href: "https://twitter.com" },
-                    { label: "LINKEDIN", href: "https://linkedin.com" },
-                    { label: "GITHUB", href: "https://github.com" },
+                    { label: "X", href: "https://x.com/GoldspadeFF" },
+                    { label: "INSTAGRAM", href: "https://www.instagram.com/goldspade_/" },
+                    { label: "WHATSAPP", href: "https://wa.me/918390612060" },
+                    { label: "GITHUB", href: "https://github.com/rohitpote-UX" },
                   ].map((item) => (
                     <li key={item.label}>
                       <a
