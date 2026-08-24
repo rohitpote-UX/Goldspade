@@ -171,9 +171,15 @@ export function Footer() {
                 </span>
                 <a
                   href="mailto:hello@goldspade.in"
-                  className="font-mono text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-pure-white hover:text-mint transition-colors duration-300 inline-block"
+                  className="font-mono text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-pure-white hover:text-mint transition-colors duration-300 block"
                 >
                   HELLO@GOLDSPADE.IN
+                </a>
+                <a
+                  href="tel:+918390612060"
+                  className="font-mono text-base sm:text-lg md:text-xl font-bold tracking-tight text-pure-white/90 hover:text-mint transition-colors duration-300 block mt-1"
+                >
+                  +91 8390612060
                 </a>
               </div>
             </div>
@@ -215,7 +221,6 @@ export function Footer() {
                   {[
                     { label: "X", href: "https://x.com/GoldspadeFF" },
                     { label: "INSTAGRAM", href: "https://www.instagram.com/goldspade_/" },
-                    { label: "WHATSAPP", href: "https://wa.me/918390612060" },
                     { label: "GITHUB", href: "https://github.com/rohitpote-UX" },
                   ].map((item) => (
                     <li key={item.label}>
