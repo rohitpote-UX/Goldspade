@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { PROJECTS } from "@/data/projects";
+import { DEDICATED_SERVICES } from "@/data/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.goldspade.in";
@@ -7,7 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const coreRoutes = [
     { route: "", priority: 1.0, changeFrequency: "weekly" as const },
-    { route: "/capabilities", priority: 0.9, changeFrequency: "weekly" as const },
+    { route: "/services", priority: 0.9, changeFrequency: "weekly" as const },
+    { route: "/capabilities", priority: 0.8, changeFrequency: "weekly" as const },
     { route: "/work", priority: 0.9, changeFrequency: "weekly" as const },
     { route: "/about", priority: 0.8, changeFrequency: "monthly" as const },
     { route: "/philosophy", priority: 0.8, changeFrequency: "monthly" as const },
@@ -22,6 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 
+  const serviceDetailRoutes = DEDICATED_SERVICES.map((service) => ({
+    url: `${baseUrl}/services/${service.dedicatedSlug || service.slug}`,
+    lastModified: currentDate,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const projectRoutes = PROJECTS.map((project) => ({
     url: `${baseUrl}/work/${project.slug}`,
     lastModified: currentDate,
@@ -29,5 +38,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...coreRoutes, ...projectRoutes];
+  return [...coreRoutes, ...serviceDetailRoutes, ...projectRoutes];
 }

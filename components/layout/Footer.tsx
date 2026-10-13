@@ -194,7 +194,7 @@ export function Footer() {
                 <ul className="space-y-3 sm:space-y-4 text-sm font-semibold">
                   {[
                     { label: "WORK", href: "/work" },
-                    { label: "CAPABILITIES", href: "/capabilities" },
+                    { label: "SERVICES", href: "/services" },
                     { label: "PHILOSOPHY", href: "/philosophy" },
                     { label: "ABOUT", href: "/about" },
                     { label: "JOURNAL", href: "/journal" },

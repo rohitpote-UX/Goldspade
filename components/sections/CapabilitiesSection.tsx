@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -60,7 +61,7 @@ interface CapabilitiesSectionProps {
 
 export function CapabilitiesSection({ headingLevel = "h2" }: CapabilitiesSectionProps = {}) {
   const sectionRef = useRef<HTMLElement>(null);
-  const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const rowsRef = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -99,34 +100,48 @@ export function CapabilitiesSection({ headingLevel = "h2" }: CapabilitiesSection
 
   return (
     <section
-      id="capabilities"
+      id="services"
       ref={sectionRef}
       className="py-16 sm:py-24 md:py-40 bg-canvas text-primary-dark border-t border-editorial-border px-5 sm:px-12 md:px-20 lg:px-24 relative overflow-hidden"
     >
+      {/* Backward-compatible anchor target for legacy #capabilities links */}
+      <span id="capabilities" className="absolute -top-24 pointer-events-none opacity-0" aria-hidden="true" />
+
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16 md:mb-24">
-          <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
-            03 — CAPABILITIES
-          </span>
-          <HeadingTag className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
-            WHAT WE BUILD
-          </HeadingTag>
-          <p className="mt-4 text-base sm:text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
-            Integrated services structured to take ambitious founders from initial concept to market leadership.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 md:mb-24 gap-6">
+          <div>
+            <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3">
+              03 — SERVICES & CAPABILITIES
+            </span>
+            <HeadingTag className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95]">
+              WHAT WE BUILD
+            </HeadingTag>
+            <p className="mt-4 text-base sm:text-lg text-secondary-dark max-w-2xl font-normal leading-relaxed">
+              Integrated services structured to take ambitious founders from initial concept to market leadership.
+            </p>
+          </div>
+
+          <Link
+            href="/services"
+            className="inline-flex items-center text-xs sm:text-sm font-mono uppercase tracking-wider font-bold text-primary-dark hover:text-secondary-dark transition-colors border-b border-primary-dark pb-1 w-fit group"
+          >
+            <span>Explore Full Catalogue (18 Services)</span>
+            <ArrowUpRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
 
         {/* Marino-Style Editorial Capability Catalogue */}
         <div className="border-t border-editorial-border relative">
           {CAPABILITIES.map((cap, index) => {
             return (
-              <div
+              <Link
                 key={cap.num}
+                href="/services"
                 ref={(el) => {
                   rowsRef.current[index] = el;
                 }}
-                className="group relative border-b border-editorial-border py-6 sm:py-8 md:py-14 transition-all duration-500 hover:bg-white/40 dark:hover:bg-white/5 px-2 md:px-4 select-none"
+                className="group relative block border-b border-editorial-border py-6 sm:py-8 md:py-14 transition-all duration-500 hover:bg-white/40 dark:hover:bg-white/5 px-2 md:px-4 cursor-pointer"
               >
                 {/* Horizontal Editorial Row */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between relative z-10">
@@ -168,7 +183,7 @@ export function CapabilitiesSection({ headingLevel = "h2" }: CapabilitiesSection
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

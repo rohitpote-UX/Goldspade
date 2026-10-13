@@ -3,6 +3,12 @@ async function testRoutes() {
   const routes = [
     "/",
     "/about",
+    "/services",
+    "/services/website-design-development",
+    "/services/custom-software-web-applications",
+    "/services/ai-integration-automation",
+    "/services/ecommerce-development",
+    "/services/technical-seo-performance",
     "/capabilities",
     "/philosophy",
     "/contact",

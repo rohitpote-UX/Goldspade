@@ -160,3 +160,118 @@ export function generateCaseStudySchema(project: Project, canonicalUrl: string) 
     ],
   };
 }
+
+export function generateServicesCatalogSchema(services: Array<{ title: string; description: string; category: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "@id": `${SITE_CONFIG.url}/services/#service`,
+        name: "Goldspade Digital Studio Services",
+        serviceType: "Digital Strategy, Design, Engineering & AI Services",
+        provider: {
+          "@id": `${SITE_CONFIG.url}/#organization`,
+        },
+        description:
+          "Comprehensive digital capabilities for founders: bespoke web development, SaaS product engineering, brand strategy, AI integration, and technical SEO architecture.",
+        areaServed: [
+          {
+            "@type": "Country",
+            name: "India",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Maharashtra",
+          },
+          {
+            "@type": "AdministrativeArea",
+            name: "Worldwide",
+          },
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Goldspade Capabilities & Service Catalogue",
+          itemListElement: services.map((service, index) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: service.title,
+              description: service.description,
+              category: service.category,
+            },
+            position: index + 1,
+          })),
+        },
+      },
+      generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Services", url: "/services" },
+      ]),
+    ],
+  };
+}
+
+export function generateServiceDetailSchema(
+  service: {
+    title: string;
+    category: string;
+    description: string;
+    faqs?: Array<{ question: string; answer: string }>;
+  },
+  canonicalUrl: string
+) {
+  const fullUrl = canonicalUrl.startsWith("http")
+    ? canonicalUrl
+    : `${SITE_CONFIG.url}${canonicalUrl}`;
+
+  const graph: Array<Record<string, unknown>> = [
+    {
+      "@type": "Service",
+      "@id": `${fullUrl}/#service`,
+      url: fullUrl,
+      name: `${service.title} — Goldspade`,
+      serviceType: service.category,
+      provider: {
+        "@id": `${SITE_CONFIG.url}/#organization`,
+      },
+      description: service.description,
+      areaServed: [
+        {
+          "@type": "Country",
+          name: "India",
+        },
+        {
+          "@type": "AdministrativeArea",
+          name: "Maharashtra",
+        },
+      ],
+    },
+    generateBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Services", url: "/services" },
+      { name: service.title, url: canonicalUrl },
+    ]),
+  ];
+
+  if (service.faqs && service.faqs.length > 0) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${fullUrl}/#faq`,
+      mainEntity: service.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    });
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
+  };
+}
+

@@ -9,7 +9,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const NAV_LINKS = [
   { label: "WORK", href: "/work" },
-  { label: "CAPABILITIES", href: "/capabilities" },
+  { label: "SERVICES", href: "/services" },
   { label: "PHILOSOPHY", href: "/philosophy" },
   { label: "ABOUT", href: "/about" },
   { label: "JOURNAL", href: "/journal" },
@@ -123,7 +123,9 @@ export function Navbar() {
           {/* Navigation Links */}
           <nav className="flex items-center space-x-6 lg:space-x-10 pl-3 sm:pl-5">
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive =
+                pathname === link.href ||
+                (link.href === "/services" && (pathname.startsWith("/services") || pathname === "/capabilities"));
               return (
                 <Link
                   key={link.href}
@@ -224,7 +226,9 @@ export function Navbar() {
             {/* Staggered Navigation Links */}
             <nav className="flex flex-col space-y-4 mt-2">
               {NAV_LINKS.map((link, index) => {
-                const isActive = pathname === link.href;
+                const isActive =
+                  pathname === link.href ||
+                  (link.href === "/services" && (pathname.startsWith("/services") || pathname === "/capabilities"));
                 return (
                   <div
                     key={link.href}
