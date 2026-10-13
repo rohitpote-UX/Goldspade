@@ -158,7 +158,10 @@ export async function POST(req: NextRequest) {
     }
 
     // ─── STEP 2: DISPATCH EMAIL NOTIFICATIONS (Resilient) ───────────────────
-    const recipientEmail = process.env.CONTACT_RECEIVER_EMAIL || "hello@goldspade.in";
+    const recipientEmail =
+      process.env.CONTACT_RECEIVER_EMAIL ||
+      process.env.INQUIRY_EMAIL ||
+      "hello@goldspade.in";
 
     const submittedAt = new Date().toLocaleString("en-US", {
       timeZone: "Asia/Kolkata",
@@ -258,7 +261,7 @@ ${finalEmail}`;
     const smtpHost = process.env.SMTP_HOST;
     const smtpPort = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : 465;
     const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASSWORD;
+    const smtpPass = process.env.SMTP_PASSWORD || process.env.SMTP_PASS;
 
     if (smtpHost && smtpUser && smtpPass && smtpPass.trim().length > 0) {
       try {

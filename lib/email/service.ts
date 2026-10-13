@@ -20,7 +20,10 @@ export interface EmailResult {
  * Supports Resend API, Nodemailer / SMTP (Gmail, SendGrid, custom), or local dev logging.
  */
 export async function sendInquiryNotification(data: ContactInquiryData): Promise<EmailResult> {
-  const recipientEmail = process.env.INQUIRY_EMAIL || "crohitpote17@gmail.com";
+  const recipientEmail =
+    process.env.INQUIRY_EMAIL ||
+    process.env.CONTACT_RECEIVER_EMAIL ||
+    "hello@goldspade.in";
   const companyName = data.companyProject?.trim();
   const subject = companyName
     ? `New Goldspade Project Inquiry — ${companyName}`

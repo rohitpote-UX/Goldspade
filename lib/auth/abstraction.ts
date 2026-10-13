@@ -2,7 +2,7 @@ export interface UserSession {
   id: string;
   email: string;
   name?: string;
-  role: "client" | "admin";
+  role: "client" | "admin" | "ADMIN" | "TEAM";
 }
 
 export interface AuthResponse {
