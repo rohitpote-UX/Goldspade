@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils/cn";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
+  target?: string;
+  rel?: string;
   variant?: "primary" | "secondary" | "outline" | "mint" | "text";
   size?: "sm" | "md" | "lg";
   icon?: boolean;
@@ -13,6 +15,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({
   href,
+  target,
+  rel,
   variant = "primary",
   size = "md",
   icon = false,
@@ -54,6 +58,8 @@ export function Button({
     return (
       <Link
         href={href}
+        target={target}
+        rel={rel}
         suppressHydrationWarning
         className={cn(baseStyles, variants[variant], sizes[size], className)}
       >

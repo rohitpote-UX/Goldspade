@@ -1,31 +1,94 @@
 import { Project } from "@/types/project";
 
+/**
+ * Projects displayed in the active Goldspade Work portfolio.
+ * Curated order: BrandBattle (featured), Nityasādhanā, Saanjgarva, Jar, Mamacha Mala, Hotel Atithi Karad,
+ * followed by retained portfolio projects.
+ */
 export const PROJECTS: Project[] = [
-  {
-    slug: "gitapath",
-    title: "GitaPath",
-    category: "Digital Product",
-    positioning: "Purpose-driven digital experience",
-    year: "2026",
-    description: "A contemplative digital platform bringing ancient philosophical wisdom into a contemporary, minimal digital interface designed for modern focus.",
-    services: ["Brand Strategy", "UI/UX Design", "Web Application", "Design System"],
-    heroImage: "/media/projects/gitapath/gitapath-hero-river.png",
-    featured: true,
-    status: "COMING SOON",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
-  },
   {
     slug: "brandbattle",
     title: "BrandBattle",
     category: "AI Product Intelligence",
     positioning: "Product comparison & decision platform",
     year: "2026",
-    description: "Intelligent evaluation engine enabling consumers and marketers to compare product specs and performance metrics with absolute clarity.",
-    services: ["Concept Development", "UI/UX Design", "Interactive Motion", "Data Visualization"],
+    description: "An AI-powered product comparison and price-intelligence platform designed to help people evaluate products, compare specifications across 50+ hardware vectors, and make informed purchasing decisions with verified marketplace prices.",
+    services: ["AI Integration", "Product Intelligence", "Price Comparison", "Web Platform"],
     heroImage: "/media/projects/brandbattle/brandbattle-hero-workspace.png",
     featured: true,
-    status: "COMING SOON",
+    status: "LIVE",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
+    liveUrl: "https://www.brandbattle.in/",
+  },
+  {
+    slug: "nityasadhana",
+    title: "Nityasādhanā",
+    category: "Spiritual Technology",
+    positioning: "Devotional routine & spiritual reporting application",
+    year: "2026",
+    description: "A calm devotional routine and reporting application designed for devotees and counsellors at ISKCON Pune to support a structured spiritual practice, daily Sadhana tracking, and coordination with zero spreadsheets or messaging clutter.",
+    services: ["Product Design", "UX Architecture", "Web Application", "PWA Engineering"],
+    heroImage: "/media/projects/nityasadhana/nityasadhana-hero.png",
+    featured: true,
+    status: "LIVE",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "PWA"],
+    liveUrl: "https://nityasadhanaiskon.vercel.app/",
+  },
+  {
+    slug: "saanjgarva",
+    title: "Saanjgarva",
+    category: "Business Software",
+    positioning: "Bar stock inventory, sales & credit management PWA",
+    year: "2026",
+    description: "A specialized operational management application and PWA engineered for Saanj Garva to streamline bar stock inventory tracking, daily sales logging, and credit (udhari) records with bilingual Marathi and English support.",
+    services: ["Product Design", "Web Application", "PWA Architecture", "Operations Management"],
+    heroImage: "/media/projects/saanjgarva/saanjgarva-hero.png",
+    featured: false,
+    status: "LIVE",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "PWA"],
+    liveUrl: "https://sanjgarva-rouge.vercel.app/",
+  },
+  {
+    slug: "jar",
+    title: "Jar",
+    category: "Business Application",
+    positioning: "Water-jar supply & operations management system",
+    year: "2026",
+    description: "A practical operational management solution and PWA built for Sai Water Suppliers in Kolewadi, simplifying daily 20L water-jar distribution, bottle inventory tracking, customer delivery logs, and payment records with offline-first support.",
+    services: ["Web Application", "PWA Engineering", "Operations Logistics", "Mobile UX"],
+    heroImage: "/media/projects/jar/jar-hero.png",
+    featured: false,
+    status: "LIVE",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "PWA"],
+    liveUrl: "https://jarapp-yu6b.vercel.app/",
+  },
+  {
+    slug: "mamacha-mala",
+    title: "Mamacha Mala",
+    category: "Hospitality",
+    positioning: "Authentic Maharashtrian restaurant & dining destination in Khodshi, Karad",
+    year: "2026",
+    description: "An immersive digital experience and culinary showcase for Hotel Mamacha Mala in Khodshi, Karad, presenting authentic wood-fire (chulivarel) cuisine, traditional Maharashtrian thalis, and rustic highway family dining.",
+    services: ["Brand Experience", "Web Engineering", "Digital Presence", "Culinary Showcase"],
+    heroImage: "/media/projects/mamacha-mala/mamacha-mala-hero-hospitality.png",
+    featured: false,
+    status: "LIVE",
+    technologies: ["React", "Motion", "Tailwind CSS", "Swiper"],
+    liveUrl: "https://mamacha-mala.vercel.app/",
+  },
+  {
+    slug: "hotel-atithi-karad",
+    title: "Hotel Atithi Karad",
+    category: "Hospitality",
+    positioning: "Family garden restaurant & regional culinary showcase in Karad",
+    year: "2026",
+    description: "A hospitality-focused digital showcase presenting Hotel Atithi Karad's celebrated Jatra Dhangari Thali, wood-fire handi preparations, family garden dining ambiance, and complete interactive regional menu along the highway in Karad.",
+    services: ["Web Design", "Frontend Engineering", "Digital Menu Architecture"],
+    heroImage: "/media/projects/hotel-atithi/hotel-atithi-hero.png",
+    featured: false,
+    status: "LIVE",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    liveUrl: "https://hotelatithikarad.in/",
   },
   {
     slug: "mayuri-developer",
@@ -36,22 +99,9 @@ export const PROJECTS: Project[] = [
     description: "Architectural web experience for an ambitious property developer in Pune, showcasing luxury residential developments through editorial spatial imagery.",
     services: ["Web Design", "Frontend Engineering", "Content Architecture"],
     heroImage: "/media/projects/mayuri/mayuri-hero-aerial.png",
-    featured: true,
+    featured: false,
     status: "COMING SOON",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
-  },
-  {
-    slug: "mamacha-mala",
-    title: "Mamacha Mala",
-    category: "Hospitality",
-    positioning: "Hospitality & restaurant destination in Khodshi, Karad",
-    year: "2026",
-    description: "Immersive digital presence for a authentic Maharashtrian resort and culinary destination surrounded by lush natural landscape.",
-    services: ["Brand Experience", "Web Engineering", "Digital Presence"],
-    heroImage: "/media/projects/mamacha-mala/mamacha-mala-hero-hospitality.png",
-    featured: true,
-    status: "LIVE",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
     slug: "ezdukkan",
@@ -62,7 +112,7 @@ export const PROJECTS: Project[] = [
     description: "Streamlined operational management and fast invoicing tool designed for modern retail merchants needing clarity, reliability, and speed.",
     services: ["Product Design", "Full Stack Development", "UX Architecture"],
     heroImage: "/media/projects/ezdukkan/ezdukkan-hero-retail.png",
-    featured: true,
+    featured: false,
     status: "LIVE",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js"],
   },
@@ -75,7 +125,7 @@ export const PROJECTS: Project[] = [
     description: "Enterprise computer vision verification system featuring real-time facial recognition and automated logging for modern workplaces and coaching institutes.",
     services: ["AI Integration", "System Architecture", "Computer Vision"],
     heroImage: "/media/projects/face-attendance/face-attendance-hero-entry.png",
-    featured: true,
+    featured: false,
     status: "COMING SOON",
     technologies: ["Python", "OpenCV", "Next.js", "TypeScript"],
   },
@@ -93,3 +143,27 @@ export const PROJECTS: Project[] = [
     technologies: ["React Native", "TypeScript", "Tailwind CSS"],
   },
 ];
+
+/**
+ * GitaPath project definition preserved in the repository for route continuity.
+ * Replaced by Nityasādhanā in displayed portfolio lists per requirements.
+ */
+export const GITAPATH_PROJECT: Project = {
+  slug: "gitapath",
+  title: "GitaPath",
+  category: "Digital Product",
+  positioning: "Purpose-driven digital experience",
+  year: "2026",
+  description: "A contemplative digital platform bringing ancient philosophical wisdom into a contemporary, minimal digital interface designed for modern focus.",
+  services: ["Brand Strategy", "UI/UX Design", "Web Application", "Design System"],
+  heroImage: "/media/projects/gitapath/gitapath-hero-river.png",
+  featured: false,
+  status: "COMING SOON",
+  technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP"],
+};
+
+/**
+ * Complete set of all registered projects for route resolution and case studies.
+ */
+export const ALL_PROJECTS: Project[] = [...PROJECTS, GITAPATH_PROJECT];
+

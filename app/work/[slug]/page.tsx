@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { PROJECTS } from "@/data/projects";
+import { ALL_PROJECTS } from "@/data/projects";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { generateCaseStudySchema } from "@/lib/seo/jsonld";
 import { ArrowLeft } from "lucide-react";
@@ -12,14 +12,14 @@ interface CaseStudyProps {
 }
 
 export async function generateStaticParams() {
-  return PROJECTS.map((project) => ({
+  return ALL_PROJECTS.map((project) => ({
     slug: project.slug,
   }));
 }
 
 export async function generateMetadata({ params }: CaseStudyProps) {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const project = ALL_PROJECTS.find((p) => p.slug === slug);
   if (!project) return {};
 
   return constructMetadata({
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: CaseStudyProps) {
 
 export default async function CaseStudyPage({ params }: CaseStudyProps) {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const project = ALL_PROJECTS.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
@@ -135,6 +135,22 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
                 ))}
               </ul>
             </div>
+
+            {project.liveUrl && (
+              <div>
+                <span className="text-xs font-mono uppercase text-secondary-dark font-bold block mb-2">
+                  Live Platform
+                </span>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-xs font-mono font-bold uppercase tracking-wider text-primary-dark hover:text-secondary-dark transition-colors underline underline-offset-4"
+                >
+                  VISIT LIVE SITE ↗
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="md:col-span-8 space-y-8">
@@ -156,8 +172,25 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
               </p>
             </div>
 
-            <div className="pt-8">
-              <Button href="/contact" variant="primary" size="md" icon>
+            <div className="pt-8 flex flex-wrap items-center gap-4">
+              {project.liveUrl && (
+                <Button
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  size="md"
+                  icon
+                >
+                  VISIT LIVE SITE
+                </Button>
+              )}
+              <Button
+                href="/contact"
+                variant={project.liveUrl ? "secondary" : "primary"}
+                size="md"
+                icon
+              >
                 Discuss Similar Project
               </Button>
             </div>

@@ -1,5 +1,5 @@
 async function testRoutes() {
-  const BASE = "http://localhost:3001";
+  const BASE = process.env.BASE_URL || "http://localhost:3000";
   const routes = [
     "/",
     "/about",
@@ -10,8 +10,12 @@ async function testRoutes() {
     "/work",
     "/work/gitapath",
     "/work/brandbattle",
-    "/work/mayuri-developer",
+    "/work/nityasadhana",
+    "/work/saanjgarva",
+    "/work/jar",
     "/work/mamacha-mala",
+    "/work/hotel-atithi-karad",
+    "/work/mayuri-developer",
     "/work/ezdukkan",
     "/work/face-attendance-system",
     "/work/bitebuddy",
