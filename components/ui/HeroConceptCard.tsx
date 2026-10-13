@@ -77,7 +77,7 @@ export function HeroConceptCard({ className }: HeroConceptCardProps) {
         className
       )}
     >
-      <Link href="/capabilities" className="block w-full h-full relative">
+      <Link href="/services" className="block w-full h-full relative">
         {/* Cinematic Multi-Frame Visual Montage Engine */}
         <div className="absolute inset-0 overflow-hidden bg-black">
           {FRAMES.map((frame, index) => {

@@ -275,3 +275,54 @@ export function generateServiceDetailSchema(
   };
 }
 
+export function generateArticleSchema(
+  article: {
+    title: string;
+    description: string;
+    publishedAt: string;
+    updatedAt?: string;
+    author: { name: string; role: string };
+    category: string;
+  },
+  canonicalUrl: string
+) {
+  const fullUrl = canonicalUrl.startsWith("http")
+    ? canonicalUrl
+    : `${SITE_CONFIG.url}${canonicalUrl}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${fullUrl}/#article`,
+        url: fullUrl,
+        headline: article.title,
+        description: article.description,
+        datePublished: `${article.publishedAt}T09:00:00+05:30`,
+        dateModified: `${article.updatedAt || article.publishedAt}T09:00:00+05:30`,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": fullUrl,
+        },
+        author: {
+          "@type": "Person",
+          name: article.author.name,
+          jobTitle: article.author.role,
+          url: `${SITE_CONFIG.url}/about`,
+        },
+        publisher: {
+          "@id": `${SITE_CONFIG.url}/#organization`,
+        },
+        articleSection: article.category,
+        inLanguage: "en-US",
+      },
+      generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Journal", url: "/journal" },
+        { name: article.title, url: canonicalUrl },
+      ]),
+    ],
+  };
+}
+

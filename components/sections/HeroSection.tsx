@@ -95,7 +95,7 @@ export function HeroSection() {
               ref={(el) => { imagesRef.current[1] = el; }}
               className="relative w-36 sm:w-52 md:w-64 aspect-[4/3] rounded-3xl overflow-hidden border border-editorial-border shadow-md transition-transform duration-700 hover:scale-105 group cursor-pointer hidden sm:block"
             >
-              <Link href="/capabilities" className="relative block w-full h-full" aria-label="Explore Brand & Visual Identity Systems">
+              <Link href="/services" className="relative block w-full h-full" aria-label="Explore Brand & Visual Identity Systems">
                 <Image
                   src="/media/hero/hero-brand.png"
                   alt="Brand and visual identity system engineered by Goldspade"
@@ -120,7 +120,7 @@ export function HeroSection() {
               ref={(el) => { imagesRef.current[2] = el; }}
               className="relative w-40 sm:w-56 md:w-72 aspect-[16/9] rounded-3xl overflow-hidden border border-editorial-border shadow-md transition-transform duration-700 hover:scale-105 group cursor-pointer"
             >
-              <Link href="/capabilities" className="relative block w-full h-full" aria-label="Explore Digital Product Interface & UX">
+              <Link href="/services" className="relative block w-full h-full" aria-label="Explore Digital Product Interface & UX">
                 <Image
                   src="/media/hero/hero-product.png"
                   alt="Digital product interface and user experience design by Goldspade"
@@ -178,7 +178,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-end pt-10 sm:pt-12 md:pt-16">
           <div className="md:col-span-6">
             <p className="text-base sm:text-xl md:text-2xl text-secondary-dark leading-relaxed font-normal max-w-lg">
-              We build brands, products and digital experiences for ambitious businesses.
+              Goldspade is a premium digital studio engineering bespoke websites, web applications, and AI integrations for ambitious founders.
             </p>
           </div>
 

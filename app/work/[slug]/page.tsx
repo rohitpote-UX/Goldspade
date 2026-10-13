@@ -5,7 +5,38 @@ import { Button } from "@/components/ui/Button";
 import { ALL_PROJECTS } from "@/data/projects";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { generateCaseStudySchema } from "@/lib/seo/jsonld";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+
+const SERVICE_HREF_MAP: Record<string, string> = {
+  "AI Integration": "/services/ai-integration-automation",
+  "Product Intelligence": "/services/custom-software-web-applications",
+  "Price Comparison": "/services/custom-software-web-applications",
+  "Web Platform": "/services/website-design-development",
+  "Product Design": "/services/ui-ux-design-product-experience",
+  "UX Architecture": "/services/ui-ux-design-product-experience",
+  "Web Application": "/services/custom-software-web-applications",
+  "PWA Engineering": "/services/mobile-app-development",
+  "PWA Architecture": "/services/mobile-app-development",
+  "Operations Management": "/services/erp-inventory-operations-software",
+  "Operations Logistics": "/services/business-process-automation",
+  "Mobile UX": "/services/ui-ux-design-product-experience",
+  "Brand Experience": "/services/visual-identity-digital-branding",
+  "Web Engineering": "/services/website-design-development",
+  "Digital Presence": "/services/website-design-development",
+  "Culinary Showcase": "/services/website-design-development",
+  "Web Design": "/services/website-design-development",
+  "Frontend Engineering": "/services/website-design-development",
+  "Digital Menu Architecture": "/services/website-design-development",
+  "Content Architecture": "/services/website-design-development",
+  "Full Stack Development": "/services/custom-software-web-applications",
+  "System Architecture": "/services/custom-software-development",
+  "Computer Vision": "/services/ai-integration-automation",
+  "Mobile App Strategy": "/services/mobile-app-development",
+  "UI/UX Design": "/services/ui-ux-design-product-experience",
+  "Backend API": "/services/api-development-system-integration",
+  "Brand Strategy": "/services/brand-strategy-positioning",
+  "Design System": "/services/visual-identity-digital-branding",
+};
 
 interface CaseStudyProps {
   params: Promise<{ slug: string }>;
@@ -118,10 +149,21 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
               <span className="text-xs font-mono uppercase text-secondary-dark font-bold block mb-2">
                 Services Rendered
               </span>
-              <ul className="space-y-1 text-sm font-semibold">
-                {project.services.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
+              <ul className="space-y-1.5 text-sm font-semibold">
+                {project.services.map((s) => {
+                  const targetHref = SERVICE_HREF_MAP[s] || "/services";
+                  return (
+                    <li key={s}>
+                      <Link
+                        href={targetHref}
+                        className="text-primary-dark hover:text-mint transition-colors inline-flex items-center group/service"
+                      >
+                        <span>{s}</span>
+                        <ArrowUpRight className="w-3 h-3 ml-1 opacity-50 group-hover/service:opacity-100 group-hover/service:translate-x-0.5 group-hover/service:-translate-y-0.5 transition-all" />
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 

@@ -284,14 +284,6 @@ export function Footer() {
               <Link href="/terms" className="hover:text-pure-white transition-colors">
                 TERMS
               </Link>
-              <Link
-                href="/admin"
-                className="text-pure-white/70 hover:text-mint transition-colors inline-flex items-center space-x-1"
-                aria-label="Goldspade Internal Client Desk"
-              >
-                <span>CLIENT DESK</span>
-                <span className="text-mint">→</span>
-              </Link>
             </div>
           </div>
         </div>

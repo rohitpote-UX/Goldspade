@@ -13,6 +13,8 @@ async function testRoutes() {
     "/philosophy",
     "/contact",
     "/journal",
+    "/journal/business-website-cost-india-founders-guide",
+    "/journal/progressive-web-apps-vs-native-apps-guide",
     "/work",
     "/work/gitapath",
     "/work/brandbattle",
