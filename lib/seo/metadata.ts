@@ -12,6 +12,13 @@ export const SITE_CONFIG = {
   twitterHandle: "@GoldspadeFF",
   email: "hello@goldspade.in",
   telephone: "+918390612060",
+  location: {
+    city: "Pune",
+    state: "Maharashtra",
+    country: "India",
+    region: "Western Maharashtra",
+    postalCode: "411001",
+  },
   socials: {
     x: "https://x.com/GoldspadeFF",
     instagram: "https://www.instagram.com/goldspade_/",

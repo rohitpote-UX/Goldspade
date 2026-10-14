@@ -195,6 +195,7 @@ export function Footer() {
                   {[
                     { label: "WORK", href: "/work" },
                     { label: "SERVICES", href: "/services" },
+                    { label: "LOCATIONS", href: "/locations" },
                     { label: "PHILOSOPHY", href: "/philosophy" },
                     { label: "ABOUT", href: "/about" },
                     { label: "JOURNAL", href: "/journal" },

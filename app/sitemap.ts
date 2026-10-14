@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { PROJECTS } from "@/data/projects";
 import { DEDICATED_SERVICES } from "@/data/services";
 import { JOURNAL_ARTICLES } from "@/data/journal";
+import { REGIONAL_LOCATIONS } from "@/data/locations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.goldspade.in";
@@ -11,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const coreRoutes = [
     { route: "", priority: 1.0, changeFrequency: "weekly" as const },
     { route: "/services", priority: 0.9, changeFrequency: "weekly" as const },
-    { route: "/capabilities", priority: 0.8, changeFrequency: "weekly" as const },
+    { route: "/locations", priority: 0.85, changeFrequency: "weekly" as const },
     { route: "/work", priority: 0.9, changeFrequency: "weekly" as const },
     { route: "/about", priority: 0.8, changeFrequency: "monthly" as const },
     { route: "/philosophy", priority: 0.8, changeFrequency: "monthly" as const },
@@ -33,6 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const locationRoutes = REGIONAL_LOCATIONS.map((location) => ({
+    url: `${baseUrl}/locations/${location.slug}`,
+    lastModified: coreLastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const projectRoutes = PROJECTS.map((project) => ({
     url: `${baseUrl}/work/${project.slug}`,
     lastModified: `${project.year || "2026"}-01-15T00:00:00.000Z`,
@@ -47,6 +55,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...coreRoutes, ...serviceDetailRoutes, ...projectRoutes, ...journalRoutes];
+  return [
+    ...coreRoutes,
+    ...serviceDetailRoutes,
+    ...locationRoutes,
+    ...projectRoutes,
+    ...journalRoutes,
+  ];
 }
+
 

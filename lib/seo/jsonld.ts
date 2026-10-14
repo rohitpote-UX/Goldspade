@@ -35,10 +35,27 @@ export function generateOrganizationSchema() {
       "Design Systems & Component Architecture",
     ],
     priceRange: "$$$$",
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: "Worldwide",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: SITE_CONFIG.location.city,
+      addressRegion: SITE_CONFIG.location.state,
+      addressCountry: "IN",
+      postalCode: SITE_CONFIG.location.postalCode,
     },
+    areaServed: [
+      { "@type": "City", name: "Pune" },
+      { "@type": "City", name: "Karad" },
+      { "@type": "City", name: "Satara" },
+      { "@type": "City", name: "Kolhapur" },
+      { "@type": "City", name: "Sangli" },
+      { "@type": "AdministrativeArea", name: "Goa" },
+      { "@type": "City", name: "Belagavi" },
+      { "@type": "City", name: "Hubballi-Dharwad" },
+      { "@type": "AdministrativeArea", name: "Konkan" },
+      { "@type": "AdministrativeArea", name: "Maharashtra" },
+      { "@type": "Country", name: "India" },
+      { "@type": "AdministrativeArea", name: "Worldwide" },
+    ],
   };
 }
 
@@ -54,7 +71,7 @@ export function generateWebsiteSchema() {
     publisher: {
       "@id": `${SITE_CONFIG.url}/#organization`,
     },
-    inLanguage: "en-US",
+    inLanguage: "en-IN",
   };
 }
 
@@ -112,7 +129,7 @@ export function generateWebPageSchema({
     about: {
       "@id": `${SITE_CONFIG.url}/#organization`,
     },
-    inLanguage: "en-US",
+    inLanguage: "en-IN",
   };
 
   if (breadcrumbs && breadcrumbs.length > 0) {
@@ -150,7 +167,7 @@ export function generateCaseStudySchema(project: Project, canonicalUrl: string) 
         genre: project.category,
         keywords: project.services.join(", "),
         dateCreated: project.year ? `${project.year}-01-01` : "2026-01-01",
-        inLanguage: "en-US",
+        inLanguage: "en-IN",
       },
       generateBreadcrumbSchema([
         { name: "Home", url: "/" },
@@ -315,7 +332,7 @@ export function generateArticleSchema(
           "@id": `${SITE_CONFIG.url}/#organization`,
         },
         articleSection: article.category,
-        inLanguage: "en-US",
+        inLanguage: "en-IN",
       },
       generateBreadcrumbSchema([
         { name: "Home", url: "/" },
@@ -325,4 +342,114 @@ export function generateArticleSchema(
     ],
   };
 }
+
+export function generateLocationsHubSchema(locations: Array<{ name: string; slug: string; region: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${SITE_CONFIG.url}/locations/#page`,
+        url: `${SITE_CONFIG.url}/locations`,
+        name: "Regional Coverage & Locations — Goldspade Digital Studio",
+        description:
+          "Goldspade engineers websites, custom applications, and business software across Maharashtra, Goa, and North Karnataka.",
+        publisher: {
+          "@id": `${SITE_CONFIG.url}/#organization`,
+        },
+        inLanguage: "en-IN",
+        mainEntity: {
+          "@type": "ItemList",
+          name: "Goldspade Regional Service Locations",
+          itemListElement: locations.map((loc, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: loc.name,
+            url: `${SITE_CONFIG.url}/locations/${loc.slug}`,
+          })),
+        },
+      },
+      generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Locations", url: "/locations" },
+      ]),
+    ],
+  };
+}
+
+export function generateLocationDetailSchema(
+  location: {
+    name: string;
+    displayName: string;
+    region: string;
+    state: string;
+    h1: string;
+    metaDescription: string;
+    faqs?: Array<{ question: string; answer: string }>;
+  },
+  canonicalUrl: string
+) {
+  const fullUrl = canonicalUrl.startsWith("http")
+    ? canonicalUrl
+    : `${SITE_CONFIG.url}${canonicalUrl}`;
+
+  const graph: Array<Record<string, unknown>> = [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${fullUrl}/#service`,
+      url: fullUrl,
+      name: `Goldspade — ${location.h1}`,
+      description: location.metaDescription,
+      parentOrganization: {
+        "@id": `${SITE_CONFIG.url}/#organization`,
+      },
+      telephone: SITE_CONFIG.telephone,
+      email: SITE_CONFIG.email,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: SITE_CONFIG.location.city,
+        addressRegion: SITE_CONFIG.location.state,
+        addressCountry: "IN",
+      },
+      areaServed: [
+        {
+          "@type": "AdministrativeArea",
+          name: location.displayName,
+        },
+        {
+          "@type": "AdministrativeArea",
+          name: location.region,
+        },
+      ],
+      priceRange: "$$$$",
+      inLanguage: "en-IN",
+    },
+    generateBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Locations", url: "/locations" },
+      { name: location.name, url: canonicalUrl },
+    ]),
+  ];
+
+  if (location.faqs && location.faqs.length > 0) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${fullUrl}/#faq`,
+      mainEntity: location.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    });
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
+  };
+}
+
 

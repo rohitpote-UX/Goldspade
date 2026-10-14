@@ -18,6 +18,9 @@ import {
   ArchiveRestore,
   Inbox,
   ArrowRight,
+  Copy,
+  Check,
+  Database,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { InquiryRecord, InquiryStatus } from "@/lib/db/inquiries";
@@ -25,6 +28,7 @@ import { InquiryRecord, InquiryStatus } from "@/lib/db/inquiries";
 const STATUS_OPTIONS: InquiryStatus[] = [
   "NEW",
   "CONTACTED",
+  "QUALIFIED",
   "IN_PROGRESS",
   "CONVERTED",
   "ARCHIVED",
@@ -39,10 +43,12 @@ export default function ClientDeskDashboardPage() {
     total: 0,
     new: 0,
     contacted: 0,
+    qualified: 0,
     inProgress: 0,
     converted: 0,
     archived: 0,
   });
+  const [databaseConfigured, setDatabaseConfigured] = useState<boolean | null>(null);
   const [currentUser, setCurrentUser] = useState<{
     id: string;
     email: string;
@@ -63,6 +69,7 @@ export default function ClientDeskDashboardPage() {
   const [editingNotes, setEditingNotes] = useState("");
   const [isSavingNotes, setIsSavingNotes] = useState(false);
   const [notesSaveFeedback, setNotesSaveFeedback] = useState("");
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Fetch inquiries from server
   const fetchDashboardData = useCallback(async () => {
@@ -83,21 +90,24 @@ export default function ClientDeskDashboardPage() {
             total: 0,
             new: 0,
             contacted: 0,
+            qualified: 0,
             inProgress: 0,
             converted: 0,
             archived: 0,
           }
         );
+        setDatabaseConfigured(data.databaseConfigured ?? false);
         setCurrentUser(data.user);
       } else {
         setError(data.error || "Failed to load inquiries");
       }
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError("Something went wrong loading inquiries. Please check your server connection.");
     } finally {
       setLoading(false);
     }
   }, [router]);
+
 
   useEffect(() => {
     fetchDashboardData();
@@ -242,6 +252,8 @@ export default function ClientDeskDashboardPage() {
     switch (status) {
       case "NEW":
         return "bg-mint/20 text-primary-dark border-mint";
+      case "QUALIFIED":
+        return "bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-500/40";
       case "CONVERTED":
       case "WON":
         return "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/40";
@@ -325,11 +337,23 @@ export default function ClientDeskDashboardPage() {
           </div>
         </header>
 
+        {/* Database Configuration Alert */}
+        {databaseConfigured === false && (
+          <div className="p-4 bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs font-mono rounded-2xl flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Database className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
+              <span>
+                <strong>Storage Notice:</strong> PostgreSQL is not connected (<code>DATABASE_URL</code> is unset). Inquiries are safely stored in durable local file storage. Configure <code>DATABASE_URL</code> in Vercel to activate managed multi-region Postgres.
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Error Alert if any */}
         {error && (
           <div className="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-900 dark:text-red-200 text-xs font-mono rounded-2xl flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <AlertCircle className="w-4 h-4 text-red-500" />
+              <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
               <span>{error}</span>
             </div>
             <button
@@ -342,17 +366,17 @@ export default function ClientDeskDashboardPage() {
         )}
 
         {/* Overview Metric Cards (Linear / Agency Style) */}
-        <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 sm:p-5 shadow-2xs">
+        <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
             <span className="text-[10px] font-mono uppercase text-secondary-dark tracking-wider block mb-1">
-              TOTAL INQUIRIES
+              TOTAL
             </span>
             <span className="text-2xl sm:text-3xl font-bold tracking-tight text-primary-dark">
               {String(stats.total).padStart(2, "0")}
             </span>
           </div>
 
-          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 sm:p-5 shadow-2xs">
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
             <span className="text-[10px] font-mono uppercase text-mint tracking-wider block mb-1 font-bold">
               NEW
             </span>
@@ -361,7 +385,7 @@ export default function ClientDeskDashboardPage() {
             </span>
           </div>
 
-          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 sm:p-5 shadow-2xs">
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
             <span className="text-[10px] font-mono uppercase text-amber-600 dark:text-amber-400 tracking-wider block mb-1 font-bold">
               CONTACTED
             </span>
@@ -370,7 +394,16 @@ export default function ClientDeskDashboardPage() {
             </span>
           </div>
 
-          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 sm:p-5 shadow-2xs">
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
+            <span className="text-[10px] font-mono uppercase text-purple-600 dark:text-purple-400 tracking-wider block mb-1 font-bold">
+              QUALIFIED
+            </span>
+            <span className="text-2xl sm:text-3xl font-bold tracking-tight text-primary-dark">
+              {String(stats.qualified).padStart(2, "0")}
+            </span>
+          </div>
+
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
             <span className="text-[10px] font-mono uppercase text-sky-600 dark:text-sky-400 tracking-wider block mb-1 font-bold">
               IN PROGRESS
             </span>
@@ -379,7 +412,7 @@ export default function ClientDeskDashboardPage() {
             </span>
           </div>
 
-          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 sm:p-5 shadow-2xs">
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
             <span className="text-[10px] font-mono uppercase text-emerald-600 dark:text-emerald-400 tracking-wider block mb-1 font-bold">
               CONVERTED
             </span>
@@ -388,7 +421,7 @@ export default function ClientDeskDashboardPage() {
             </span>
           </div>
 
-          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 sm:p-5 shadow-2xs">
+          <div className="bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4 shadow-2xs">
             <span className="text-[10px] font-mono uppercase text-secondary-dark tracking-wider block mb-1">
               ARCHIVED
             </span>
@@ -397,6 +430,7 @@ export default function ClientDeskDashboardPage() {
             </span>
           </div>
         </section>
+
 
         {/* Filter, Search & Sort Control Bar */}
         <section className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-black/60 border border-editorial-border rounded-2xl p-4">
@@ -443,6 +477,8 @@ export default function ClientDeskDashboardPage() {
                 count = stats.new;
               } else if (st === "CONTACTED") {
                 count = stats.contacted;
+              } else if (st === "QUALIFIED") {
+                count = stats.qualified;
               } else if (st === "ARCHIVED") {
                 count = stats.archived;
               } else {
@@ -720,13 +756,37 @@ export default function ClientDeskDashboardPage() {
                   <span className="uppercase text-secondary-dark block mb-1 font-bold">
                     CLIENT EMAIL
                   </span>
-                  <a
-                    href={`mailto:${selectedInquiry.email}`}
-                    className="text-sm font-bold text-primary-dark hover:text-mint hover:underline inline-flex items-center"
-                  >
-                    <span>{selectedInquiry.email}</span>
-                    <ExternalLink className="w-3.5 h-3.5 ml-1 opacity-70" />
-                  </a>
+                  <div className="flex items-center space-x-2">
+                    <a
+                      href={`mailto:${selectedInquiry.email}`}
+                      className="text-sm font-bold text-primary-dark hover:text-mint hover:underline inline-flex items-center"
+                    >
+                      <span>{selectedInquiry.email}</span>
+                      <ExternalLink className="w-3.5 h-3.5 ml-1 opacity-70" />
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(selectedInquiry.email);
+                        setCopiedEmail(true);
+                        setTimeout(() => setCopiedEmail(false), 2000);
+                      }}
+                      className="p-1 rounded bg-black/5 dark:bg-white/10 hover:bg-mint/20 text-secondary-dark hover:text-primary-dark transition-colors inline-flex items-center space-x-1"
+                      title="Copy email address"
+                    >
+                      {copiedEmail ? (
+                        <>
+                          <Check className="w-3 h-3 text-mint" />
+                          <span className="text-[10px] text-mint font-bold">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" />
+                          <span className="text-[10px]">Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -740,10 +800,41 @@ export default function ClientDeskDashboardPage() {
 
                 <div>
                   <span className="uppercase text-secondary-dark block mb-1 font-bold">
+                    INQUIRY SOURCE
+                  </span>
+                  <span className="text-xs text-primary-dark font-mono bg-black/5 dark:bg-white/10 px-2.5 py-1 rounded-md inline-block font-semibold">
+                    {selectedInquiry.source || "website_contact"}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="uppercase text-secondary-dark block mb-1 font-bold">
+                    EMAIL NOTIFICATION
+                  </span>
+                  <span
+                    className={cn(
+                      "text-xs font-mono font-bold uppercase px-2.5 py-1 rounded-md inline-block",
+                      selectedInquiry.emailStatus === "sent"
+                        ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300"
+                        : selectedInquiry.emailStatus === "failed"
+                        ? "bg-amber-500/20 text-amber-700 dark:text-amber-300"
+                        : "bg-secondary-dark/20 text-secondary-dark"
+                    )}
+                  >
+                    {selectedInquiry.emailStatus || "pending"}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="uppercase text-secondary-dark block mb-1 font-bold">
                     SUBMITTED DATE
                   </span>
                   <span className="text-xs text-primary-dark font-semibold">
-                    {new Date(selectedInquiry.createdAt).toLocaleString()}
+                    {new Date(selectedInquiry.createdAt).toLocaleString("en-US", {
+                      timeZone: "Asia/Kolkata",
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    })}
                   </span>
                 </div>
 
@@ -773,6 +864,29 @@ export default function ClientDeskDashboardPage() {
                   </select>
                 </div>
               </div>
+
+              {/* Quick Status Action Buttons */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <span className="text-[11px] font-mono font-bold uppercase text-secondary-dark mr-1">
+                  Quick Actions:
+                </span>
+                {(["CONTACTED", "QUALIFIED", "CONVERTED"] as InquiryStatus[]).map((st) => (
+                  <button
+                    key={st}
+                    type="button"
+                    onClick={() => handleStatusChange(selectedInquiry.id, st)}
+                    className={cn(
+                      "text-xs font-mono font-bold uppercase px-3 py-1 rounded-full border transition-all",
+                      selectedInquiry.status === st
+                        ? getStatusBadgeClass(st)
+                        : "border-editorial-border text-secondary-dark hover:text-primary-dark hover:border-mint"
+                    )}
+                  >
+                    Mark {st}
+                  </button>
+                ))}
+              </div>
+
 
               {/* Project Overview & Objectives */}
               <div>

@@ -258,6 +258,34 @@ export const SERVICES: ServiceItem[] = [
     ],
     searchIntent: "mobile app development, custom mobile applications, cross-platform app development",
     relatedProjects: ["saanjgarva", "jar", "nityasadhana"],
+    hasDedicatedPage: true,
+    dedicatedSlug: "mobile-app-development",
+    overview:
+      "For most business operations, customer portals, and internal workflows, native mobile apps create unnecessary friction: 30% App Store cuts, delayed review cycles, dual iOS/Android development overhead, and high download drop-offs. Goldspade engineers installable Progressive Web Apps (PWAs) that run full screen, load instantly offline via IndexedDB, and synchronize automatically upon reconnection—delivering 95% of native utility at a fraction of the build and maintenance cost.",
+    considerations: [
+      "Zero App Store gatekeeping: visitors install directly with a single tap",
+      "Offline-first local caching for reliable field operations in patchy network zones",
+      "Single maintainable TypeScript codebase serving Android, iOS, and desktop viewports",
+      "Touch-optimized ergonomics designed for one-handed mobile operations",
+      "Zero 30% platform commissions on billing, invoicing, and subscriptions",
+    ],
+    faqs: [
+      {
+        question: "Can our customers or staff install this on their phones without using the App Store?",
+        answer:
+          "Yes. Modern Progressive Web Apps (PWAs) are installed directly from the mobile browser. With a single tap, the app adds a native icon to the user's home screen, opens full screen without browser bars, and functions like an installed app without any Play Store or App Store downloads.",
+      },
+      {
+        question: "How does the app function when there is no internet connection?",
+        answer:
+          "We engineer offline-first architectures using service workers and IndexedDB (as demonstrated in our Jar and Saanjgarva applications). Staff can continue logging deliveries, stock items, or sales without connection. The moment connectivity resumes, the application automatically pushes queued records to the cloud server.",
+      },
+      {
+        question: "Is a PWA suitable for customer-facing applications?",
+        answer:
+          "Yes. PWAs are ideal for customer portals, booking systems, routine tracking (like Nityasādhanā for ISKCON Pune), and subscription platforms where eliminating the App Store download hurdle directly increases user adoption.",
+      },
+    ],
   },
   {
     id: "08",
@@ -424,6 +452,34 @@ export const SERVICES: ServiceItem[] = [
     ],
     searchIntent: "ERP software development, inventory management software, business operations software",
     relatedProjects: ["saanjgarva", "jar"],
+    hasDedicatedPage: true,
+    dedicatedSlug: "erp-inventory-operations-software",
+    overview:
+      "Generic enterprise ERP systems are notoriously expensive, bloated with unused modules, and rigid to modify. On the other end, spreadsheets break under multi-user access and create severe ledger reconciliation errors. Goldspade engineers custom operational software, billing consoles, and real-time inventory systems built precisely around how your company actually operates—whether tracking daily 20L water bottle routes, managing bar stock and credit (udhari), or reconciling retail distributor ledgers.",
+    considerations: [
+      "Real-time stock ledger synchronization with zero spreadsheet lock-ups",
+      "Role-based access boundaries for managers, cashiers, and field drivers",
+      "Bilingual interface capabilities (Marathi and English) for regional workforce adoption",
+      "Offline-first capability allowing field staff to log dispatches without cellular data",
+      "100% intellectual property ownership with zero recurring per-seat SaaS license fees",
+    ],
+    faqs: [
+      {
+        question: "Why build custom operations software instead of subscribing to a generic ERP?",
+        answer:
+          "Off-the-shelf software charges recurring monthly per-seat fees while forcing your staff into awkward workarounds for features that don't match your physical workflow. Custom software aligns 100% with your operational reality, eliminates unnecessary complexity, and belongs to your business with zero recurring SaaS license fees.",
+      },
+      {
+        question: "Can the software handle credit (udhari) tracking and payment reconciliation?",
+        answer:
+          "Yes. As demonstrated in our Saanjgarva system, we engineer custom customer and supplier ledger consoles with credit limits, payment logging, and automated daily cash reconciliation.",
+      },
+      {
+        question: "Can our field staff use this software on standard smartphones?",
+        answer:
+          "Yes. We design mobile-first interfaces that run effortlessly on budget Android smartphones and tablets, featuring touch-optimized numeric inputs and offline support.",
+      },
+    ],
   },
   {
     id: "15",

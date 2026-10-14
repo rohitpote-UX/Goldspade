@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionFromRequest, isStaffSession, isAdminSession } from "@/lib/auth/server";
+import { isDatabaseConfigured } from "@/lib/db/client";
 import {
   getInquiries,
   getInquiryById,
@@ -46,6 +47,7 @@ export async function GET(req: NextRequest) {
       total: inquiries.length,
       new: inquiries.filter((i) => i.status === "NEW").length,
       contacted: inquiries.filter((i) => i.status === "CONTACTED").length,
+      qualified: inquiries.filter((i) => i.status === "QUALIFIED").length,
       inProgress: inquiries.filter(
         (i) => i.status === "IN_PROGRESS" || i.status === "IN_DISCUSSION" || i.status === "PROPOSAL_SENT"
       ).length,
@@ -58,6 +60,8 @@ export async function GET(req: NextRequest) {
         success: true,
         inquiries,
         stats,
+        databaseConfigured: isDatabaseConfigured(),
+        storageType: isDatabaseConfigured() ? "postgresql" : "file_fallback",
         user: {
           id: session!.userId,
           email: session!.email,
@@ -70,11 +74,12 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error("[Admin Inquiries API Error]:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to retrieve inquiries." },
+      { success: false, error: "Failed to retrieve inquiries from storage." },
       { status: 500 }
     );
   }
 }
+
 
 /**
  * PATCH /api/admin/inquiries

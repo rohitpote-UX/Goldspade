@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { saveInquiry, updateInquiryEmailStatus } from "@/lib/db/inquiries";
-
+import { sendInquiryNotification } from "@/lib/email/service";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_NAME_LENGTH = 100;
@@ -11,7 +11,7 @@ const MIN_MESSAGE_LENGTH = 10;
 
 // ─── Rate Limiting (in-memory sliding window) ────────────────────────────────
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_MAX = 6; // 6 inquiries
+const RATE_LIMIT_MAX = 8; // 8 inquiries
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 
 function isRateLimited(ip: string): boolean {
@@ -39,15 +39,6 @@ function sanitize(input: string): string {
     .trim();
 }
 
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
 // ─── POST Handler ────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   const clientIp =
@@ -55,10 +46,13 @@ export async function POST(req: NextRequest) {
     req.headers.get("x-real-ip") ||
     "127.0.0.1";
 
-  // Rate limiting
+  // Rate limiting defense
   if (isRateLimited(clientIp)) {
     return NextResponse.json(
-      { success: false, error: "Too many submissions from this connection. Please wait a few minutes before trying again." },
+      {
+        success: false,
+        error: "Too many submissions from this connection. Please wait a few minutes before trying again.",
+      },
       { status: 429 }
     );
   }
@@ -74,6 +68,7 @@ export async function POST(req: NextRequest) {
       budget = "",
       message = "",
       overview = "",
+      source = "website_contact",
       _hp = "",
     } = body;
 
@@ -81,7 +76,10 @@ export async function POST(req: NextRequest) {
     if (_hp && String(_hp).trim().length > 0) {
       console.warn(`[Contact Spam Guard] Honeypot triggered from IP: ${clientIp}`);
       return NextResponse.json(
-        { success: true, message: "Thank you. We've received your inquiry and will get back to you within 24 hours." },
+        {
+          success: true,
+          message: "Thank you for reaching out to Goldspade. Your project inquiry has been received.",
+        },
         { status: 200 }
       );
     }
@@ -92,6 +90,7 @@ export async function POST(req: NextRequest) {
     const finalCompany = sanitize(String(company || companyProject));
     const finalBudget = sanitize(String(budget));
     const finalMessage = sanitize(String(message || overview));
+    const finalSource = sanitize(String(source || "website_contact"));
 
     const errors: Record<string, string> = {};
 
@@ -134,7 +133,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ─── STEP 1: PERSIST INQUIRY IN DATABASE (Primary Source of Truth) ─────
+    // ─── STEP 1: PERSIST INQUIRY IN STORAGE (Primary Source of Truth) ─────
     let savedInquiry;
     try {
       savedInquiry = await saveInquiry({
@@ -144,202 +143,52 @@ export async function POST(req: NextRequest) {
         budget: finalBudget,
         overview: finalMessage,
         ip: clientIp,
-        source: "website_contact",
+        source: finalSource,
       });
     } catch (dbError) {
-      console.error("[Contact DB Save Error]:", dbError);
+      console.error("[Contact Persistence Failure]:", dbError);
       return NextResponse.json(
         {
           success: false,
-          error: "Something went wrong while saving your inquiry. Please try again or email us directly at hello@goldspade.in.",
+          error:
+            "We couldn't submit your inquiry just now. Your information is still here. Please try again in a moment or email us directly at hello@goldspade.in.",
         },
         { status: 500 }
       );
     }
 
-    // ─── STEP 2: DISPATCH EMAIL NOTIFICATIONS (Resilient) ───────────────────
-    const recipientEmail =
-      process.env.CONTACT_RECEIVER_EMAIL ||
-      process.env.INQUIRY_EMAIL ||
-      "hello@goldspade.in";
+    // ─── STEP 2: DISPATCH EMAIL NOTIFICATION (Resilient) ────────────────────
+    try {
+      const emailResult = await sendInquiryNotification({
+        id: savedInquiry.id,
+        name: finalName,
+        email: finalEmail,
+        companyProject: finalCompany,
+        budget: finalBudget,
+        overview: finalMessage,
+        source: finalSource,
+        submittedAt: savedInquiry.createdAt,
+      });
 
-    const submittedAt = new Date().toLocaleString("en-US", {
-      timeZone: "Asia/Kolkata",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
-
-    const subject = finalCompany
-      ? `New Project Inquiry — ${finalCompany}`
-      : `New Project Inquiry — ${finalName}`;
-
-    const textBody = `NEW GOLDSPADE INQUIRY
-
-Name:
-${finalName}
-
-Email:
-${finalEmail}
-
-Company / Project:
-${finalCompany || "N/A"}
-
-Estimated Budget:
-${finalBudget || "Not specified"}
-
-Project Overview:
-${finalMessage}
-
-Submitted:
-${submittedAt}
-
-Reply directly to:
-${finalEmail}`;
-
-    const htmlBody = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f3; color: #171515; padding: 24px; margin: 0; }
-    .card { background: #ffffff; border: 1px solid #dcdcd8; border-radius: 16px; padding: 32px; max-width: 600px; margin: 0 auto; }
-    .brand { font-family: monospace; font-weight: bold; letter-spacing: 2px; color: #73F3C5; background: #171515; padding: 6px 12px; border-radius: 4px; display: inline-block; margin-bottom: 20px; font-size: 12px; }
-    h2 { font-size: 20px; font-weight: 700; text-transform: uppercase; margin-top: 0; margin-bottom: 24px; letter-spacing: -0.5px; border-bottom: 1px solid #eeeeee; padding-bottom: 16px; }
-    .field { margin-bottom: 18px; }
-    .label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #666666; margin-bottom: 4px; }
-    .value { font-size: 15px; font-weight: 600; color: #171515; }
-    .overview-box { background: #fafafa; border: 1px solid #eeeeee; border-radius: 12px; padding: 16px; font-size: 14px; line-height: 1.6; white-space: pre-wrap; margin-top: 6px; }
-    .footer { font-family: monospace; font-size: 11px; color: #888888; margin-top: 32px; border-top: 1px solid #eeeeee; padding-top: 16px; text-align: center; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="brand">GOLDSPADE</div>
-    <h2>New Project Inquiry</h2>
-
-    <div class="field">
-      <div class="label">Name</div>
-      <div class="value">${escapeHtml(finalName)}</div>
-    </div>
-
-    <div class="field">
-      <div class="label">Email</div>
-      <div class="value"><a href="mailto:${escapeHtml(finalEmail)}">${escapeHtml(finalEmail)}</a></div>
-    </div>
-
-    <div class="field">
-      <div class="label">Company / Project</div>
-      <div class="value">${escapeHtml(finalCompany || "N/A")}</div>
-    </div>
-
-    <div class="field">
-      <div class="label">Estimated Budget</div>
-      <div class="value">${escapeHtml(finalBudget || "Not specified")}</div>
-    </div>
-
-    <div class="field">
-      <div class="label">Project Overview &amp; Objectives</div>
-      <div class="overview-box">${escapeHtml(finalMessage)}</div>
-    </div>
-
-    <div class="footer">
-      Submitted via Goldspade Website &bull; ${escapeHtml(submittedAt)}<br>
-      Reply directly to: <a href="mailto:${escapeHtml(finalEmail)}">${escapeHtml(finalEmail)}</a>
-    </div>
-  </div>
-</body>
-</html>`;
-
-    let emailSent = false;
-
-    // A. Check SMTP Provider (Titan / GoDaddy)
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : 465;
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASSWORD || process.env.SMTP_PASS;
-
-    if (smtpHost && smtpUser && smtpPass && smtpPass.trim().length > 0) {
-      try {
-        const nodemailer = (await import("nodemailer")).default;
-        const transporter = nodemailer.createTransport({
-          host: smtpHost,
-          port: smtpPort,
-          secure: smtpPort === 465,
-          auth: { user: smtpUser, pass: smtpPass },
-        });
-
-        await transporter.sendMail({
-          from: `"Goldspade Inquiries" <${smtpUser}>`,
-          to: recipientEmail,
-          replyTo: finalEmail,
-          subject: subject,
-          text: textBody,
-          html: htmlBody,
-        });
-
-        emailSent = true;
+      if (emailResult.success) {
         await updateInquiryEmailStatus(savedInquiry.id, "sent");
-        console.log(`[Contact] Inquiry email dispatched via SMTP to ${recipientEmail}`);
-      } catch (smtpError) {
-        console.error("[Contact SMTP Delivery Exception]:", smtpError);
+      } else {
+        await updateInquiryEmailStatus(savedInquiry.id, "failed");
+        console.warn(
+          `[Contact Email Warning]: Delivery not completed (${emailResult.message || emailResult.error}). Inquiry is safely persisted in admin desk.`
+        );
       }
-    }
-
-    // B. Check Resend API Provider (Fallback)
-    if (!emailSent) {
-      const resendApiKey = process.env.RESEND_API_KEY;
-      if (resendApiKey && resendApiKey.trim().length > 0 && !resendApiKey.includes("placeholder")) {
-        try {
-          const fromAddress =
-            process.env.RESEND_FROM_EMAIL || "Goldspade Inquiries <onboarding@resend.dev>";
-          const response = await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${resendApiKey.trim()}`,
-            },
-            body: JSON.stringify({
-              from: fromAddress,
-              to: [recipientEmail],
-              reply_to: finalEmail,
-              subject: subject,
-              text: textBody,
-              html: htmlBody,
-            }),
-          });
-
-          if (response.ok) {
-            emailSent = true;
-            await updateInquiryEmailStatus(savedInquiry.id, "sent");
-            console.log(`[Contact] Inquiry email dispatched via Resend to ${recipientEmail}`);
-          } else {
-            const errText = await response.text();
-            console.error("[Contact Resend API Error]:", response.status, errText);
-          }
-        } catch (resendError) {
-          console.error("[Contact Resend API Exception]:", resendError);
-        }
-      }
-    }
-
-    if (!emailSent) {
+    } catch (emailErr) {
+      console.error("[Contact Email Exception]:", emailErr);
       await updateInquiryEmailStatus(savedInquiry.id, "failed");
-      console.warn(
-        `[Contact Notice] Inquiry ${savedInquiry.id} safely stored in DB, but email delivery is unconfigured or failed. Admin can view lead in /admin dashboard.`
-      );
     }
 
-    // ─── STEP 3: RETURN SUCCESS CONFIRMATION TO CLIENT ─────────────────────
-    // CRITICAL: Since database successfully captured the inquiry, return success to visitor so lead is never lost.
+    // ─── STEP 3: RETURN SUCCESS CONFIRMATION TO CLIENT ──────────────────────
     return NextResponse.json(
       {
         success: true,
-        message: "Thank you. We've received your inquiry and will get back to you within 24 hours.",
+        message:
+          "Thank you for reaching out to Goldspade. Your project inquiry has been received. We'll review the details and follow up as appropriate.",
         inquiryId: savedInquiry.id,
       },
       { status: 200 }
@@ -349,9 +198,11 @@ ${finalEmail}`;
     return NextResponse.json(
       {
         success: false,
-        error: "Something went wrong while sending your inquiry. Please try again or email us directly at hello@goldspade.in.",
+        error:
+          "Something went wrong while sending your inquiry. Your message has been preserved. Please try again or email us directly at hello@goldspade.in.",
       },
       { status: 500 }
     );
   }
 }
+

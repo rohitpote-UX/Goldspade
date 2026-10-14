@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Suspense } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { ArrowUpRight, Check, ChevronDown, Mail } from "lucide-react";
+import { ArrowUpRight, Check, ChevronDown, Mail, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 const BUDGET_OPTIONS = [
@@ -22,7 +23,12 @@ const PROMPT_CHIPS = [
   "Something difficult to explain?",
 ];
 
-export default function ContactPage() {
+function ContactFormContent() {
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams.get("service") || searchParams.get("s");
+  const projectParam = searchParams.get("project") || searchParams.get("ref");
+  const locationParam = searchParams.get("location") || searchParams.get("loc");
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +37,29 @@ export default function ContactPage() {
     message: "",
     _hp: "", // Honeypot field
   });
+
+  // Pre-populate inquiry message based on incoming context from services, case studies, or regional pages
+  useEffect(() => {
+    let initialContext = "";
+    if (serviceParam && locationParam) {
+      initialContext = `Inquiry regarding ${serviceParam.replace(/-/g, " ")} in ${locationParam.toUpperCase()}: `;
+    } else if (serviceParam) {
+      initialContext = `Inquiry regarding ${serviceParam.replace(/-/g, " ")}: `;
+    } else if (projectParam) {
+      initialContext = `We would like to build something similar to ${projectParam.replace(/-/g, " ")}: `;
+    } else if (locationParam) {
+      initialContext = `Inquiry from ${locationParam.toUpperCase()}: `;
+    }
+
+    if (initialContext) {
+      setFormData((prev) => {
+        if (!prev.message) {
+          return { ...prev, message: initialContext };
+        }
+        return prev;
+      });
+    }
+  }, [serviceParam, projectParam, locationParam]);
 
   const [touched, setTouched] = useState({
     name: false,
@@ -175,6 +204,13 @@ export default function ContactPage() {
           company: formData.company.trim(),
           budget: formData.budget,
           message: formData.message.trim(),
+          source: locationParam
+            ? `location:${locationParam}`
+            : serviceParam
+            ? `service:${serviceParam}`
+            : projectParam
+            ? `work:${projectParam}`
+            : "contact_page",
           _hp: formData._hp,
         }),
       });
@@ -228,6 +264,16 @@ export default function ContactPage() {
           <p className="text-base sm:text-xl text-secondary-dark font-normal leading-relaxed">
             Tell us about your company, what you are building, or where you need technical and design clarity.
           </p>
+
+          {/* Contextual Intent Pill Badge */}
+          {(serviceParam || projectParam || locationParam) && (
+            <div className="mt-6 inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-mint/15 border border-mint/40 text-primary-dark font-mono text-xs">
+              <Sparkles className="w-3.5 h-3.5 text-mint flex-shrink-0" />
+              <span className="font-semibold uppercase tracking-wider">
+                Inquiry Context: {serviceParam ? serviceParam.replace(/-/g, " ") : ""} {projectParam ? `· Ref: ${projectParam.replace(/-/g, " ")}` : ""} {locationParam ? `· Location: ${locationParam.toUpperCase()}` : ""}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 pt-6 sm:pt-8 border-t border-editorial-border" suppressHydrationWarning>
@@ -715,3 +761,12 @@ export default function ContactPage() {
     </div>
   );
 }
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas min-h-screen" />}>
+      <ContactFormContent />
+    </Suspense>
+  );
+}
+

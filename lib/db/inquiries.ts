@@ -1,10 +1,12 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { isDatabaseConfigured, query } from "./client";
 
 export type InquiryStatus =
   | "NEW"
   | "CONTACTED"
+  | "QUALIFIED"
   | "IN_PROGRESS"
   | "CONVERTED"
   | "ARCHIVED"
@@ -39,28 +41,94 @@ export interface CreateInquiryInput {
   source?: string;
 }
 
-const DB_DIR = path.join(process.cwd(), "data");
-const DB_FILE = path.join(DB_DIR, "inquiries.json");
+const LOCAL_DB_DIR = path.join(process.cwd(), "data");
+const LOCAL_DB_FILE = path.join(LOCAL_DB_DIR, "inquiries.json");
+const TMP_DB_FILE = path.join(os.tmpdir(), "goldspade_inquiries.json");
 
-function ensureDevDbExists(): void {
+function getWritableFilePath(): string {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return TMP_DB_FILE;
+  }
   try {
-    if (!fs.existsSync(DB_DIR)) {
-      fs.mkdirSync(DB_DIR, { recursive: true });
+    if (!fs.existsSync(LOCAL_DB_DIR)) {
+      fs.mkdirSync(LOCAL_DB_DIR, { recursive: true });
     }
-    if (!fs.existsSync(DB_FILE)) {
-      fs.writeFileSync(DB_FILE, JSON.stringify([], null, 2), "utf-8");
-    }
-  } catch (error) {
-    console.error("[Dev Database Init Error]:", error);
+    fs.accessSync(LOCAL_DB_DIR, fs.constants.W_OK);
+    return LOCAL_DB_FILE;
+  } catch {
+    return TMP_DB_FILE;
   }
 }
 
-function normalizeStatus(status?: string): InquiryStatus {
+function readFileInquiries(): InquiryRecord[] {
+  const map = new Map<string, InquiryRecord>();
+
+  // 1. Read bundled repository data/inquiries.json
+  if (fs.existsSync(LOCAL_DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(LOCAL_DB_FILE, "utf-8");
+      const list = JSON.parse(raw) as InquiryRecord[];
+      list.forEach((item) => {
+        if (item && item.id) map.set(item.id, item);
+      });
+    } catch (e) {
+      console.error("[Read bundled inquiries.json Error]:", e);
+    }
+  }
+
+  // 2. Read runtime tmp file if separate
+  if (TMP_DB_FILE !== LOCAL_DB_FILE && fs.existsSync(TMP_DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(TMP_DB_FILE, "utf-8");
+      const list = JSON.parse(raw) as InquiryRecord[];
+      list.forEach((item) => {
+        if (item && item.id) map.set(item.id, item);
+      });
+    } catch (e) {
+      console.error("[Read tmp inquiries.json Error]:", e);
+    }
+  }
+
+  return Array.from(map.values()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+}
+
+function writeFileInquiries(records: InquiryRecord[]): void {
+  const targetPath = getWritableFilePath();
+  try {
+    const dir = path.dirname(targetPath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    const tempFile = `${targetPath}.${Date.now()}.tmp`;
+    fs.writeFileSync(tempFile, JSON.stringify(records, null, 2), "utf-8");
+    fs.renameSync(tempFile, targetPath);
+  } catch (err) {
+    // If writing to local dir failed, attempt writing to /tmp
+    if (targetPath !== TMP_DB_FILE) {
+      try {
+        const tempFile = `${TMP_DB_FILE}.${Date.now()}.tmp`;
+        fs.writeFileSync(tempFile, JSON.stringify(records, null, 2), "utf-8");
+        fs.renameSync(tempFile, TMP_DB_FILE);
+        return;
+      } catch (tmpErr) {
+        console.error("[Fallback File Write Error]:", tmpErr);
+        throw new Error("Persistent storage error: File system is read-only.");
+      }
+    }
+    console.error("[File Write Error]:", err);
+    throw new Error("Persistent storage error: Unable to write inquiry to disk.");
+  }
+}
+
+export function normalizeStatus(status?: string): InquiryStatus {
   if (!status) return "NEW";
   const upper = status.toUpperCase().replace(/\s+/g, "_");
   const valid: InquiryStatus[] = [
     "NEW",
     "CONTACTED",
+    "QUALIFIED",
     "IN_PROGRESS",
     "CONVERTED",
     "ARCHIVED",
@@ -73,7 +141,8 @@ function normalizeStatus(status?: string): InquiryStatus {
 }
 
 /**
- * Saves an inquiry record to PostgreSQL if configured, or dev JSON storage as fallback.
+ * Saves an inquiry record to PostgreSQL if configured, or durable file storage as fallback.
+ * Throws an explicit error if neither persistent store succeeds.
  */
 export async function saveInquiry(input: CreateInquiryInput): Promise<InquiryRecord> {
   const id = `inq_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
@@ -115,12 +184,11 @@ export async function saveInquiry(input: CreateInquiryInput): Promise<InquiryRec
       };
     } catch (dbError) {
       console.error("[PostgreSQL Inquiry Save Error]:", dbError);
-      // Fall through to JSON storage fallback if Postgres fails
+      // Fall through to file fallback if Postgres connection encounters an issue
     }
   }
 
-  // Development file-based fallback
-  ensureDevDbExists();
+  // File-based persistence fallback
   const record: InquiryRecord = {
     id,
     name,
@@ -138,25 +206,27 @@ export async function saveInquiry(input: CreateInquiryInput): Promise<InquiryRec
   };
 
   try {
-    const rawData = fs.readFileSync(DB_FILE, "utf-8");
-    const existing = JSON.parse(rawData) as InquiryRecord[];
-    existing.unshift(record);
-
-    const tempFile = `${DB_FILE}.tmp`;
-    fs.writeFileSync(tempFile, JSON.stringify(existing, null, 2), "utf-8");
-    fs.renameSync(tempFile, DB_FILE);
-
+    const existing = readFileInquiries();
+    // Check if duplicate ID exists
+    const filtered = existing.filter((i) => i.id !== id);
+    filtered.unshift(record);
+    writeFileInquiries(filtered);
     return record;
   } catch (error) {
-    console.error("[Dev DB Save Error]:", error);
-    return record;
+    console.error("[File Storage Save Error]:", error);
+    throw new Error(
+      "Failed to persist inquiry to storage. Database is unconfigured and filesystem is unavailable."
+    );
   }
 }
 
 /**
  * Updates the email delivery status for an existing inquiry.
  */
-export async function updateInquiryEmailStatus(id: string, status: "sent" | "failed" | "queued"): Promise<void> {
+export async function updateInquiryEmailStatus(
+  id: string,
+  status: "sent" | "failed" | "queued" | "unconfigured"
+): Promise<void> {
   if (isDatabaseConfigured()) {
     try {
       await query(`UPDATE inquiries SET email_status = $1, updated_at = NOW() WHERE id = $2`, [status, id]);
@@ -167,18 +237,15 @@ export async function updateInquiryEmailStatus(id: string, status: "sent" | "fai
   }
 
   try {
-    if (fs.existsSync(DB_FILE)) {
-      const rawData = fs.readFileSync(DB_FILE, "utf-8");
-      const list = JSON.parse(rawData) as InquiryRecord[];
-      const target = list.find((item) => item.id === id);
-      if (target) {
-        target.emailStatus = status;
-        target.updatedAt = new Date().toISOString();
-        fs.writeFileSync(DB_FILE, JSON.stringify(list, null, 2), "utf-8");
-      }
+    const list = readFileInquiries();
+    const target = list.find((item) => item.id === id);
+    if (target) {
+      target.emailStatus = status;
+      target.updatedAt = new Date().toISOString();
+      writeFileInquiries(list);
     }
   } catch (err) {
-    console.error("[Dev DB Status Update Error]:", err);
+    console.error("[File DB Email Status Update Error]:", err);
   }
 }
 
@@ -214,10 +281,8 @@ export async function getInquiries(): Promise<InquiryRecord[]> {
     }
   }
 
-  ensureDevDbExists();
   try {
-    const rawData = fs.readFileSync(DB_FILE, "utf-8");
-    const list = JSON.parse(rawData) as Array<Partial<InquiryRecord>>;
+    const list = readFileInquiries();
     return list.map((item) => ({
       id: item.id || `inq_${Date.now()}`,
       name: item.name || "Anonymous",
@@ -234,7 +299,7 @@ export async function getInquiries(): Promise<InquiryRecord[]> {
       updatedAt: item.updatedAt || item.createdAt || new Date().toISOString(),
     }));
   } catch (error) {
-    console.error("[Dev Database Read Error]:", error);
+    console.error("[Inquiry Read Error]:", error);
     return [];
   }
 }
@@ -264,19 +329,16 @@ export async function updateInquiryStatus(id: string, newStatus: InquiryStatus):
   }
 
   try {
-    if (fs.existsSync(DB_FILE)) {
-      const rawData = fs.readFileSync(DB_FILE, "utf-8");
-      const list = JSON.parse(rawData) as InquiryRecord[];
-      const target = list.find((item) => item.id === id);
-      if (target) {
-        target.status = normalized;
-        target.updatedAt = now;
-        fs.writeFileSync(DB_FILE, JSON.stringify(list, null, 2), "utf-8");
-        return true;
-      }
+    const list = readFileInquiries();
+    const target = list.find((item) => item.id === id);
+    if (target) {
+      target.status = normalized;
+      target.updatedAt = now;
+      writeFileInquiries(list);
+      return true;
     }
   } catch (err) {
-    console.error("[Dev DB Status Update Error]:", err);
+    console.error("[File DB Status Update Error]:", err);
   }
   return false;
 }
@@ -300,19 +362,16 @@ export async function updateInquiryNotes(id: string, notes: string): Promise<boo
   }
 
   try {
-    if (fs.existsSync(DB_FILE)) {
-      const rawData = fs.readFileSync(DB_FILE, "utf-8");
-      const list = JSON.parse(rawData) as InquiryRecord[];
-      const target = list.find((item) => item.id === id);
-      if (target) {
-        target.notes = notes;
-        target.updatedAt = now;
-        fs.writeFileSync(DB_FILE, JSON.stringify(list, null, 2), "utf-8");
-        return true;
-      }
+    const list = readFileInquiries();
+    const target = list.find((item) => item.id === id);
+    if (target) {
+      target.notes = notes;
+      target.updatedAt = now;
+      writeFileInquiries(list);
+      return true;
     }
   } catch (err) {
-    console.error("[Dev DB Notes Update Error]:", err);
+    console.error("[File DB Notes Update Error]:", err);
   }
   return false;
 }
@@ -331,15 +390,15 @@ export async function deleteInquiry(id: string): Promise<boolean> {
   }
 
   try {
-    if (fs.existsSync(DB_FILE)) {
-      const rawData = fs.readFileSync(DB_FILE, "utf-8");
-      const list = JSON.parse(rawData) as InquiryRecord[];
-      const filtered = list.filter((item) => item.id !== id);
-      fs.writeFileSync(DB_FILE, JSON.stringify(filtered, null, 2), "utf-8");
+    const list = readFileInquiries();
+    const filtered = list.filter((item) => item.id !== id);
+    if (filtered.length !== list.length) {
+      writeFileInquiries(filtered);
       return true;
     }
   } catch (err) {
-    console.error("[Dev DB Delete Error]:", err);
+    console.error("[File DB Delete Error]:", err);
   }
   return false;
 }
+

@@ -228,7 +228,7 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
                 </Button>
               )}
               <Button
-                href="/contact"
+                href={`/contact?project=${encodeURIComponent(project.slug)}`}
                 variant={project.liveUrl ? "secondary" : "primary"}
                 size="md"
                 icon
