@@ -7,6 +7,7 @@ import { CapabilitiesSection } from "@/components/sections/CapabilitiesSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { PhilosophySection } from "@/components/sections/PhilosophySection";
 import { TrustSection } from "@/components/sections/TrustSection";
+import { CoverageSection } from "@/components/sections/CoverageSection";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 
 export const metadata = constructMetadata({
@@ -38,6 +39,7 @@ export default function HomePage() {
       <ProcessSection />
       <PhilosophySection />
       <TrustSection />
+      <CoverageSection />
       <FinalCTASection />
     </>
   );
