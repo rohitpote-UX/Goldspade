@@ -139,6 +139,62 @@ export function generateWebPageSchema({
   return schema;
 }
 
+export function generateFAQPageSchema(
+  faqs: Array<{ question: string; fullAnswer?: string; answer?: string }>,
+  canonicalUrl: string = "/"
+) {
+  const fullUrl = canonicalUrl.startsWith("http")
+    ? canonicalUrl
+    : `${SITE_CONFIG.url}${canonicalUrl}`;
+
+  return {
+    "@type": "FAQPage",
+    "@id": `${fullUrl}/#faq`,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.fullAnswer || faq.answer || "",
+      },
+    })),
+  };
+}
+
+export function generateHomepageSchema(
+  faqs: Array<{ question: string; fullAnswer?: string; answer?: string }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${SITE_CONFIG.url}/#webpage`,
+        url: SITE_CONFIG.url,
+        name: "Goldspade — Digital Studio & Web Development in Pune",
+        description:
+          "Goldspade is an engineering-led digital studio based in Pune. We build custom websites, web applications, product engineering, and digital brand experiences for ambitious founders.",
+        isPartOf: {
+          "@id": `${SITE_CONFIG.url}/#website`,
+        },
+        about: {
+          "@id": `${SITE_CONFIG.url}/#organization`,
+        },
+        inLanguage: "en-IN",
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: [
+            "#studio-brand-overview",
+            "#faq-what-does-goldspade-do-answer",
+            "#faq-services-offered-answer",
+          ],
+        },
+      },
+      generateFAQPageSchema(faqs, "/"),
+    ],
+  };
+}
+
 export function generateCaseStudySchema(project: Project, canonicalUrl: string) {
   const fullUrl = canonicalUrl.startsWith("http")
     ? canonicalUrl
@@ -316,6 +372,7 @@ export function generateArticleSchema(
         url: fullUrl,
         headline: article.title,
         description: article.description,
+        image: `${SITE_CONFIG.url}/og-image.jpg`,
         datePublished: `${article.publishedAt}T09:00:00+05:30`,
         dateModified: `${article.updatedAt || article.publishedAt}T09:00:00+05:30`,
         mainEntityOfPage: {
@@ -329,7 +386,13 @@ export function generateArticleSchema(
           url: `${SITE_CONFIG.url}/about`,
         },
         publisher: {
+          "@type": "Organization",
           "@id": `${SITE_CONFIG.url}/#organization`,
+          name: SITE_CONFIG.name,
+          logo: {
+            "@type": "ImageObject",
+            url: `${SITE_CONFIG.url}/logo.png`,
+          },
         },
         articleSection: article.category,
         inLanguage: "en-IN",

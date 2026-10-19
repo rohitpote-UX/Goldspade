@@ -1,0 +1,41 @@
+# Goldspade — Forged for Founders
+
+> Goldspade is an engineering-led digital studio based in Pune, Maharashtra. We architect, design, and build bespoke websites, custom web applications, product engineering, and AI business automation for ambitious founders and enterprises across India.
+
+## Studio Details
+- **Official Website**: https://www.goldspade.in
+- **Headquarters**: Pune, Maharashtra, India
+- **Contact Email**: rohit@goldspade.in
+- **Primary Practices**: Brand Strategy, UI/UX Product Design, Full-Stack Web Development, Custom Software Engineering & AI Integration.
+- **Delivery Model**: 2-week structured sprints, direct access to founding engineers, 100% intellectual property ownership.
+
+## Core Services
+- [Custom Software Development](https://www.goldspade.in/services/custom-software-development): Bespoke web applications, microservices, internal operational tools, and enterprise workflow engines.
+- [Product Engineering](https://www.goldspade.in/services/product-engineering): Scalable digital products, MVP development, technical architecture, and SaaS platforms built on Next.js.
+- [Website Design & Development](https://www.goldspade.in/services/website-design-development): High-converting, Awwwards-caliber marketing websites with sub-second Core Web Vitals.
+- [AI Solutions & Automation](https://www.goldspade.in/services/ai-solutions): Pragmatic LLM integrations, document retrieval engines, and workflow automation.
+- [Digital Brand Identity](https://www.goldspade.in/services/brand-identity): Distinctive visual systems, typography, design tokens, and comprehensive brand guidelines.
+- [Technical SEO & Performance](https://www.goldspade.in/services/seo-growth): Answer Engine Optimization (AEO), Schema.org architectures, and Core Web Vitals engineering.
+
+## Selected Portfolio & Case Studies
+- [BrandBattle](https://www.goldspade.in/work/brandbattle): Gamified real-time brand comparison platform with instant polling architecture and dynamic leaderboards.
+- [Nityasādhanā](https://www.goldspade.in/work/nityasadhana): Mindful habit and ritual tracker progressive web app with local-first offline synchronization.
+- [Saanjgarva](https://www.goldspade.in/work/saanjgarva): Luxury hospitality and bespoke resort brand experience in western Maharashtra.
+- [Jar Financial](https://www.goldspade.in/work/jar): Micro-savings and financial micro-investment mobile interface concept.
+- [Hotel Atithi Karad](https://www.goldspade.in/work/hotel-atithi-karad): Regional hospitality digital presence and room booking portal.
+- [Mamacha Mala](https://www.goldspade.in/work/mamacha-mala): Agro-tourism resort digital destination and regional event venue.
+
+## Engineering Perspectives & Research
+- [Why We Default to Next.js App Router for Production](https://www.goldspade.in/journal/why-we-default-to-nextjs-app-router): Technical architecture analysis of React Server Components, streaming HTML, and caching strategies.
+- [The Death of the Redesign: Incremental Product Evolution](https://www.goldspade.in/journal/death-of-the-redesign-incremental-evolution): Why ambitious brands replace disruptive multi-year redesigns with continuous sprint improvements.
+- [Technical SEO in the Age of Answer Engines (AEO)](https://www.goldspade.in/journal/technical-seo-in-the-age-of-answer-engines): How to structure Schema.org, semantic HTML, and direct factual passages for search engines and LLMs.
+- [How Founders Should Evaluate Web Development Partners in India](https://www.goldspade.in/journal/evaluating-web-development-partners-india): Practical criteria for evaluating freelancers, traditional agencies, and focused engineering studios.
+
+## Regional Coverage & Delivery Corridors
+- [Pune Hub](https://www.goldspade.in/locations/pune): Studio headquarters, on-site founder workshops, and IT corridor engineering.
+- [Maharashtra Industrial Corridor](https://www.goldspade.in/locations/maharashtra): Statewide product engineering and industrial automation.
+- [India Nationwide](https://www.goldspade.in/locations/india): Pan-India remote development sprints and venture collaborations.
+- [Karad](https://www.goldspade.in/locations/karad), [Satara](https://www.goldspade.in/locations/satara), [Kolhapur](https://www.goldspade.in/locations/kolhapur), [Sangli](https://www.goldspade.in/locations/sangli), [Goa](https://www.goldspade.in/locations/goa), [Belagavi](https://www.goldspade.in/locations/belagavi), [Hubballi-Dharwad](https://www.goldspade.in/locations/hubballi-dharwad).
+
+## Project Inquiries
+- [Start a Project](https://www.goldspade.in/contact): Direct technical scoping inquiry with 24-hour turnaround.

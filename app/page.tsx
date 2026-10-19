@@ -1,5 +1,6 @@
 import { constructMetadata } from "@/lib/seo/metadata";
-import { generateWebPageSchema } from "@/lib/seo/jsonld";
+import { generateHomepageSchema } from "@/lib/seo/jsonld";
+import { HOMEPAGE_FAQS } from "@/data/homepageFaqs";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { IntroSection } from "@/components/sections/IntroSection";
 import { SelectedWorkSection } from "@/components/sections/SelectedWorkSection";
@@ -8,23 +9,19 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { PhilosophySection } from "@/components/sections/PhilosophySection";
 import { TrustSection } from "@/components/sections/TrustSection";
 import { CoverageSection } from "@/components/sections/CoverageSection";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 
 export const metadata = constructMetadata({
-  title: "Goldspade — Premium Digital Studio for Ambitious Founders",
+  title: "Goldspade — Digital Studio & Web Development in Pune",
   exactTitle: true,
   description:
-    "Goldspade is a premium digital studio building brands, digital products, websites and digital experiences for ambitious founders and businesses.",
+    "Goldspade is an engineering-led digital studio based in Pune. We build bespoke websites, custom web applications, product engineering, and modern brand experiences for ambitious founders.",
   canonicalUrl: "/",
 });
 
 export default function HomePage() {
-  const pageSchema = generateWebPageSchema({
-    title: "Goldspade — Premium Digital Studio for Ambitious Founders",
-    description:
-      "Goldspade is a premium digital studio building brands, digital products, websites and digital experiences for ambitious founders and businesses.",
-    url: "/",
-  });
+  const pageSchema = generateHomepageSchema(HOMEPAGE_FAQS);
 
   return (
     <>
@@ -40,6 +37,7 @@ export default function HomePage() {
       <PhilosophySection />
       <TrustSection />
       <CoverageSection />
+      <FAQSection />
       <FinalCTASection />
     </>
   );

@@ -16,6 +16,7 @@ const CAPABILITIES = [
       "We forge distinctive brand identities, design systems, and positioning strategies that establish immediate authority and long-term enterprise value.",
     deliverables: ["Brand Identity", "Visual Strategy", "Design Systems", "Tone of Voice"],
     image: "/media/projects/gitapath/gitapath-hero-river.png",
+    href: "/services#strategy-brand",
   },
   {
     num: "02",
@@ -25,6 +26,7 @@ const CAPABILITIES = [
       "End-to-end digital product design for web applications and mobile ecosystems engineered around intuitive user interaction and scalability.",
     deliverables: ["UI/UX Architecture", "SaaS Platforms", "Mobile Applications", "Prototyping"],
     image: "/media/projects/brandbattle/brandbattle-hero-workspace.png",
+    href: "/services/product-engineering",
   },
   {
     num: "03",
@@ -34,6 +36,7 @@ const CAPABILITIES = [
       "Immersive web experiences designed with typography, composition, and restrained motion that elevate brand perception.",
     deliverables: ["Editorial Websites", "Marketing Sites", "Interactive Design", "Motion Design"],
     image: "/media/pages/about/about-studio-collaborative.png",
+    href: "/services/website-design-development",
   },
   {
     num: "04",
@@ -43,6 +46,7 @@ const CAPABILITIES = [
       "Clean, modern frontend and backend architectures utilizing Next.js, React, TypeScript, and AI integrations for performance.",
     deliverables: ["Next.js App Router", "Full-Stack Web", "API Architecture", "AI Automation"],
     image: "/media/projects/ezdukkan/ezdukkan-hero-retail.png",
+    href: "/services/ai-integration-automation",
   },
   {
     num: "05",
@@ -52,6 +56,7 @@ const CAPABILITIES = [
       "Technical SEO foundations, conversion architecture, and performance optimization ensuring maximum visibility and organic conversion.",
     deliverables: ["Technical SEO", "Conversion Rate Optimization", "Performance Audit", "Core Web Vitals"],
     image: "/media/pages/philosophy/philosophy-founder-horizon.png",
+    href: "/services/technical-seo-performance",
   },
 ];
 
@@ -137,7 +142,7 @@ export function CapabilitiesSection({ headingLevel = "h2" }: CapabilitiesSection
             return (
               <Link
                 key={cap.num}
-                href="/services"
+                href={cap.href || "/services"}
                 ref={(el) => {
                   rowsRef.current[index] = el;
                 }}

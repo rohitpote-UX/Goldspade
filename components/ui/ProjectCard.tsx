@@ -48,10 +48,10 @@ export function ProjectCard({
           {isLive ? (
             <>
               <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
-              <span>{project.year} · LIVE</span>
+              <span><time dateTime={project.year}>{project.year}</time> · LIVE</span>
             </>
           ) : (
-            <span>{project.year} · COMING SOON</span>
+            <span><time dateTime={project.year}>{project.year}</time> · COMING SOON</span>
           )}
         </div>
       </div>

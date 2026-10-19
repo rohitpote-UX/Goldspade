@@ -11,9 +11,9 @@ export function CoverageAccessibleList() {
           <span className="text-xs uppercase font-mono tracking-widest text-secondary-dark block mb-1">
             GEOGRAPHIC DIRECTORY & INTERNAL CORRIDORS
           </span>
-          <h4 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-primary-dark">
+          <h3 className="text-lg sm:text-xl font-bold uppercase tracking-tight text-primary-dark">
             Complete Regional Coverage Matrix
-          </h4>
+          </h3>
         </div>
         <span className="text-xs font-mono text-secondary-dark/60">
           Rooted in Pune · Serving Maharashtra, Goa, Karnataka & Pan-India
@@ -39,9 +39,9 @@ export function CoverageAccessibleList() {
                   </span>
                 </div>
 
-                <h5 className="text-base font-bold uppercase tracking-tight text-primary-dark mb-1">
+                <h4 className="text-base font-bold uppercase tracking-tight text-primary-dark mb-1">
                   {region.name}
-                </h5>
+                </h4>
 
                 <p className="text-xs text-secondary-dark leading-relaxed mb-4">
                   {region.tagline}

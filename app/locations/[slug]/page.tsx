@@ -264,7 +264,7 @@ export default async function LocationDetailPage({ params }: LocationPageProps) 
 
                   <div className="p-6">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-secondary-dark block mb-1">
-                      {project.category} · {project.year}
+                      {project.category} · <time dateTime={project.year}>{project.year}</time>
                     </span>
                     <h3 className="text-xl font-bold uppercase tracking-tight text-primary-dark mb-2">
                       {project.title}

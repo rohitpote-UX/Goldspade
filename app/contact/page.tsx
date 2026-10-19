@@ -429,8 +429,19 @@ function ContactFormContent() {
               /* Form Component */
               <form
                 id="project-inquiry-form"
+                role="form"
+                aria-label="Goldspade Project Inquiry Form"
                 data-tool-name="submitProjectInquiry"
                 data-tool-description="Submit a verified project inquiry to Goldspade digital studio."
+                data-webmcp-tool="submitProjectInquiry"
+                data-webmcp-description="Submit a verified project inquiry to Goldspade digital studio."
+                data-webmcp-parameters={JSON.stringify({
+                  name: { type: "string", description: "Inquirer full name", required: true },
+                  email: { type: "string", format: "email", description: "Inquirer corporate or contact email", required: true },
+                  company: { type: "string", description: "Company or startup venture name", required: false },
+                  budget: { type: "string", enum: BUDGET_OPTIONS, description: "Estimated project budget tier", required: false },
+                  message: { type: "string", description: "Project overview, scope, and technical objectives", required: true },
+                })}
                 onSubmit={handleSubmit}
                 className="space-y-6 sm:space-y-7 p-6 sm:p-8 md:p-10 bg-white dark:bg-black/40 rounded-3xl border border-editorial-border shadow-xs"
                 suppressHydrationWarning
@@ -456,7 +467,12 @@ function ContactFormContent() {
                 />
 
                 {status.error && (
-                  <div className="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-900 dark:text-red-200 text-xs font-mono rounded-2xl" suppressHydrationWarning>
+                  <div
+                    role="alert"
+                    aria-live="polite"
+                    className="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-900 dark:text-red-200 text-xs font-mono rounded-2xl"
+                    suppressHydrationWarning
+                  >
                     <p className="font-bold mb-1">Something went wrong.</p>
                     <p>{status.error}</p>
                   </div>

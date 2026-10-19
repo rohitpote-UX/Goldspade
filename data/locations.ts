@@ -714,6 +714,166 @@ export const LOCATIONS: LocationProfile[] = [
       { label: "Case Study: Hotel Mamacha Mala", href: "/work/mamacha-mala" },
     ],
   },
+  {
+    slug: "maharashtra",
+    name: "Maharashtra",
+    displayName: "Maharashtra, India",
+    region: "Western India",
+    state: "Maharashtra",
+    tier: 1,
+    h1: "Web Design, Custom Software & Product Engineering in Maharashtra",
+    seoTitle: "Web Design & Custom Software Development in Maharashtra — Goldspade",
+    metaDescription:
+      "Goldspade is a Pune-based digital studio and product engineering partner building high-speed Next.js websites, custom business software, and PWAs across Maharashtra.",
+    primaryKeywords: [
+      "software development services Maharashtra",
+      "website development company Maharashtra",
+      "product engineering company Maharashtra",
+      "software development company in Pune",
+      "web development agency Maharashtra",
+    ],
+    heroSummary:
+      "Headquartered in Pune with verified project delivery across Western Maharashtra and the Konkan coast, Goldspade provides principal-led web design, custom business applications, and product engineering for ambitious founders and enterprises throughout Maharashtra.",
+    operatingModel: {
+      baseCity: "Pune",
+      deliveryType: "Regional Corridor & On-Site Alignment",
+      description:
+        "Based in Pune with direct NH48 connectivity and high-speed transit across Maharashtra. We combine on-site architectural workshops in Pune, Mumbai, Satara, and Kolhapur with disciplined remote engineering sprints.",
+    },
+    marketContext: [
+      "Maharashtra is India's industrial, financial, and manufacturing powerhouse—home to dynamic commercial clusters from Mumbai and Pune to the agro-industrial belts of Western Maharashtra.",
+      "Most enterprises outside Tier-1 metros are forced to choose between slow, template-driven local web shops or overpriced agency conglomerates that treat regional businesses as afterthoughts.",
+      "Goldspade bridges this gap with senior-architect craftsmanship, zero junior subcontracting, and high-performance TypeScript/Next.js systems tailored to Maharashtra's commercial realities.",
+    ],
+    industryNeeds: [
+      {
+        industry: "Manufacturing & Industrial Groups",
+        challenge: "Heavy engineering foundries, precision tooling, and auto component manufacturers require high-authority digital presentations and technical specification engines to win domestic and export contracts.",
+        solution: "Editorial digital flagships with sub-second page performance, interactive equipment specification tables, and automated RFQ quotation routing.",
+      },
+      {
+        industry: "Hospitality & Highway Culinary Heritage",
+        challenge: "Iconic regional restaurants and destination resorts need digital touchpoints that capture their atmosphere, present digital menus, and handle customer directions without clunky third-party portal fees.",
+        solution: "High-conversion culinary websites with interactive menu architecture, rich spatial imagery, and direct WhatsApp booking (demonstrated in Hotel Atithi Karad & Mamacha Mala).",
+      },
+      {
+        industry: "Agro-Processing & Operations Logistics",
+        challenge: "Regional distributors, food processors, and suppliers face constant stock leakage and disputed credit records when relying on manual notebooks and WhatsApp messages.",
+        solution: "Custom operational PWAs featuring offline-first data caching and bilingual Marathi/English interfaces (proven in Saanjgarva and Jar).",
+      },
+    ],
+    concreteDeliverables: [
+      "Bespoke Corporate & Founder Flagships (Next.js 15, Tailwind, GSAP)",
+      "Custom Business Software & Inventory Ledgers (Bilingual Marathi & English)",
+      "Installable Offline-First Progressive Web Apps (PWAs)",
+      "Certified E-Commerce & Payment Gateway Integration (Razorpay, UPI)",
+      "Technical SEO Foundations (Lighthouse 95+, Zero Layout Shift, Schema.org)",
+    ],
+    relevantProjects: ["brandbattle", "nityasadhana", "saanjgarva", "jar", "hotel-atithi-karad", "mamacha-mala"],
+    faqs: [
+      {
+        question: "Where is Goldspade physically based in Maharashtra?",
+        answer:
+          "Our studio headquarters is located in Pune. We serve clients across Maharashtra through scheduled on-site discovery sessions in Pune, Karad, Satara, and Kolhapur, supported by weekly remote sprint demonstrations.",
+      },
+      {
+        question: "Do you build bilingual software in Marathi and English?",
+        answer:
+          "Yes. Many of our operational applications (such as Saanjgarva for inventory and credit management) feature bilingual Marathi and English interfaces designed specifically for counter staff, warehouse managers, and field operators.",
+      },
+      {
+        question: "How does project delivery and communication work across Maharashtra?",
+        answer:
+          "We operate in disciplined weekly sprints. You collaborate directly with the principal architects designing and writing your code via shared staging environments, video walkthroughs, and scheduled in-person roadmap alignments.",
+      },
+    ],
+    serviceLinks: [
+      { label: "Website Design & Development", href: "/services/website-design-development" },
+      { label: "Custom Software Development", href: "/services/custom-software-development" },
+      { label: "Product Engineering", href: "/services/product-engineering" },
+      { label: "AI Integration & Automation", href: "/services/ai-integration-automation" },
+    ],
+  },
+  {
+    slug: "india",
+    name: "India",
+    displayName: "Pan-India",
+    region: "National Coverage",
+    state: "India-wide",
+    tier: 1,
+    h1: "Digital Studio & Product Engineering for Founders Across India",
+    seoTitle: "Digital Studio, Website Development & Product Engineering in India — Goldspade",
+    metaDescription:
+      "Goldspade is an engineering-first digital studio building bespoke web platforms, custom SaaS applications, and product architectures for ambitious founders across India.",
+    primaryKeywords: [
+      "software product development agency India",
+      "custom digital product agency India",
+      "web application development India",
+      "corporate website development India",
+      "Next.js development company India",
+    ],
+    heroSummary:
+      "Goldspade collaborates with technology founders, high-growth startups, and ambitious enterprises across Bengaluru, Mumbai, Delhi NCR, Pune, and Hyderabad—engineering high-authority digital flagships, multi-tenant SaaS products, and custom operational software.",
+    operatingModel: {
+      baseCity: "Pune",
+      deliveryType: "Remote Execution & Sprint Delivery",
+      description:
+        "Delivering world-class product engineering nationwide via async transparency, weekly production releases, shared GitHub repositories, and direct founder-to-architect communication.",
+    },
+    marketContext: [
+      "Indian founders building for global and domestic markets need digital partners who combine world-class typography and visual craft with rigorous full-stack engineering.",
+      "The traditional Indian IT services model sells armies of junior billable hours with multi-tiered project management overhead, resulting in bloated, unmaintainable code and missed market windows.",
+      "Goldspade operates on a modern studio model: concentrated sprints, principal engineers writing every line of code, and complete IP ownership delivered with zero agency bloat.",
+    ],
+    industryNeeds: [
+      {
+        industry: "B2B SaaS & Tech Startups",
+        challenge: "Founders need high-velocity MVP engineering and robust SaaS platforms with authenticated portals, real-time analytics, and AI copilots that impress investors and users alike.",
+        solution: "Full-stack Next.js App Router architectures, modular component design systems, and resilient API integrations built for instant scale.",
+      },
+      {
+        industry: "Modern D2C & Lifestyle Brands",
+        challenge: "Direct-to-consumer businesses face brutal customer acquisition costs and cannot afford sluggish page speeds, brittle carts, or template visual mediocrity.",
+        solution: "Sub-second digital storefronts engineered with instant client-side filtering, UPI checkout flows, and structured Schema.org product data.",
+      },
+      {
+        industry: "Professional Services & Enterprise Groups",
+        challenge: "Consulting firms, real estate developers, and corporate groups need a digital flagship that commands immediate authority and converts high-ticket inquiries.",
+        solution: "Editorial digital flagships utilizing next-gen typography, GSAP micro-interactions, and flawless Core Web Vitals across viewports.",
+      },
+    ],
+    concreteDeliverables: [
+      "High-Performance Next.js App Router Web Flagships",
+      "Scalable SaaS Architectures & Multi-Role Client Portals",
+      "Installable Progressive Web Apps (PWAs) with Offline Caching",
+      "Practical AI Integrations (OpenAI, Gemini, Anthropic API Pipelines)",
+      "Technical SEO & Sub-Second Core Web Vitals Engineering",
+    ],
+    relevantProjects: ["brandbattle", "nityasadhana", "saanjgarva", "jar", "ezdukkan"],
+    faqs: [
+      {
+        question: "How does Goldspade collaborate with founders outside Maharashtra?",
+        answer:
+          "We work with founders across India through async-first engineering workflows: weekly video demos, staging preview URLs on every Git pull request, real-time communication channels, and direct video roadmapping sessions with our principal architect.",
+      },
+      {
+        question: "Do you guarantee 100% intellectual property ownership?",
+        answer:
+          "Yes. From the first sprint to final deployment, you retain 100% ownership of all source code, database architectures, and design tokens, stored directly in your company's private Git repository.",
+      },
+      {
+        question: "What is your typical project timeline for product development?",
+        answer:
+          "Bespoke digital flagships typically launch within 2 to 4 weeks. Full-scale SaaS platforms and custom operational applications range between 4 to 10 weeks, deployed iteratively in verifiable weekly milestones.",
+      },
+    ],
+    serviceLinks: [
+      { label: "Product Engineering", href: "/services/product-engineering" },
+      { label: "Website Design & Development", href: "/services/website-design-development" },
+      { label: "Custom Web Applications & SaaS", href: "/services/custom-software-web-applications" },
+      { label: "AI Integration & Workflows", href: "/services/ai-integration-automation" },
+    ],
+  },
 ];
 
 export const REGIONAL_LOCATIONS = LOCATIONS;

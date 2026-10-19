@@ -306,6 +306,81 @@ export const SERVICES: ServiceItem[] = [
     ],
     searchIntent: "custom software development, business software solutions, bespoke software development",
     relatedProjects: ["saanjgarva", "ezdukkan", "jar"],
+    hasDedicatedPage: true,
+    dedicatedSlug: "custom-software-development",
+    overview:
+      "Every growing business reaches a point where generic off-the-shelf software and fragmented spreadsheets become an operational liability. Goldspade engineers custom business software built precisely around how your company functions. From specialized stock ledgers and delivery logistics engines to role-based internal portals, we deliver robust TypeScript applications that streamline operations, eliminate human error, and grant leadership real-time clarity.",
+    considerations: [
+      "Zero recurring per-seat monthly license fees—you own the software completely",
+      "Offline-first architecture enabling operations even during network dropouts",
+      "Role-based access boundaries protecting sensitive commercial and margin data",
+      "Seamless export and integration with existing accounting and communication tools",
+      "Tailored bilingual interfaces (e.g., Marathi and English) for regional operational staff",
+    ],
+    faqs: [
+      {
+        question: "When should our business consider custom software over off-the-shelf SaaS?",
+        answer:
+          "Custom software becomes commercially viable when your business processes are unique, when recurring per-user SaaS subscription costs multiply across dozens of employees, or when off-the-shelf tools force your team into clumsy manual workarounds on WhatsApp and Excel.",
+      },
+      {
+        question: "Can the software be operated on mobile devices by field staff?",
+        answer:
+          "Yes. We engineer mobile-first Progressive Web Apps (PWAs) that work seamlessly on standard Android and iOS devices, with offline caching (as proven in our Jar delivery logistics and Saanjgarva inventory tools).",
+      },
+      {
+        question: "How is data secured and backed up?",
+        answer:
+          "We implement encrypted database connections, daily automated snapshots, strict session validation, and role-based permissions ensuring only authorized personnel access commercial data.",
+      },
+    ],
+  },
+  {
+    id: "08B",
+    slug: "product-engineering",
+    title: "Product Engineering & Digital Systems",
+    category: "Applications & Software Products",
+    categorySlug: "applications-software",
+    tagline: "End-to-end software product development, technical architecture & scalable MVPs",
+    description:
+      "We partner with ambitious founders to engineer scalable software products—from technical architecture and interactive prototypes to high-performance production platforms built on Next.js, TypeScript, and cloud APIs.",
+    deliverables: [
+      "System Architecture & High-Concurrency Database Design",
+      "Next.js 15 & Full-Stack TypeScript Engineering",
+      "MVP Rapid Engineering & Production Validation",
+      "Multi-Tenant SaaS Dashboards & Role-Based Auth",
+      "Secure REST & GraphQL API Integration",
+      "Resilient Cloud Infrastructure & CI/CD Pipelines",
+    ],
+    searchIntent: "product engineering agency Pune, digital product development company Pune, software product development agency India, startup technology partner Pune",
+    relatedProjects: ["brandbattle", "nityasadhana", "saanjgarva", "ezdukkan"],
+    hasDedicatedPage: true,
+    dedicatedSlug: "product-engineering",
+    overview:
+      "Product engineering is fundamentally distinct from superficial agency web design. It demands disciplined systems architecture, strict type safety, database normalisation, automated testing, and scalable cloud deployment. Goldspade acts as a dedicated technical co-builder for founders—transforming complex product requirements into resilient, audit-ready codebases that withstand heavy production usage and investor diligence.",
+    considerations: [
+      "Single-threaded execution velocity with direct senior architect oversight",
+      "100% intellectual property and private Git repository ownership from day one",
+      "Strict TypeScript interfaces guaranteeing contract integrity between frontend and backend",
+      "Sub-second database latency through connection pooling and structured query optimization",
+    ],
+    faqs: [
+      {
+        question: "How does Goldspade's product engineering approach differ from a traditional agency?",
+        answer:
+          "Traditional agencies sell billable contractor hours and intermediate account management—often handing code to junior subcontractors. At Goldspade, you work directly with the principal architects designing and writing your codebase. We work in tight weekly sprints with demonstrable deployments and full source code transparency.",
+      },
+      {
+        question: "Can you help us build and launch an MVP for investor demonstration?",
+        answer:
+          "Yes. We specialize in taking founders from validated problem statements to functional, production-ready MVPs within 4 to 8 weeks—ensuring clean foundational architecture that doesn't need to be scrapped when you scale.",
+      },
+      {
+        question: "Who retains ownership of the code and intellectual property?",
+        answer:
+          "You retain 100% of all intellectual property, design assets, and source code upon milestone completion. All work is developed directly in your private Git repository.",
+      },
+    ],
   },
 
   // Category D — AI, Automation & Integrations

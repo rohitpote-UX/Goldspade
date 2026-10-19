@@ -69,7 +69,7 @@ export default function JournalPage() {
                   <div className="flex items-center space-x-3">
                     <span className="flex items-center">
                       <Calendar className="w-3.5 h-3.5 mr-1 opacity-60" />
-                      {article.publishedAt}
+                      <time dateTime={article.publishedAt}>{article.publishedAt}</time>
                     </span>
                     <span>·</span>
                     <span className="flex items-center">

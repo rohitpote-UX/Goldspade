@@ -1,0 +1,55 @@
+# Goldspade — Full Studio Context & Knowledge Base
+
+## Executive Overview
+Goldspade (https://www.goldspade.in) is an independent, engineering-led digital studio headquartered in Pune, Maharashtra, India. We architect, design, and build digital products, custom web applications, bespoke corporate websites, and AI business automations for ambitious founders, high-growth startups, and established enterprises.
+
+Our brand philosophy is "Forged for Founders" — emphasizing uncompromising craft, high velocity, and direct collaboration with senior practitioners without traditional agency layers.
+
+## Core Services & Capabilities
+
+### 1. Custom Software Development (https://www.goldspade.in/services/custom-software-development)
+- Bespoke web applications and software platforms tailored to business workflows.
+- Scalable backend architectures, REST & GraphQL APIs, microservices, and database modeling (PostgreSQL, Redis).
+- Authentication, role-based access control, transaction pipelines, and external SaaS integrations.
+- Production readiness: automated testing, CI/CD, error tracking, and comprehensive technical documentation.
+
+### 2. Product Engineering (https://www.goldspade.in/services/product-engineering)
+- Rapid MVP development for early-stage ventures and venture-backed startups.
+- Production-grade Next.js App Router architecture with React Server Components.
+- Design system development using TailwindCSS and modern UI tokens.
+- Performance engineering: Sub-second Largest Contentful Paint (LCP < 1.2s), Cumulative Layout Shift (CLS = 0), and 100/100 Lighthouse/SAGE targets.
+
+### 3. Website Design & Development (https://www.goldspade.in/services/website-design-development)
+- Commercial storytelling and Awwwards-caliber visual design.
+- Fluid responsive layouts, GSAP micro-animations, and full dark/light mode fidelity.
+- Strict WCAG 2.2 AA accessibility, keyboard navigation, and semantic HTML5 hierarchy.
+
+### 4. AI Solutions & Automation (https://www.goldspade.in/services/ai-solutions)
+- Pragmatic generative AI integrations using OpenAI, Anthropic Claude, and open-source models.
+- Retrieval-Augmented Generation (RAG) pipelines for internal enterprise knowledge bases and customer support.
+- Asynchronous operational automations and workflow tooling.
+
+### 5. Brand Identity & Strategy (https://www.goldspade.in/services/brand-identity)
+- Strategic market positioning and brand narrative for founders.
+- Logo suites, color palettes, custom typography, and scalable brand design systems.
+- Production-ready digital brand assets and style guidelines.
+
+### 6. Technical SEO & Performance Optimization (https://www.goldspade.in/services/seo-growth)
+- Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO).
+- Comprehensive Schema.org JSON-LD graph (Organization, ProfessionalService, WebPage, FAQPage, BreadcrumbList, SpeakableSpecification).
+- Automated XML sitemaps, robots.txt crawler policies, and canonical domain protection.
+
+## Engagement Model & Commercial Pricing (India & Global)
+- **Focused Commercial Website Sprint**: Typically ₹50,000 to ₹1,50,000. Timeline: 3 to 6 weeks.
+- **Custom Web Application / Platform**: Typically ₹1,50,000 to ₹5,00,000+. Timeline: 6 to 12 weeks.
+- **Sprint Structure**: 2-week agile delivery sprints with continuous staging deployments and asynchronous loom updates.
+- **IP Ownership**: 100% intellectual property, full source code repositories, and design files transferred to client upon milestone completion.
+
+## Studio Headquarters & Delivery Corridors
+- **Headquarters**: Pune, Maharashtra, India.
+- **Active Delivery Regions**: Pune, Karad, Satara, Kolhapur, Sangli, Konkan, Goa, Belagavi, Hubballi-Dharwad, Mumbai, Bengaluru, and pan-India remote partnerships.
+
+## Official Contact
+- **Project Inquiry**: https://www.goldspade.in/contact
+- **Direct Technical Email**: rohit@goldspade.in
+- **Repository / Engineering**: https://github.com/rohitpote-UX/Goldspade

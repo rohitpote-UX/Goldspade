@@ -93,7 +93,7 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
         <div className="max-w-4xl mb-10 sm:mb-12">
           <div className="flex items-center space-x-3 mb-3">
             <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block">
-              {project.category} — {project.year}
+              {project.category} — <time dateTime={project.year}>{project.year}</time>
             </span>
             <span className="inline-flex items-center text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full border border-editorial-border bg-white text-primary-dark">
               {isLive ? (
@@ -198,21 +198,58 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
           <div className="md:col-span-8 space-y-8">
             <div>
               <h2 className="text-2xl font-bold uppercase tracking-tight mb-4 text-primary-dark">
-                Overview & Challenge
+                The Challenge & Business Context
               </h2>
               <p className="text-base sm:text-lg text-secondary-dark leading-relaxed font-normal">
-                {project.description}
+                {project.challenge || project.description}
               </p>
             </div>
 
             <div className="pt-8 border-t border-editorial-border">
               <h3 className="text-xl font-bold uppercase tracking-tight mb-4 text-primary-dark">
-                Strategic Approach
+                Strategic Approach & Architectural Decisions
               </h3>
               <p className="text-base text-secondary-dark leading-relaxed font-normal">
-                Goldspade designed and engineered this digital experience focusing on clarity, minimal friction, visual impact, and strict technical performance standards.
+                {project.approach ||
+                  "Goldspade designed and engineered this digital experience focusing on clarity, minimal friction, visual impact, and strict technical performance standards."}
               </p>
             </div>
+
+            {project.solution && (
+              <div className="pt-8 border-t border-editorial-border">
+                <h3 className="text-xl font-bold uppercase tracking-tight mb-4 text-primary-dark">
+                  Engineered Solution & Key Deliverables
+                </h3>
+                <p className="text-base text-secondary-dark leading-relaxed font-normal">
+                  {project.solution}
+                </p>
+              </div>
+            )}
+
+            {project.result && (
+              <div className="pt-8 border-t border-editorial-border">
+                <h3 className="text-xl font-bold uppercase tracking-tight mb-4 text-primary-dark">
+                  Verified Outcomes & Commercial Impact
+                </h3>
+                <p className="text-base text-secondary-dark leading-relaxed font-normal">
+                  {project.result}
+                </p>
+              </div>
+            )}
+
+            {project.testimonial && (
+              <div className="pt-8 border-t border-editorial-border">
+                <blockquote className="p-6 rounded-2xl bg-white/70 dark:bg-white/[0.03] border border-editorial-border">
+                  <p className="text-base sm:text-lg italic text-primary-dark mb-4 leading-relaxed">
+                    &ldquo;{project.testimonial.quote}&rdquo;
+                  </p>
+                  <footer className="font-mono text-xs uppercase tracking-wider text-secondary-dark">
+                    <span className="font-bold text-primary-dark">{project.testimonial.author}</span>
+                    <span> &middot; {project.testimonial.role}, {project.testimonial.company}</span>
+                  </footer>
+                </blockquote>
+              </div>
+            )}
 
             <div className="pt-8 flex flex-wrap items-center gap-4">
               {project.liveUrl && (

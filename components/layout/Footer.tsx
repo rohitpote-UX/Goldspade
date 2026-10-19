@@ -147,6 +147,7 @@ export function Footer() {
 
         {/* Main Content Layout Container */}
         <div ref={contentRef} className="max-w-[1920px] mx-auto relative z-10">
+          <h2 className="sr-only">Studio Navigation & Inquiry Directory</h2>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 pb-12 sm:pb-16 md:pb-20 border-b border-pure-white/10">
             {/* Column 1: Brand Signature & Contact */}
             <div className="md:col-span-5 flex flex-col justify-between space-y-6 sm:space-y-8">
@@ -252,9 +253,9 @@ export function Footer() {
                     </span>
                     <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
                   </div>
-                  <h4 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-pure-white mb-2 sm:mb-3">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight text-pure-white mb-2 sm:mb-3">
                     HAVE AN IDEA?
-                  </h4>
+                  </h3>
                   <p className="text-xs sm:text-sm text-pure-white/80 leading-relaxed mb-6 sm:mb-8">
                     Let&apos;s discuss how we can build your brand, product, or system.
                   </p>
@@ -275,7 +276,7 @@ export function Footer() {
           <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-pure-white/70 font-mono gap-4 sm:gap-0">
             <div className="flex flex-col sm:flex-row items-center sm:space-x-4 text-center sm:text-left gap-1 sm:gap-0">
               <span className="text-pure-white/60 font-bold">STUDIO / 001</span>
-              <span>© {currentYear} GOLDSPADE STUDIO. ALL RIGHTS RESERVED.</span>
+              <span>© <time dateTime={`${currentYear}`}>{currentYear}</time> GOLDSPADE STUDIO. ALL RIGHTS RESERVED.</span>
             </div>
 
             <div className="flex items-center space-x-6 font-bold">

@@ -177,7 +177,10 @@ export function HeroSection() {
         {/* Supporting Copy & Dual Rounded CTAs */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-end pt-10 sm:pt-12 md:pt-16">
           <div className="md:col-span-6">
-            <p className="text-base sm:text-xl md:text-2xl text-secondary-dark leading-relaxed font-normal max-w-lg">
+            <p
+              id="studio-brand-overview"
+              className="text-base sm:text-xl md:text-2xl text-secondary-dark leading-relaxed font-normal max-w-lg"
+            >
               Goldspade is a premium digital studio engineering bespoke websites, web applications, and AI integrations for ambitious founders.
             </p>
           </div>

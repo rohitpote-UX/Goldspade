@@ -182,7 +182,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-mono uppercase text-secondary-dark">
-                        {project.category} · {project.year}
+                        {project.category} · <time dateTime={project.year}>{project.year}</time>
                       </span>
                       <ArrowUpRight className="w-4 h-4 text-secondary-dark group-hover:text-primary-dark group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
