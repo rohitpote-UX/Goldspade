@@ -72,7 +72,7 @@ export function HeroSection() {
         {/* Editorial Typography + Interacting Floating Images Canvas */}
         <div ref={headlineRef} className="relative z-10 font-bold uppercase tracking-tighter leading-[0.85] text-primary-dark">
           {/* Accessible Semantic H1 for Search Engines and Screen Readers */}
-          <h1 className="sr-only">Goldspade — Premium Digital Studio Forged for Founders</h1>
+          <h1 className="sr-only">Goldspade — Website Development Company, Custom Software & Web Applications Studio</h1>
 
           {/* Line 1: FORGED + Floating Hero Concept Showcase */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-8 mb-2">

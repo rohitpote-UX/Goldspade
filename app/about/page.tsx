@@ -4,10 +4,10 @@ import { generateWebPageSchema } from "@/lib/seo/jsonld";
 import { TrustSection } from "@/components/sections/TrustSection";
 
 export const metadata = constructMetadata({
-  title: "About Goldspade — Digital Studio for Ambitious Founders",
+  title: "About Goldspade — Engineering-Led Digital Studio in Pune",
   exactTitle: true,
   description:
-    "Goldspade is a premium digital studio building brands, digital products, websites and digital experiences for ambitious founders and businesses.",
+    "Goldspade is an engineering-led digital studio founded by Rohit Pote in Pune. We build custom websites, scalable web applications, and digital systems for founders.",
   canonicalUrl: "/about",
 });
 

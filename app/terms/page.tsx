@@ -43,7 +43,7 @@ export default function TermsPage() {
               1. Engagement Principles
             </h2>
             <p className="text-base font-normal">
-              By accessing the website (https://www.goldspade.in) or initiating a project inquiry with Goldspade, you agree to these Terms of Service. Goldspade provides bespoke brand strategy, digital product design, web engineering, and software solutions for founders and enterprises.
+              By accessing the website (https://goldspade.in) or initiating a project inquiry with Goldspade, you agree to these Terms of Service. Goldspade provides bespoke brand strategy, digital product design, web engineering, and software solutions for founders and enterprises.
             </p>
           </section>
 

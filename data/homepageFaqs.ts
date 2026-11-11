@@ -14,7 +14,7 @@ export const HOMEPAGE_FAQS: FAQItem[] = [
     shortAnswer:
       "Goldspade is an engineering-led digital studio that builds bespoke websites, scalable web applications, modern brand identities, and AI-driven automation for ambitious founders.",
     fullAnswer:
-      "Goldspade is an engineering-led digital studio that builds bespoke websites, scalable web applications, modern brand identities, and AI-driven automation for ambitious founders. We combine Awwwards-caliber aesthetics with robust software engineering, taking digital products from strategic positioning to full production deployment.",
+      "Goldspade is an engineering-led digital studio that builds bespoke websites, scalable web applications, modern brand identities, and AI-driven automation for ambitious founders. We combine precision editorial aesthetics with robust software engineering, taking digital products from strategic positioning to full production deployment.",
     serviceHref: "/services/custom-software-development",
     serviceLabel: "Explore Software Engineering",
   },

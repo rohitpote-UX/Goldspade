@@ -31,6 +31,8 @@ export interface ServiceItem {
   relatedProjects?: string[]; // Project slugs from PROJECTS
   hasDedicatedPage?: boolean;
   dedicatedSlug?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   overview?: string;
   considerations?: string[];
   faqs?: ServiceFAQ[];

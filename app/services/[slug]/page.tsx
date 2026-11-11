@@ -26,9 +26,9 @@ export async function generateMetadata({ params }: ServicePageProps) {
   if (!service) return {};
 
   return constructMetadata({
-    title: `${service.title} — Goldspade Studio`,
+    title: service.seoTitle || `${service.title} | Goldspade`,
     exactTitle: true,
-    description: service.description,
+    description: service.seoDescription || service.description,
     canonicalUrl: `/services/${slug}`,
   });
 }

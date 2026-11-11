@@ -92,7 +92,7 @@ export function HeroConceptCard({ className }: HeroConceptCardProps) {
               >
                 <Image
                   src={frame.src}
-                  alt={frame.tagline}
+                  alt={`Goldspade ${frame.tagline} — Digital product engineering and web development`}
                   fill
                   priority={index === 0}
                   sizes="(max-width: 640px) 176px, (max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"

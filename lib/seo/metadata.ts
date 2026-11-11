@@ -1,13 +1,17 @@
 import { Metadata } from "next";
 
+export const CANONICAL_SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://goldspade.in"
+).replace(/\/+$/, "");
+
 export const SITE_CONFIG = {
   name: "Goldspade",
   alternateName: "Goldspade Studio",
   tagline: "Forged for Founders.",
-  title: "Goldspade — Premium Digital Studio for Ambitious Founders",
+  title: "Goldspade — Website Development Company, Custom Software & Web Applications",
   description:
-    "Goldspade is a premium digital studio building brands, digital products, websites and digital experiences for ambitious founders and businesses.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.goldspade.in",
+    "Goldspade is an engineering-led digital studio in Pune, India. We design and build high-performance websites, custom web applications, SaaS platforms, and AI digital solutions for ambitious founders.",
+  url: CANONICAL_SITE_URL,
   ogImage: "/og-image.jpg",
   twitterHandle: "@GoldspadeFF",
   email: "hello@goldspade.in",
@@ -25,6 +29,30 @@ export const SITE_CONFIG = {
     github: "https://github.com/rohitpote-UX",
   },
 };
+
+/**
+ * Builds a strictly normalized, canonical absolute URL.
+ * Ensures consistent non-WWW format and avoids duplicate trailing slashes.
+ */
+export function buildCanonicalUrl(pathOrUrl?: string): string {
+  if (!pathOrUrl || pathOrUrl === "/" || pathOrUrl === "") {
+    return CANONICAL_SITE_URL;
+  }
+
+  if (pathOrUrl.startsWith("http://") || pathOrUrl.startsWith("https://")) {
+    try {
+      const urlObj = new URL(pathOrUrl);
+      const cleanPath = urlObj.pathname.replace(/\/+$/, "");
+      return `${urlObj.origin}${cleanPath}${urlObj.search}`;
+    } catch {
+      return pathOrUrl.replace(/\/+$/, "");
+    }
+  }
+
+  const cleanPath = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
+  const trimmed = cleanPath.replace(/\/+$/, "");
+  return `${CANONICAL_SITE_URL}${trimmed}`;
+}
 
 export function constructMetadata({
   title,
@@ -51,23 +79,19 @@ export function constructMetadata({
       : `${title} | ${SITE_CONFIG.name}`
     : SITE_CONFIG.title;
 
-  const canonical = canonicalUrl
-    ? canonicalUrl.startsWith("http")
-      ? canonicalUrl
-      : `${SITE_CONFIG.url}${canonicalUrl.startsWith("/") ? canonicalUrl : `/${canonicalUrl}`}`
-    : SITE_CONFIG.url;
+  const canonical = buildCanonicalUrl(canonicalUrl);
 
   const ogImageUrl = image.startsWith("http")
     ? image
-    : `${SITE_CONFIG.url}${image.startsWith("/") ? image : `/${image}`}`;
+    : `${CANONICAL_SITE_URL}${image.startsWith("/") ? image : `/${image}`}`;
 
   return {
     title: metaTitle,
     description,
-    authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+    authors: [{ name: SITE_CONFIG.name, url: CANONICAL_SITE_URL }],
     creator: SITE_CONFIG.name,
     publisher: SITE_CONFIG.name,
-    metadataBase: new URL(SITE_CONFIG.url),
+    metadataBase: new URL(CANONICAL_SITE_URL),
     alternates: {
       canonical,
     },

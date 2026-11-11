@@ -13,10 +13,10 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 
 export const metadata = constructMetadata({
-  title: "Goldspade — Digital Studio & Web Development in Pune",
+  title: "Goldspade — Website Development Company & Custom Web Applications",
   exactTitle: true,
   description:
-    "Goldspade is an engineering-led digital studio based in Pune. We build bespoke websites, custom web applications, product engineering, and modern brand experiences for ambitious founders.",
+    "Goldspade is an engineering-led digital studio in Pune, India. We design and build high-performance websites, custom web applications, and AI digital solutions for ambitious founders.",
   canonicalUrl: "/",
 });
 

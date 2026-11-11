@@ -5,10 +5,10 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { SERVICES } from "@/data/services";
 
 export const metadata = constructMetadata({
-  title: "Goldspade | Web Development, Digital Products & AI Solutions",
+  title: "Website Development & Custom Software Services | Goldspade",
   exactTitle: true,
   description:
-    "Explore Goldspade's comprehensive services: bespoke web design, custom SaaS web applications, AI automation, e-commerce, and technical SEO engineered for ambitious founders.",
+    "Explore Goldspade services: bespoke website development, custom web applications, Next.js engineering, e-commerce, AI automation, and technical SEO architecture.",
   canonicalUrl: "/services",
 });
 

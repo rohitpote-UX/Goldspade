@@ -39,7 +39,7 @@ export function ProjectCard({
       >
         <Image
           src={project.heroImage}
-          alt={project.title}
+          alt={`${project.title} — ${project.positioning}`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter contrast-105"

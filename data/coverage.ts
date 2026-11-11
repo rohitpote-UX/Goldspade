@@ -489,9 +489,9 @@ export const COVERAGE_CITIES: CoverageCity[] = [
     serviceLinks: [
       { label: "Custom Software & Web Apps", href: "/services/custom-software-web-applications" },
       { label: "AI Integration & Intelligent Workflows", href: "/services/ai-integration-automation" },
-      { label: "Full Service Capabilities", href: "/capabilities" },
+      { label: "All Services & Capabilities", href: "/services" },
     ],
-    locationUrl: "/capabilities",
+    locationUrl: "/locations/india",
     caseStudy: {
       title: "BrandBattle AI Platform",
       href: "/work/brandbattle",

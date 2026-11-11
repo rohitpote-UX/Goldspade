@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  trailingSlash: false,
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
@@ -44,10 +45,52 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Prevent search engine indexing of private API routes and internal admin endpoints
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow, noarchive",
+          },
+        ],
+      },
+      {
+        source: "/admin/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, nofollow, noarchive",
+          },
+        ],
+      },
+      // Aggressive caching for static media assets
+      {
+        source: "/media/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
   async redirects() {
     return [
+      // Enforce WWW to non-WWW canonical redirection
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.goldspade.in",
+          },
+        ],
+        destination: "https://goldspade.in/:path*",
+        permanent: true,
+      },
+      // Capabilities legacy path consolidation
       {
         source: "/capabilities",
         destination: "/services",
@@ -58,6 +101,7 @@ const nextConfig: NextConfig = {
         destination: "/services/:path*",
         permanent: true,
       },
+      // Service slug standardisation
       {
         source: "/services/website-development",
         destination: "/services/website-design-development",

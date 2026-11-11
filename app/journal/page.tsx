@@ -6,10 +6,10 @@ import { JOURNAL_ARTICLES, EDITORIAL_PLAN_12 } from "@/data/journal";
 import { Button } from "@/components/ui/Button";
 
 export const metadata = constructMetadata({
-  title: "Goldspade Journal — Engineering, Strategy & Founder Insights",
+  title: "Journal — Engineering, Technical SEO & Founder Insights | Goldspade",
   exactTitle: true,
   description:
-    "Original technical perspectives, product architecture guides, and candid web engineering analyses for ambitious founders by Goldspade Studio.",
+    "Candid engineering perspectives, technical SEO architectures, PWA analysis, and web development pricing guides for founders and business leaders.",
   canonicalUrl: "/journal",
 });
 

@@ -5,10 +5,10 @@ import { generateLocationsHubSchema } from "@/lib/seo/jsonld";
 import { LOCATIONS } from "@/data/locations";
 
 export const metadata = constructMetadata({
-  title: "Regional Locations & Service Coverage — Goldspade Digital Studio",
+  title: "Locations & Regional Service Coverage | Goldspade Digital Studio",
   exactTitle: true,
   description:
-    "Goldspade is a premium digital studio based in Pune, engineering high-speed websites, custom business software, and AI automation across Maharashtra, Goa, and North Karnataka.",
+    "Goldspade delivers website development, custom software, and digital solutions across Pune, Satara, Karad, Sangli, Kolhapur, Belgaum, Maharashtra, and India.",
   canonicalUrl: "/locations",
 });
 

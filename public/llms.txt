@@ -1,41 +1,56 @@
 # Goldspade — Forged for Founders
 
-> Goldspade is an engineering-led digital studio based in Pune, Maharashtra. We architect, design, and build bespoke websites, custom web applications, product engineering, and AI business automation for ambitious founders and enterprises across India.
+> Goldspade is an engineering-led digital studio headquartered in Pune, Maharashtra, India. We design and build bespoke business websites, high-performance web applications, custom business software, and pragmatic AI integrations for ambitious founders and enterprises across Maharashtra, Karnataka, and India.
 
-## Studio Details
-- **Official Website**: https://www.goldspade.in
-- **Headquarters**: Pune, Maharashtra, India
-- **Contact Email**: rohit@goldspade.in
-- **Primary Practices**: Brand Strategy, UI/UX Product Design, Full-Stack Web Development, Custom Software Engineering & AI Integration.
-- **Delivery Model**: 2-week structured sprints, direct access to founding engineers, 100% intellectual property ownership.
+## Studio Profile & Facts
+- **Official Website**: https://goldspade.in
+- **Headquarters**: Pune, Maharashtra, India (Postal Code: 411001)
+- **Founder & Principal Architect**: Rohit Pote
+- **Direct Contact**: hello@goldspade.in | +91 8390612060
+- **Primary Practices**: Website Design & Development, Custom Software Engineering, Web Application Development, Progressive Web Apps (PWAs), AI Integration & Process Automation, Technical SEO Architecture.
+- **Operating Model**: Direct collaboration with founding principal engineers, 2-week agile sprints, 100% intellectual property and source code ownership transferred to clients.
+- **Commercial Investment Ranges**: Business websites typically ₹25,000 to ₹1,50,000; custom software and web applications ₹1,00,000 to ₹5,00,000+.
 
-## Core Services
-- [Custom Software Development](https://www.goldspade.in/services/custom-software-development): Bespoke web applications, microservices, internal operational tools, and enterprise workflow engines.
-- [Product Engineering](https://www.goldspade.in/services/product-engineering): Scalable digital products, MVP development, technical architecture, and SaaS platforms built on Next.js.
-- [Website Design & Development](https://www.goldspade.in/services/website-design-development): High-converting, Awwwards-caliber marketing websites with sub-second Core Web Vitals.
-- [AI Solutions & Automation](https://www.goldspade.in/services/ai-solutions): Pragmatic LLM integrations, document retrieval engines, and workflow automation.
-- [Digital Brand Identity](https://www.goldspade.in/services/brand-identity): Distinctive visual systems, typography, design tokens, and comprehensive brand guidelines.
-- [Technical SEO & Performance](https://www.goldspade.in/services/seo-growth): Answer Engine Optimization (AEO), Schema.org architectures, and Core Web Vitals engineering.
+## Core Services & Dedicated Capabilities
+- [Website Design & Development](https://goldspade.in/services/website-design-development): High-speed bespoke marketing flagships, corporate websites, and editorial experiences engineered in Next.js 15, TypeScript, and Tailwind CSS with sub-second Core Web Vitals.
+- [Web Application Development & SaaS Engineering](https://goldspade.in/services/custom-software-web-applications): Scalable web applications, authenticated client portals, multi-tenant SaaS dashboards, and high-concurrency systems.
+- [Custom Software Development](https://goldspade.in/services/custom-software-development): Bespoke business software, internal operations tools, and database systems that eliminate spreadsheet chaos.
+- [Progressive Web Apps (PWAs) & Mobile](https://goldspade.in/services/mobile-app-development): Installable, offline-first Progressive Web Apps operating with zero App Store friction or platform commission fees.
+- [Custom E-Commerce Development](https://goldspade.in/services/ecommerce-development): High-converting digital storefronts with instant catalog filtering and certified Indian payment gateway integrations (Razorpay, UPI).
+- [Product Engineering & MVP Architecture](https://goldspade.in/services/product-engineering): End-to-end technical co-building for technology startups, from architectural roadmap to production launch.
+- [AI Integration & Business Automation](https://goldspade.in/services/ai-integration-automation): Practical AI integrations using foundation APIs (OpenAI, Gemini, Anthropic), semantic search, and document extraction.
+- [Operations, Inventory & Billing Software](https://goldspade.in/services/erp-inventory-operations-software): Specialized operational software, bilingual inventory management, and billing consoles for retailers and distributors.
+- [Technical SEO & Performance Architecture](https://goldspade.in/services/technical-seo-performance): Comprehensive Schema.org graphs, sub-second Core Web Vitals, semantic HTML5, and search engine crawlability engineering.
 
-## Selected Portfolio & Case Studies
-- [BrandBattle](https://www.goldspade.in/work/brandbattle): Gamified real-time brand comparison platform with instant polling architecture and dynamic leaderboards.
-- [Nityasādhanā](https://www.goldspade.in/work/nityasadhana): Mindful habit and ritual tracker progressive web app with local-first offline synchronization.
-- [Saanjgarva](https://www.goldspade.in/work/saanjgarva): Luxury hospitality and bespoke resort brand experience in western Maharashtra.
-- [Jar Financial](https://www.goldspade.in/work/jar): Micro-savings and financial micro-investment mobile interface concept.
-- [Hotel Atithi Karad](https://www.goldspade.in/work/hotel-atithi-karad): Regional hospitality digital presence and room booking portal.
-- [Mamacha Mala](https://www.goldspade.in/work/mamacha-mala): Agro-tourism resort digital destination and regional event venue.
+## Verified Portfolio & Case Studies
+- [BrandBattle](https://goldspade.in/work/brandbattle): AI-powered product comparison and price-intelligence platform evaluating hardware across 50+ vectors with sub-second filtering.
+- [Nityasādhanā](https://goldspade.in/work/nityasadhana): Calm devotional habit and reporting Progressive Web App for devotees and counselors at ISKCON Pune, eliminating spreadsheet tracking.
+- [Saanjgarva](https://goldspade.in/work/saanjgarva): Specialized operational PWA for Saanj Garva managing bar stock inventory, daily sales, and customer credit (udhari) with bilingual Marathi and English support.
+- [Jar](https://goldspade.in/work/jar): Practical offline-first delivery and bottle inventory PWA for Sai Water Suppliers in Kolewadi, tracking 20L water-jar logistics and customer ledgers.
+- [Mamacha Mala](https://goldspade.in/work/mamacha-mala): Immersive culinary showcase and digital flagship for Hotel Mamacha Mala in Khodshi, Karad, presenting wood-fire (chulivarel) dining and direct inquiry routing.
+- [Hotel Atithi Karad](https://goldspade.in/work/hotel-atithi-karad): Regional hospitality digital showcase for Hotel Atithi Karad presenting family garden dining, regional menus, and highway traveler discovery.
+- [EZdukkan](https://goldspade.in/work/ezdukkan): Streamlined operational management and fast invoicing tool designed for modern retail merchants.
+- [Mayuri Developer](https://goldspade.in/work/mayuri-developer): Premium real estate and architectural web platform engineered for a property developer in Pune.
 
-## Engineering Perspectives & Research
-- [Why We Default to Next.js App Router for Production](https://www.goldspade.in/journal/why-we-default-to-nextjs-app-router): Technical architecture analysis of React Server Components, streaming HTML, and caching strategies.
-- [The Death of the Redesign: Incremental Product Evolution](https://www.goldspade.in/journal/death-of-the-redesign-incremental-evolution): Why ambitious brands replace disruptive multi-year redesigns with continuous sprint improvements.
-- [Technical SEO in the Age of Answer Engines (AEO)](https://www.goldspade.in/journal/technical-seo-in-the-age-of-answer-engines): How to structure Schema.org, semantic HTML, and direct factual passages for search engines and LLMs.
-- [How Founders Should Evaluate Web Development Partners in India](https://www.goldspade.in/journal/evaluating-web-development-partners-india): Practical criteria for evaluating freelancers, traditional agencies, and focused engineering studios.
+## Published Engineering Research & Guides
+- [How Much Does a Custom Business Website Cost in India?](https://goldspade.in/journal/business-website-cost-india-founders-guide): A candid founder's guide to scope, technical architecture, hidden agency costs, and measuring ROI.
+- [Progressive Web Apps (PWAs) vs Native Mobile Apps](https://goldspade.in/journal/progressive-web-apps-vs-native-apps-guide): Comparing App Store download drop-off against instant PWA installs and offline caching for growing businesses.
+- [When Does a Business Need Custom Software? Replacing Spreadsheets](https://goldspade.in/journal/replace-spreadsheets-custom-business-software-guide): How Indian enterprises identify spreadsheet failure and transition to scalable, custom-built applications.
+- [How to Choose a Web Development Partner in India](https://goldspade.in/journal/how-to-choose-web-development-partner-india-guide): Practical criteria for evaluating freelancers, traditional agencies, and engineering studios.
 
-## Regional Coverage & Delivery Corridors
-- [Pune Hub](https://www.goldspade.in/locations/pune): Studio headquarters, on-site founder workshops, and IT corridor engineering.
-- [Maharashtra Industrial Corridor](https://www.goldspade.in/locations/maharashtra): Statewide product engineering and industrial automation.
-- [India Nationwide](https://www.goldspade.in/locations/india): Pan-India remote development sprints and venture collaborations.
-- [Karad](https://www.goldspade.in/locations/karad), [Satara](https://www.goldspade.in/locations/satara), [Kolhapur](https://www.goldspade.in/locations/kolhapur), [Sangli](https://www.goldspade.in/locations/sangli), [Goa](https://www.goldspade.in/locations/goa), [Belagavi](https://www.goldspade.in/locations/belagavi), [Hubballi-Dharwad](https://www.goldspade.in/locations/hubballi-dharwad).
+## Regional Service Corridors
+- [Pune Hub](https://goldspade.in/locations/pune): Primary studio headquarters, in-person discovery sessions, and SaaS/startup engineering across Pune.
+- [Satara](https://goldspade.in/locations/satara): Business software, distributor tools, and digital flagships along the Western Maharashtra corridor.
+- [Karad](https://goldspade.in/locations/karad): Hospitality platforms, regional enterprise websites, and logistics PWAs (Hotel Atithi, Mamacha Mala, Jar).
+- [Sangli](https://goldspade.in/locations/sangli): Custom business software, bilingual inventory PWAs, and trading ledgers (Saanjgarva).
+- [Kolhapur](https://goldspade.in/locations/kolhapur): Industrial websites, foundry inventory software, and manufacturing digital flagships.
+- [Belgaum / Belagavi](https://goldspade.in/locations/belagavi): Precision engineering digital flagships and operational business software.
+- [Hubballi-Dharwad](https://goldspade.in/locations/hubballi-dharwad): Custom software, startup web applications, and logistics systems.
+- [Goa](https://goldspade.in/locations/goa): Boutique resort websites, direct-booking engines, and culinary showcases.
+- [Konkan](https://goldspade.in/locations/konkan): Agro-tourism, coastal homestay flagships, and seasonal fruit pre-order platforms across Ratnagiri and Sindhudurg.
+- [Maharashtra](https://goldspade.in/locations/maharashtra): Statewide product engineering and industrial digital solutions.
+- [Pan-India](https://goldspade.in/locations/india): Nationwide remote sprint delivery for technology founders and ambitious enterprises.
 
-## Project Inquiries
-- [Start a Project](https://www.goldspade.in/contact): Direct technical scoping inquiry with 24-hour turnaround.
+## Contact & Project Scoping
+- Submit an inquiry: https://goldspade.in/contact
+- General inquiries: hello@goldspade.in

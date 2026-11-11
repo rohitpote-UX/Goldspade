@@ -252,7 +252,7 @@ export default async function LocationDetailPage({ params }: LocationPageProps) 
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/5">
                     <Image
                       src={project.heroImage}
-                      alt={project.title}
+                      alt={`${project.title} — ${project.positioning} by Goldspade`}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"

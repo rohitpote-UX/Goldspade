@@ -3,10 +3,10 @@ import { constructMetadata } from "@/lib/seo/metadata";
 import { generateWebPageSchema } from "@/lib/seo/jsonld";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Start a Project with Goldspade",
+  title: "Contact Goldspade — Start a Project Inquiry | Pune & Nationwide",
   exactTitle: true,
   description:
-    "Partner with Goldspade. Tell us about your company, digital product, or web platform inquiry. Response guaranteed within 24 hours.",
+    "Start a project with Goldspade. Share your website development, web application, or custom software requirements for a technical scoping reply within 24 hours.",
   canonicalUrl: "/contact",
 });
 

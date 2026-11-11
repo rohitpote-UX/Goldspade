@@ -51,7 +51,8 @@ export async function sendInquiryNotification(data: ContactInquiryData): Promise
         timeZoneName: "short",
       });
 
-  const adminUrl = "https://www.goldspade.in/admin";
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://goldspade.in").replace(/\/+$/, "");
+  const adminUrl = `${baseUrl}/admin`;
 
   const textBody = `GOLDSPADE
 NEW PROJECT INQUIRY

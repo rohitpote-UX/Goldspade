@@ -248,35 +248,18 @@ function ContactFormContent() {
   };
 
   return (
-    <div
-      suppressHydrationWarning
-      className="pt-28 sm:pt-36 md:py-40 bg-canvas text-primary-dark min-h-screen px-5 sm:px-12 md:px-20 lg:px-24 transition-colors duration-300"
-    >
-      <div className="max-w-7xl mx-auto" suppressHydrationWarning>
-        {/* Section Header */}
-        <div className="mb-12 sm:mb-16 md:mb-20 max-w-3xl" suppressHydrationWarning>
-          <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3 font-bold">
-            INQUIRIES · START A CONVERSATION
+    <>
+      {/* Contextual Intent Pill Badge */}
+      {(serviceParam || projectParam || locationParam) && (
+        <div className="-mt-8 mb-8 inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-mint/15 border border-mint/40 text-primary-dark font-mono text-xs">
+          <Sparkles className="w-3.5 h-3.5 text-mint flex-shrink-0" />
+          <span className="font-semibold uppercase tracking-wider">
+            Inquiry Context: {serviceParam ? serviceParam.replace(/-/g, " ") : ""} {projectParam ? `· Ref: ${projectParam.replace(/-/g, " ")}` : ""} {locationParam ? `· Location: ${locationParam.toUpperCase()}` : ""}
           </span>
-          <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95] mb-4">
-            START A PROJECT
-          </h1>
-          <p className="text-base sm:text-xl text-secondary-dark font-normal leading-relaxed">
-            Tell us about your company, what you are building, or where you need technical and design clarity.
-          </p>
-
-          {/* Contextual Intent Pill Badge */}
-          {(serviceParam || projectParam || locationParam) && (
-            <div className="mt-6 inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-mint/15 border border-mint/40 text-primary-dark font-mono text-xs">
-              <Sparkles className="w-3.5 h-3.5 text-mint flex-shrink-0" />
-              <span className="font-semibold uppercase tracking-wider">
-                Inquiry Context: {serviceParam ? serviceParam.replace(/-/g, " ") : ""} {projectParam ? `· Ref: ${projectParam.replace(/-/g, " ")}` : ""} {locationParam ? `· Location: ${locationParam.toUpperCase()}` : ""}
-              </span>
-            </div>
-          )}
         </div>
+      )}
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 pt-6 sm:pt-8 border-t border-editorial-border" suppressHydrationWarning>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16 pt-6 sm:pt-8 border-t border-editorial-border" suppressHydrationWarning>
           {/* Left Column: Direct Studio Information */}
           <div className="md:col-span-5 space-y-6 sm:space-y-8" suppressHydrationWarning>
             {/* Direct Email with Awwwards-style Brush Interaction */}
@@ -374,7 +357,7 @@ function ContactFormContent() {
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-editorial-border shadow-xs group cursor-pointer" suppressHydrationWarning>
               <Image
                 src="/media/pages/contact/contact-desk-morning.png"
-                alt="Goldspade Morning Workspace"
+                alt="Goldspade Pune digital studio workspace and project inquiry consultation desk"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover filter contrast-105 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
@@ -773,16 +756,35 @@ function ContactFormContent() {
             )}
           </div>
         </div>
-      </div>
-    </div>
+    </>
   );
 }
 
 export default function ContactPage() {
   return (
-    <Suspense fallback={<div className="pt-28 sm:pt-36 pb-20 md:py-40 bg-canvas min-h-screen" />}>
-      <ContactFormContent />
-    </Suspense>
+    <div
+      suppressHydrationWarning
+      className="pt-28 sm:pt-36 md:py-40 bg-canvas text-primary-dark min-h-screen px-5 sm:px-12 md:px-20 lg:px-24 transition-colors duration-300"
+    >
+      <div className="max-w-7xl mx-auto" suppressHydrationWarning>
+        {/* Section Header */}
+        <div className="mb-12 sm:mb-16 md:mb-20 max-w-3xl" suppressHydrationWarning>
+          <span className="text-xs uppercase tracking-widest text-secondary-dark font-mono block mb-3 font-bold">
+            INQUIRIES · START A CONVERSATION
+          </span>
+          <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold uppercase tracking-tight text-primary-dark leading-[0.95] mb-4">
+            START A PROJECT
+          </h1>
+          <p className="text-base sm:text-xl text-secondary-dark font-normal leading-relaxed">
+            Tell us about your company, what you are building, or where you need technical and design clarity.
+          </p>
+        </div>
+
+        <Suspense fallback={<div className="h-96" />}>
+          <ContactFormContent />
+        </Suspense>
+      </div>
+    </div>
   );
 }
 

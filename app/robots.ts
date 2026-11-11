@@ -1,8 +1,7 @@
 import { MetadataRoute } from "next";
+import { CANONICAL_SITE_URL } from "@/lib/seo/metadata";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.goldspade.in";
-
   const privateDisallows = [
     "/admin",
     "/admin/",
@@ -35,7 +34,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: privateDisallows,
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: `${CANONICAL_SITE_URL}/sitemap.xml`,
+    host: CANONICAL_SITE_URL,
   };
 }

@@ -4,10 +4,10 @@ import { PhilosophySection } from "@/components/sections/PhilosophySection";
 import { TrustSection } from "@/components/sections/TrustSection";
 
 export const metadata = constructMetadata({
-  title: "Goldspade Philosophy — Strategy, Design & Technology",
+  title: "Studio Philosophy — Strategy, Craft & Engineering | Goldspade",
   exactTitle: true,
   description:
-    "Ideas are everywhere. Execution is rare. Learn how Goldspade approaches brand strategy, digital product design, and software engineering.",
+    "Ideas are everywhere. Execution is rare. Learn how Goldspade approaches bespoke website development, clean TypeScript architecture, and digital craftsmanship.",
   canonicalUrl: "/philosophy",
 });
 

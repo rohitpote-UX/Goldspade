@@ -43,7 +43,7 @@ export default function PrivacyPage() {
               1. Overview &amp; Commitment
             </h2>
             <p className="text-base font-normal">
-              Goldspade (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;studio&rdquo;) respects your privacy and is committed to protecting the confidential information and personal data you share with us through our website (https://www.goldspade.in) and client engagement channels.
+              Goldspade (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;studio&rdquo;) respects your privacy and is committed to protecting the confidential information and personal data you share with us through our website (https://goldspade.in) and client engagement channels.
             </p>
           </section>
 

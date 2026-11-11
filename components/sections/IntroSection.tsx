@@ -196,7 +196,7 @@ export function IntroSection() {
               >
                 <Image
                   src="/media/pages/positioning/positioning-foundation-artifact.png"
-                  alt="Goldspade Digital Foundation Artifact"
+                  alt="Goldspade digital foundation artifact — Strategy, design systems, and web architecture"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 480px"

@@ -104,6 +104,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["hotel-atithi-karad", "mamacha-mala", "mayuri-developer"],
     hasDedicatedPage: true,
     dedicatedSlug: "website-design-development",
+    seoTitle: "Custom Website Design & Development Services | Goldspade",
+    seoDescription:
+      "Bespoke website design and development engineered with Next.js, React, and sub-second performance. Built for founders, growing enterprises, and modern brands.",
     overview:
       "Your website is the single most critical touchpoint where founders prove credibility to investors, enterprise clients, and prospective buyers. Goldspade builds custom digital flagships engineered with Next.js, clean semantic code, and typography-first editorial layouts. We reject off-the-shelf templates and heavy page-builders in favor of bespoke frontend engineering that loads instantaneously and communicates undeniable authority.",
     considerations: [
@@ -152,6 +155,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["ezdukkan"],
     hasDedicatedPage: true,
     dedicatedSlug: "ecommerce-development",
+    seoTitle: "Custom E-Commerce Website Development Services | Goldspade",
+    seoDescription:
+      "High-conversion custom e-commerce websites and digital storefronts engineered with Next.js, Razorpay, UPI, and instant checkout for ambitious brands in India.",
     overview:
       "In modern e-commerce, every second of checkout friction or slow page latency directly erodes conversion rates. Goldspade engineers custom online storefronts and shopping experiences structured around clean product presentation, instant client-side filtering, and frictionless mobile checkouts with verified payment integrations.",
     considerations: [
@@ -217,6 +223,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["brandbattle", "nityasadhana", "ezdukkan"],
     hasDedicatedPage: true,
     dedicatedSlug: "custom-software-web-applications",
+    seoTitle: "Web Application Development & SaaS Engineering | Goldspade",
+    seoDescription:
+      "Scalable web application development and SaaS engineering. We build multi-tenant portals, internal tools, and high-concurrency platforms in Next.js and React.",
     overview:
       "Off-the-shelf software inevitably forces growing businesses into awkward workarounds. Goldspade builds custom web applications and SaaS platforms engineered around how your company actually operates. From multi-tiered customer portals to high-concurrency SaaS interfaces, we deliver clean TypeScript codebases designed for longevity, auditability, and effortless future expansion.",
     considerations: [
@@ -260,6 +269,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["saanjgarva", "jar", "nityasadhana"],
     hasDedicatedPage: true,
     dedicatedSlug: "mobile-app-development",
+    seoTitle: "Progressive Web App (PWA) & Mobile Development | Goldspade",
+    seoDescription:
+      "Installable, offline-first Progressive Web Apps (PWAs) and mobile digital products. Fast, cross-platform performance without app store distribution friction.",
     overview:
       "For most business operations, customer portals, and internal workflows, native mobile apps create unnecessary friction: 30% App Store cuts, delayed review cycles, dual iOS/Android development overhead, and high download drop-offs. Goldspade engineers installable Progressive Web Apps (PWAs) that run full screen, load instantly offline via IndexedDB, and synchronize automatically upon reconnection—delivering 95% of native utility at a fraction of the build and maintenance cost.",
     considerations: [
@@ -308,6 +320,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["saanjgarva", "ezdukkan", "jar"],
     hasDedicatedPage: true,
     dedicatedSlug: "custom-software-development",
+    seoTitle: "Custom Software Development Company & Systems Architecture | Goldspade",
+    seoDescription:
+      "Engineering bespoke business software, secure APIs, and operational systems. Eliminate spreadsheet bottlenecks with custom-built software for your workflows.",
     overview:
       "Every growing business reaches a point where generic off-the-shelf software and fragmented spreadsheets become an operational liability. Goldspade engineers custom business software built precisely around how your company functions. From specialized stock ledgers and delivery logistics engines to role-based internal portals, we deliver robust TypeScript applications that streamline operations, eliminate human error, and grant leadership real-time clarity.",
     considerations: [
@@ -356,6 +371,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["brandbattle", "nityasadhana", "saanjgarva", "ezdukkan"],
     hasDedicatedPage: true,
     dedicatedSlug: "product-engineering",
+    seoTitle: "Product Engineering & MVP Development for Founders | Goldspade",
+    seoDescription:
+      "End-to-end digital product engineering and rapid MVP development for technology founders. Scalable TypeScript architectures built for rapid launch and growth.",
     overview:
       "Product engineering is fundamentally distinct from superficial agency web design. It demands disciplined systems architecture, strict type safety, database normalisation, automated testing, and scalable cloud deployment. Goldspade acts as a dedicated technical co-builder for founders—transforming complex product requirements into resilient, audit-ready codebases that withstand heavy production usage and investor diligence.",
     considerations: [
@@ -405,6 +423,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["brandbattle", "face-attendance-system"],
     hasDedicatedPage: true,
     dedicatedSlug: "ai-integration-automation",
+    seoTitle: "AI Integration & Business Process Automation Services | Goldspade",
+    seoDescription:
+      "Pragmatic AI integrations, LLM workflows, and business automation. Embed intelligent assistants, automated data extraction, and AI pipelines into your systems.",
     overview:
       "Artificial intelligence creates real commercial value when applied to concrete operational bottlenecks rather than speculative hype. Goldspade integrates pragmatic AI capabilities directly into software products—enabling founders to automate repetitive document parsing, embed natural language search across proprietary catalogs, and build human-supervised intelligence into core platforms.",
     considerations: [
@@ -529,6 +550,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["saanjgarva", "jar"],
     hasDedicatedPage: true,
     dedicatedSlug: "erp-inventory-operations-software",
+    seoTitle: "Operations, Inventory & Billing Software Development | Goldspade",
+    seoDescription:
+      "Bespoke operations software, bilingual inventory management PWAs, and billing tools designed for retail merchants, distributors, and regional enterprises.",
     overview:
       "Generic enterprise ERP systems are notoriously expensive, bloated with unused modules, and rigid to modify. On the other end, spreadsheets break under multi-user access and create severe ledger reconciliation errors. Goldspade engineers custom operational software, billing consoles, and real-time inventory systems built precisely around how your company actually operates—whether tracking daily 20L water bottle routes, managing bar stock and credit (udhari), or reconciling retail distributor ledgers.",
     considerations: [
@@ -619,6 +643,9 @@ export const SERVICES: ServiceItem[] = [
     relatedProjects: ["hotel-atithi-karad", "brandbattle"],
     hasDedicatedPage: true,
     dedicatedSlug: "technical-seo-performance",
+    seoTitle: "Technical SEO & Core Web Vitals Performance Services | Goldspade",
+    seoDescription:
+      "Enterprise technical SEO architecture, structured Schema.org graphs, sub-second Core Web Vitals, and search engine crawlability engineering by Goldspade.",
     overview:
       "Search visibility is fundamentally an engineering discipline. Even extraordinary design fails to generate business value if search engine crawlers struggle to parse content, or if excessive JavaScript slows down page rendering. Goldspade provides comprehensive technical SEO architecture—ensuring your web properties achieve optimal Core Web Vitals, pristine semantic hierarchies, valid Schema.org graph markup, and effortless discoverability by both traditional search engines and AI answer engines.",
     considerations: [

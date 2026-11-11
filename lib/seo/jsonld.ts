@@ -1,40 +1,61 @@
-import { SITE_CONFIG } from "./metadata";
+import { SITE_CONFIG, CANONICAL_SITE_URL, buildCanonicalUrl } from "./metadata";
 import { Project } from "@/types/project";
+
+/**
+ * Creates a normalized Schema.org entity URI ID without duplicate slashes.
+ */
+function makeEntityId(pathOrUrl: string, fragment: string): string {
+  const canonical = buildCanonicalUrl(pathOrUrl);
+  const cleanFragment = fragment.replace(/^#/, "");
+  return `${canonical}#${cleanFragment}`;
+}
 
 export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": ["Organization", "ProfessionalService"],
-    "@id": `${SITE_CONFIG.url}/#organization`,
+    "@id": makeEntityId("/", "organization"),
     name: SITE_CONFIG.name,
     alternateName: SITE_CONFIG.alternateName,
-    url: SITE_CONFIG.url,
+    url: CANONICAL_SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_CONFIG.url}/logo.png`,
+      url: `${CANONICAL_SITE_URL}/logo.png`,
       caption: SITE_CONFIG.name,
+      width: 512,
+      height: 512,
     },
-    image: `${SITE_CONFIG.url}/og-image.jpg`,
+    image: `${CANONICAL_SITE_URL}/og-image.jpg`,
     description: SITE_CONFIG.description,
     slogan: SITE_CONFIG.tagline,
     email: SITE_CONFIG.email,
     telephone: SITE_CONFIG.telephone,
+    founder: {
+      "@type": "Person",
+      name: "Rohit Pote",
+      jobTitle: "Founder & Principal Architect",
+      url: `${CANONICAL_SITE_URL}/about`,
+    },
     sameAs: [
       SITE_CONFIG.socials.x,
       SITE_CONFIG.socials.instagram,
       SITE_CONFIG.socials.github,
     ],
     knowsAbout: [
-      "Brand Strategy & Positioning",
-      "Digital Product Design",
-      "UI/UX Architecture",
-      "Full-Stack Web Development",
+      "Website Development",
+      "Web Design & UX Architecture",
+      "Custom Software Development",
+      "Web Application Development",
       "Next.js & React Engineering",
-      "AI & Process Automation",
-      "Technical SEO & Performance Optimization",
-      "Design Systems & Component Architecture",
+      "Progressive Web Apps (PWAs)",
+      "AI & Business Process Automation",
+      "Technical SEO & Core Web Vitals Architecture",
+      "E-Commerce & Digital Commerce Platforms",
+      "Brand Strategy & Digital Design Systems",
     ],
-    priceRange: "$$$$",
+    priceRange: "₹₹ - ₹₹₹₹",
+    currenciesAccepted: "INR, USD, EUR",
+    paymentAccepted: "Bank Transfer, UPI, Credit Card, Razorpay",
     address: {
       "@type": "PostalAddress",
       addressLocality: SITE_CONFIG.location.city,
@@ -43,14 +64,14 @@ export function generateOrganizationSchema() {
       postalCode: SITE_CONFIG.location.postalCode,
     },
     areaServed: [
-      { "@type": "City", name: "Pune" },
-      { "@type": "City", name: "Karad" },
-      { "@type": "City", name: "Satara" },
-      { "@type": "City", name: "Kolhapur" },
-      { "@type": "City", name: "Sangli" },
+      { "@type": "City", name: "Pune", "@id": "https://en.wikipedia.org/wiki/Pune" },
+      { "@type": "City", name: "Satara", "@id": "https://en.wikipedia.org/wiki/Satara_(city)" },
+      { "@type": "City", name: "Karad", "@id": "https://en.wikipedia.org/wiki/Karad" },
+      { "@type": "City", name: "Sangli", "@id": "https://en.wikipedia.org/wiki/Sangli" },
+      { "@type": "City", name: "Kolhapur", "@id": "https://en.wikipedia.org/wiki/Kolhapur" },
+      { "@type": "City", name: "Belagavi", alternateName: "Belgaum", "@id": "https://en.wikipedia.org/wiki/Belgaum" },
+      { "@type": "City", name: "Hubballi-Dharwad", alternateName: "Hubli", "@id": "https://en.wikipedia.org/wiki/Hubli%E2%80%93Dharwad" },
       { "@type": "AdministrativeArea", name: "Goa" },
-      { "@type": "City", name: "Belagavi" },
-      { "@type": "City", name: "Hubballi-Dharwad" },
       { "@type": "AdministrativeArea", name: "Konkan" },
       { "@type": "AdministrativeArea", name: "Maharashtra" },
       { "@type": "Country", name: "India" },
@@ -63,13 +84,13 @@ export function generateWebsiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${SITE_CONFIG.url}/#website`,
-    url: SITE_CONFIG.url,
+    "@id": makeEntityId("/", "website"),
+    url: CANONICAL_SITE_URL,
     name: SITE_CONFIG.name,
     alternateName: SITE_CONFIG.alternateName,
     description: SITE_CONFIG.description,
     publisher: {
-      "@id": `${SITE_CONFIG.url}/#organization`,
+      "@id": makeEntityId("/", "organization"),
     },
     inLanguage: "en-IN",
   };
@@ -98,7 +119,7 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: item.url.startsWith("http") ? item.url : `${SITE_CONFIG.url}${item.url}`,
+      item: buildCanonicalUrl(item.url),
     })),
   };
 }
@@ -114,20 +135,20 @@ export function generateWebPageSchema({
   url: string;
   breadcrumbs?: BreadcrumbItem[];
 }) {
-  const fullUrl = url.startsWith("http") ? url : `${SITE_CONFIG.url}${url}`;
+  const canonical = buildCanonicalUrl(url);
 
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${fullUrl}/#webpage`,
-    url: fullUrl,
+    "@id": makeEntityId(url, "webpage"),
+    url: canonical,
     name: title,
     description,
     isPartOf: {
-      "@id": `${SITE_CONFIG.url}/#website`,
+      "@id": makeEntityId("/", "website"),
     },
     about: {
-      "@id": `${SITE_CONFIG.url}/#organization`,
+      "@id": makeEntityId("/", "organization"),
     },
     inLanguage: "en-IN",
   };
@@ -143,13 +164,9 @@ export function generateFAQPageSchema(
   faqs: Array<{ question: string; fullAnswer?: string; answer?: string }>,
   canonicalUrl: string = "/"
 ) {
-  const fullUrl = canonicalUrl.startsWith("http")
-    ? canonicalUrl
-    : `${SITE_CONFIG.url}${canonicalUrl}`;
-
   return {
     "@type": "FAQPage",
-    "@id": `${fullUrl}/#faq`,
+    "@id": makeEntityId(canonicalUrl, "faq"),
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -169,22 +186,22 @@ export function generateHomepageSchema(
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": `${SITE_CONFIG.url}/#webpage`,
-        url: SITE_CONFIG.url,
-        name: "Goldspade — Digital Studio & Web Development in Pune",
+        "@id": makeEntityId("/", "webpage"),
+        url: CANONICAL_SITE_URL,
+        name: "Goldspade — Website Development Company & Custom Web Applications",
         description:
-          "Goldspade is an engineering-led digital studio based in Pune. We build custom websites, web applications, product engineering, and digital brand experiences for ambitious founders.",
+          "Goldspade is an engineering-led digital studio in Pune, India. We design and build high-performance websites, custom web applications, SaaS platforms, and AI digital solutions for ambitious founders.",
         isPartOf: {
-          "@id": `${SITE_CONFIG.url}/#website`,
+          "@id": makeEntityId("/", "website"),
         },
         about: {
-          "@id": `${SITE_CONFIG.url}/#organization`,
+          "@id": makeEntityId("/", "organization"),
         },
         inLanguage: "en-IN",
         speakable: {
           "@type": "SpeakableSpecification",
           cssSelector: [
-            "#studio-brand-overview",
+            "#positioning",
             "#faq-what-does-goldspade-do-answer",
             "#faq-services-offered-answer",
           ],
@@ -196,29 +213,27 @@ export function generateHomepageSchema(
 }
 
 export function generateCaseStudySchema(project: Project, canonicalUrl: string) {
-  const fullUrl = canonicalUrl.startsWith("http")
-    ? canonicalUrl
-    : `${SITE_CONFIG.url}${canonicalUrl}`;
+  const fullUrl = buildCanonicalUrl(canonicalUrl);
   const fullImage = project.heroImage.startsWith("http")
     ? project.heroImage
-    : `${SITE_CONFIG.url}${project.heroImage}`;
+    : `${CANONICAL_SITE_URL}${project.heroImage}`;
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "CreativeWork",
-        "@id": `${fullUrl}/#creativework`,
+        "@id": makeEntityId(canonicalUrl, "creativework"),
         url: fullUrl,
         name: `${project.title} — ${project.category}`,
         headline: `${project.title}: ${project.positioning}`,
         description: project.description,
         image: fullImage,
         creator: {
-          "@id": `${SITE_CONFIG.url}/#organization`,
+          "@id": makeEntityId("/", "organization"),
         },
         publisher: {
-          "@id": `${SITE_CONFIG.url}/#organization`,
+          "@id": makeEntityId("/", "organization"),
         },
         genre: project.category,
         keywords: project.services.join(", "),
@@ -234,33 +249,26 @@ export function generateCaseStudySchema(project: Project, canonicalUrl: string) 
   };
 }
 
-export function generateServicesCatalogSchema(services: Array<{ title: string; description: string; category: string }>) {
+export function generateServicesCatalogSchema(
+  services: Array<{ title: string; description: string; category: string }>
+) {
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Service",
-        "@id": `${SITE_CONFIG.url}/services/#service`,
+        "@id": makeEntityId("/services", "service"),
         name: "Goldspade Digital Studio Services",
-        serviceType: "Digital Strategy, Design, Engineering & AI Services",
+        serviceType: "Website Development, Custom Software & AI Services",
         provider: {
-          "@id": `${SITE_CONFIG.url}/#organization`,
+          "@id": makeEntityId("/", "organization"),
         },
         description:
           "Comprehensive digital capabilities for founders: bespoke web development, SaaS product engineering, brand strategy, AI integration, and technical SEO architecture.",
         areaServed: [
-          {
-            "@type": "Country",
-            name: "India",
-          },
-          {
-            "@type": "AdministrativeArea",
-            name: "Maharashtra",
-          },
-          {
-            "@type": "AdministrativeArea",
-            name: "Worldwide",
-          },
+          { "@type": "Country", name: "India" },
+          { "@type": "AdministrativeArea", name: "Maharashtra" },
+          { "@type": "AdministrativeArea", name: "Worldwide" },
         ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -294,30 +302,22 @@ export function generateServiceDetailSchema(
   },
   canonicalUrl: string
 ) {
-  const fullUrl = canonicalUrl.startsWith("http")
-    ? canonicalUrl
-    : `${SITE_CONFIG.url}${canonicalUrl}`;
+  const fullUrl = buildCanonicalUrl(canonicalUrl);
 
   const graph: Array<Record<string, unknown>> = [
     {
       "@type": "Service",
-      "@id": `${fullUrl}/#service`,
+      "@id": makeEntityId(canonicalUrl, "service"),
       url: fullUrl,
       name: `${service.title} — Goldspade`,
       serviceType: service.category,
       provider: {
-        "@id": `${SITE_CONFIG.url}/#organization`,
+        "@id": makeEntityId("/", "organization"),
       },
       description: service.description,
       areaServed: [
-        {
-          "@type": "Country",
-          name: "India",
-        },
-        {
-          "@type": "AdministrativeArea",
-          name: "Maharashtra",
-        },
+        { "@type": "Country", name: "India" },
+        { "@type": "AdministrativeArea", name: "Maharashtra" },
       ],
     },
     generateBreadcrumbSchema([
@@ -330,7 +330,7 @@ export function generateServiceDetailSchema(
   if (service.faqs && service.faqs.length > 0) {
     graph.push({
       "@type": "FAQPage",
-      "@id": `${fullUrl}/#faq`,
+      "@id": makeEntityId(canonicalUrl, "faq"),
       mainEntity: service.faqs.map((faq) => ({
         "@type": "Question",
         name: faq.question,
@@ -359,20 +359,18 @@ export function generateArticleSchema(
   },
   canonicalUrl: string
 ) {
-  const fullUrl = canonicalUrl.startsWith("http")
-    ? canonicalUrl
-    : `${SITE_CONFIG.url}${canonicalUrl}`;
+  const fullUrl = buildCanonicalUrl(canonicalUrl);
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "BlogPosting",
-        "@id": `${fullUrl}/#article`,
+        "@id": makeEntityId(canonicalUrl, "article"),
         url: fullUrl,
         headline: article.title,
         description: article.description,
-        image: `${SITE_CONFIG.url}/og-image.jpg`,
+        image: `${CANONICAL_SITE_URL}/og-image.jpg`,
         datePublished: `${article.publishedAt}T09:00:00+05:30`,
         dateModified: `${article.updatedAt || article.publishedAt}T09:00:00+05:30`,
         mainEntityOfPage: {
@@ -383,15 +381,15 @@ export function generateArticleSchema(
           "@type": "Person",
           name: article.author.name,
           jobTitle: article.author.role,
-          url: `${SITE_CONFIG.url}/about`,
+          url: `${CANONICAL_SITE_URL}/about`,
         },
         publisher: {
           "@type": "Organization",
-          "@id": `${SITE_CONFIG.url}/#organization`,
+          "@id": makeEntityId("/", "organization"),
           name: SITE_CONFIG.name,
           logo: {
             "@type": "ImageObject",
-            url: `${SITE_CONFIG.url}/logo.png`,
+            url: `${CANONICAL_SITE_URL}/logo.png`,
           },
         },
         articleSection: article.category,
@@ -406,19 +404,21 @@ export function generateArticleSchema(
   };
 }
 
-export function generateLocationsHubSchema(locations: Array<{ name: string; slug: string; region: string }>) {
+export function generateLocationsHubSchema(
+  locations: Array<{ name: string; slug: string; region: string }>
+) {
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "CollectionPage",
-        "@id": `${SITE_CONFIG.url}/locations/#page`,
-        url: `${SITE_CONFIG.url}/locations`,
+        "@id": makeEntityId("/locations", "page"),
+        url: buildCanonicalUrl("/locations"),
         name: "Regional Coverage & Locations — Goldspade Digital Studio",
         description:
-          "Goldspade engineers websites, custom applications, and business software across Maharashtra, Goa, and North Karnataka.",
+          "Goldspade engineers websites, custom applications, and business software across Pune, Satara, Karad, Sangli, Kolhapur, Belgaum, Maharashtra, and India.",
         publisher: {
-          "@id": `${SITE_CONFIG.url}/#organization`,
+          "@id": makeEntityId("/", "organization"),
         },
         inLanguage: "en-IN",
         mainEntity: {
@@ -428,7 +428,7 @@ export function generateLocationsHubSchema(locations: Array<{ name: string; slug
             "@type": "ListItem",
             position: index + 1,
             name: loc.name,
-            url: `${SITE_CONFIG.url}/locations/${loc.slug}`,
+            url: buildCanonicalUrl(`/locations/${loc.slug}`),
           })),
         },
       },
@@ -452,19 +452,17 @@ export function generateLocationDetailSchema(
   },
   canonicalUrl: string
 ) {
-  const fullUrl = canonicalUrl.startsWith("http")
-    ? canonicalUrl
-    : `${SITE_CONFIG.url}${canonicalUrl}`;
+  const fullUrl = buildCanonicalUrl(canonicalUrl);
 
   const graph: Array<Record<string, unknown>> = [
     {
       "@type": "ProfessionalService",
-      "@id": `${fullUrl}/#service`,
+      "@id": makeEntityId(canonicalUrl, "service"),
       url: fullUrl,
       name: `Goldspade — ${location.h1}`,
       description: location.metaDescription,
       parentOrganization: {
-        "@id": `${SITE_CONFIG.url}/#organization`,
+        "@id": makeEntityId("/", "organization"),
       },
       telephone: SITE_CONFIG.telephone,
       email: SITE_CONFIG.email,
@@ -473,6 +471,7 @@ export function generateLocationDetailSchema(
         addressLocality: SITE_CONFIG.location.city,
         addressRegion: SITE_CONFIG.location.state,
         addressCountry: "IN",
+        postalCode: SITE_CONFIG.location.postalCode,
       },
       areaServed: [
         {
@@ -483,8 +482,12 @@ export function generateLocationDetailSchema(
           "@type": "AdministrativeArea",
           name: location.region,
         },
+        {
+          "@type": "AdministrativeArea",
+          name: location.state,
+        },
       ],
-      priceRange: "$$$$",
+      priceRange: "₹₹ - ₹₹₹₹",
       inLanguage: "en-IN",
     },
     generateBreadcrumbSchema([
@@ -497,7 +500,7 @@ export function generateLocationDetailSchema(
   if (location.faqs && location.faqs.length > 0) {
     graph.push({
       "@type": "FAQPage",
-      "@id": `${fullUrl}/#faq`,
+      "@id": makeEntityId(canonicalUrl, "faq"),
       mainEntity: location.faqs.map((faq) => ({
         "@type": "Question",
         name: faq.question,
@@ -514,5 +517,3 @@ export function generateLocationDetailSchema(
     "@graph": graph,
   };
 }
-
-

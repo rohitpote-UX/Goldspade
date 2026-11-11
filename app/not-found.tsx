@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
+
+export const metadata: Metadata = {
+  title: "Page Not Found | Goldspade",
+  description: "The requested page could not be found.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function NotFound() {
   return (

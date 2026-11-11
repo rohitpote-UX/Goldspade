@@ -4,10 +4,10 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 import { PROJECTS } from "@/data/projects";
 
 export const metadata = constructMetadata({
-  title: "Goldspade — Selected Work & Case Studies",
+  title: "Selected Work & Case Studies | Goldspade Web Development Studio",
   exactTitle: true,
   description:
-    "Explore selected digital products, web platforms, and brand systems engineered for ambitious founders by Goldspade.",
+    "Explore verified case studies: AI platforms, custom web applications, hospitality flagships, and operational PWAs engineered for founders by Goldspade.",
   canonicalUrl: "/work",
 });
 

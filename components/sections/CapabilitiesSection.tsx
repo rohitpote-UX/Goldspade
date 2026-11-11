@@ -161,7 +161,7 @@ export function CapabilitiesSection({ headingLevel = "h2" }: CapabilitiesSection
                       <div className="w-60 md:w-72 h-full relative transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] -translate-x-full group-hover:translate-x-0">
                         <Image
                           src={cap.image}
-                          alt={cap.title}
+                          alt={`Goldspade ${cap.title} — ${cap.tagline}`}
                           fill
                           sizes="288px"
                           className="object-cover rounded-2xl filter contrast-105"
