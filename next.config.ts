@@ -78,18 +78,6 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Enforce WWW to non-WWW canonical redirection
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "www.goldspade.in",
-          },
-        ],
-        destination: "https://goldspade.in/:path*",
-        permanent: true,
-      },
       // Capabilities legacy path consolidation
       {
         source: "/capabilities",
